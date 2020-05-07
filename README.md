@@ -4,7 +4,7 @@ DiamondPHP is a fully featured web development framework built for PHP 7 and off
 
 ### PROJECT STATUS
 DiamondPHP is currently in **BETA** stages of development. As such, it is not recommended to use the framework in a production environment yet - there are still bugs needing fixed and a few more features to be added.
-A production-ready version 1.0.0 is scheduled for public release on September 30, 2017.
+A production-ready version 1.0.0 is scheduled for public release on September 30, 2020.
 
 ### PHILOSOPHY & GOALS
 Like all frameworks, DiamondPHP strives to simplify and speed up the web development process. Where DiamondPHP deviates from most frameworks
