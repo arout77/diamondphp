@@ -1,16 +1,32 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
-class Import {
+class Import
+{
 
+	/**
+	 * @var array
+	 */
 	public $error = [];
+	/**
+	 * @var mixed
+	 */
 	public $file;
 
-	public function __construct($file) {
+	/**
+	 * @param $file
+	 */
+	public function __construct($file)
+	{
 		$this->file = $file;
 	}
 
-	public function get_global_configuration($setting) {
+	/**
+	 * @param $setting
+	 * @return mixed
+	 */
+	public function get_global_configuration($setting)
+	{
 		// Locate the global .env file
 		$getLine = $setting;
 
@@ -25,7 +41,8 @@ class Import {
 		$pattern = "/^.*$pattern.*\$/m";
 
 		// search, and store all matching occurences in $matches
-		if (preg_match_all($pattern, $contents, $matches)) {
+		if (preg_match_all($pattern, $contents, $matches))
+		{
 
 			// Return the line from the .env file
 			$line = implode("\n", $matches[0]);
@@ -36,10 +53,16 @@ class Import {
 		return $this->error = "Invalid configuration setting: {$setting}";
 	}
 
-	private function setting_value($line) {
+	/**
+	 * @param $line
+	 * @return mixed
+	 */
+	private function setting_value($line)
+	{
 
 		// Now extracting the double-quoted value
-		if (preg_match('/"([^"]+)"/', $line, $m)) {
+		if (preg_match('/"([^"]+)"/', $line, $m))
+		{
 			return $m[1];
 		}
 

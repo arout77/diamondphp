@@ -1,6 +1,6 @@
 <?php
 namespace Web\Controller;
-use Hal\Controller\Base_Controller;
+use App\Controller\Base_Controller;
 
 class Home_Controller extends Base_Controller
 {

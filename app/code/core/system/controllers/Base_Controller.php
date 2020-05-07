@@ -1,37 +1,101 @@
 <?php
-namespace Hal\Controller;
+namespace App\Controller;
 /*
  * File:    /app/code/core/system/base_controller.php
  * Purpose: Base class from which all controllers extend
  */
 
-class Base_Controller {
+class Base_Controller
+{
+	/**
+	 * @var mixed
+	 */
 	protected $action;
+	/**
+	 * @var mixed
+	 */
 	public $cache;
+	/**
+	 * @var mixed
+	 */
 	public $config;
+	/**
+	 * @var mixed
+	 */
 	private $controller;
+	/**
+	 * @var mixed
+	 */
 	private $controller_class;
+	/**
+	 * @var mixed
+	 */
 	private $controller_filename;
+	/**
+	 * @var mixed
+	 */
 	protected $core;
+	/**
+	 * @var mixed
+	 */
 	protected $cron;
+	/**
+	 * @var mixed
+	 */
 	protected $data;
+	/**
+	 * @var mixed
+	 */
 	protected $db;
+	/**
+	 * @var mixed
+	 */
 	protected $dispatcher;
+	/**
+	 * @var mixed
+	 */
 	public $load;
+	/**
+	 * @var mixed
+	 */
 	public $log;
+	/**
+	 * @var mixed
+	 */
 	protected $model;
+	/**
+	 * @var mixed
+	 */
 	protected $param;
+	/**
+	 * @var mixed
+	 */
 	protected $route;
+	/**
+	 * @var mixed
+	 */
 	public $session;
+	/**
+	 * @var mixed
+	 */
 	public $template;
+	/**
+	 * @var mixed
+	 */
 	public $toolbox;
+	/**
+	 * @var mixed
+	 */
 	public $view;
 
-	public function __construct($app) 
+	/**
+	 * @param $app
+	 */
+	public function __construct($app)
 	{
-		$this->config     = $app['config'];
-		$this->core       = $app;
-		$this->cron       = $app['cron'];
+		$this->config = $app['config'];
+		$this->core   = $app;
+		// $this->cron       = $app['cron'];
 		$this->db         = $app['database'];
 		$this->dispatcher = $app['dispatcher'];
 		$this->event      = $app['event'];
@@ -45,14 +109,17 @@ class Base_Controller {
 		$this->toolbox    = $app['toolbox'];
 	}
 
-	public final function parse() 
+	/**
+	 * @return mixed
+	 */
+	public final function parse()
 	{
 		# Define child controller extending this class
 		$this->controller = $this->route->controller;
 		# The class name contained inside child controller
-		$this->controller_class = $this->controller.'_Controller';
+		$this->controller_class = $this->controller . '_Controller';
 		# File name of child controller
-		$this->controller_filename = ucwords($this->controller_class).'.php';
+		$this->controller_filename = ucwords($this->controller_class) . '.php';
 		# Action being requested from child controller
 		$this->action = $this->route->action;
 		$action       = trim(strtolower($this->route->action));
@@ -66,38 +133,47 @@ class Base_Controller {
 
 		# Admin, Public and Override classes
 		$_admin_class    = $this->controller_class;
-		$_web_class      = "\Web\Controller\\".$this->controller_class;
-		$_override_class = "\Hal\ControllerOverride\\".$this->controller_class;
+		$_web_class      = "\Web\Controller\\" . $this->controller_class;
+		$_override_class = "\Hal\ControllerOverride\\" . $this->controller_class;
 
 		# Check if the admin controller is being requested
-		if ($this->controller == $this->config->setting('admin_controller') && is_readable(CORE_PATH.'controllers/'.$this->controller_filename) && $this->controller_filename) {
+		if ($this->controller == $this->config->setting('admin_controller') && is_readable(CORE_PATH . 'controllers/' . $this->controller_filename) && $this->controller_filename)
+		{
 			# File was found and has proper file permissions
-			require_once CORE_PATH.'controllers/'.$this->controller_filename;
+			require_once CORE_PATH . 'controllers/' . $this->controller_filename;
 
-			if (class_exists($_admin_class)) {
+			if (class_exists($_admin_class))
+			{
 				# File found and class exists, so instantiate controller class
 				$__instantiate_class = new $this->controller_class($this->core);
 
-				if (method_exists($__instantiate_class, $action)) {
+				if (method_exists($__instantiate_class, $action))
+				{
 					# Class method exists
 					$__instantiate_class->$action();
-				} else {
+				}
+				else
+				{
 					# Valid controller, but invalid action
-					$this->template->assign('controller_path', CORE_PATH.'controllers/'.$this->controller_filename);
+					$this->template->assign('controller_path', CORE_PATH . 'controllers/' . $this->controller_filename);
 					$this->template->assign('content', 'error/action.tpl');
 				}
-			} else {
+			}
+			else
+			{
 				# Controller file exists, but class name
 				# is not formatted / spelled properly
 				$this->template->assign('content', 'error/controller-bad-classname.tpl');
 			}
 		}
 		# First search for requested controller file in override directory
-		 elseif (is_readable(PUBLIC_OVERRIDE_PATH.'controllers/'.$this->controller_filename) && class_exists($_web_class)) {
+		elseif (is_readable(PUBLIC_OVERRIDE_PATH . 'controllers/' . $this->controller_filename) && class_exists($_web_class))
+		{
 			# File was found and has proper file permissions
-			require_once PUBLIC_OVERRIDE_PATH.'controllers/'.$this->controller_filename;
+			require_once PUBLIC_OVERRIDE_PATH . 'controllers/' . $this->controller_filename;
 
-			if (class_exists($_override_class)) {
+			if (class_exists($_override_class))
+			{
 				# File found and class exists, so instantiate controller class
 				$__instantiate_class = new $_override_class($this->core);
 
@@ -106,65 +182,94 @@ class Base_Controller {
 				// 	echo $_override_class . ' DOES NOT EXTEND ' . $_web_class;
 				// }
 
-				if (method_exists($__instantiate_class, $action)) {
+				if (method_exists($__instantiate_class, $action))
+				{
 					# Class method exists
 					$__instantiate_class->$action();
-				} else {
+				}
+				else
+				{
 					# Valid controller, but invalid action
-					$this->template->assign('controller_path', PUBLIC_OVERRIDE_PATH.'controllers/'.$this->controller_filename);
+					$this->template->assign('controller_path', PUBLIC_OVERRIDE_PATH . 'controllers/' . $this->controller_filename);
 					$this->template->assign('content', 'error/action.tpl');
 				}
-			} else {
+			}
+			else
+			{
 				# Controller file exists, but class name
 				# is not formatted / spelled properly
 				$this->template->assign('content', 'error/controller-bad-classname.tpl');
 			}
-		} else {
-			if (!is_readable($this->config->setting('controllers_path').$this->controller_filename)) {
+		}
+		else
+		{
+			if (!is_readable($this->config->setting('controllers_path') . $this->controller_filename))
+			{
 				# Controller file does not exist, or
 				# does not have read permissions
-				if ($this->config->setting('debug_mode') === 'OFF' {
+				if ($this->config->setting('debug_mode') === 'OFF')
+				{
 					return $this->redirect('error/_404');
-				} else {
+				}
+				else
+				{
 					$controller = new \Web\Controller\Error_Controller($this->core);
 					$controller->controller();
 				}
 			}
 
 			# Search for requested controller file in public directory
-			if (is_readable($this->config->setting('controllers_path').$this->controller_filename) && $this->controller_filename) {
+			if (is_readable($this->config->setting('controllers_path') . $this->controller_filename) && $this->controller_filename)
+			{
 				# File was found and has proper file permissions
-				require_once $this->config->setting('controllers_path').$this->controller_filename;
+				require_once $this->config->setting('controllers_path') . $this->controller_filename;
 
-				if (class_exists($_web_class)) {
+				if (class_exists($_web_class))
+				{
 					# File found and class exists, so instantiate controller class
 					$__instantiate_class = new $_web_class($this->core);
-					if (method_exists($__instantiate_class, $action)) {
+					if (method_exists($__instantiate_class, $action))
+					{
 						# Class method exists
 						$__instantiate_class->$action();
-					} else {
+					}
+					else
+					{
 						# Valid controller, but invalid action
-						if ($this->config->setting('debug_mode') === 'OFF' {
+						if ($this->config->setting('debug_mode') === 'OFF')
+						{
 							$this->redirect('error/_404');
-						} else {
-							$this->template->assign('controller_path', $this->config->setting('controllers_path').$this->controller_filename);
+						}
+						else
+						{
+							$this->template->assign('controller_path', $this->config->setting('controllers_path') . $this->controller_filename);
 							$this->template->assign('content', 'error/action.tpl');
 						}
 					}
-				} else {
+				}
+				else
+				{
 					# Controller file exists, but class name is not formatted / spelled properly
-					if ($this->config->setting('debug_mode') === 'OFF' {
+					if ($this->config->setting('debug_mode') === 'OFF')
+					{
 						$this->redirect('error/_404');
-					} else {
+					}
+					else
+					{
 						$this->template->assign('content', 'error/controller-bad-classname.tpl');
 					}
 				}
-			} else {
+			}
+			else
+			{
 				# Controller file does not exist, or
 				# does not have read permissions
-				if ($this->config->setting('debug_mode') === 'OFF' {
+				if ($this->config->setting('debug_mode') === 'OFF')
+				{
 					$this->redirect('error/_404');
-				} else {
+				}
+				else
+				{
 					$this->template->assign('content', 'error/controller.tpl');
 				}
 
@@ -173,23 +278,42 @@ class Base_Controller {
 
 	}
 
-	public function model($model) {
+	/**
+	 * @param $model
+	 * @return mixed
+	 */
+	public function model($model)
+	{
 		return $this->load->model("$model");
 	}
 
-	public function redirect($url) {
-		if ($url === 'http_referer') {
-			return header('Location: '.$_SERVER['HTTP_REFERER']);
+	/**
+	 * @param $url
+	 */
+	public function redirect($url)
+	{
+		if ($url === 'http_referer')
+		{
+			return header('Location: ' . $_SERVER['HTTP_REFERER']);
 			exit;
 		}
-		return header('Location: '.BASE_URL.$url);
+		return header('Location: ' . BASE_URL . $url);
 	}
 
-	public function session() {
+	/**
+	 * @return mixed
+	 */
+	public function session()
+	{
 		return $this->toolbox('session');
 	}
 
-	public function toolbox($helper) {
+	/**
+	 * @param $helper
+	 * @return mixed
+	 */
+	public function toolbox($helper)
+	{
 		# Load a Toolbox helper
 		return $this->toolbox["$helper"];
 	}

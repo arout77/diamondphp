@@ -1,7 +1,9 @@
 <?php
 
-class MemberModel extends Hal\Model\System_Model {
-	public function select($limit = 0) {
+class MemberModel extends App\Model\System_Model 
+{
+	public function select($limit = 0) 
+	{
 		# Get all member profiles
 		if ($limit !== 0) {
 			$limit1 = (int) $this->toolbox('sanitize')->xss($limit * 10);

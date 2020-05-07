@@ -1,6 +1,6 @@
 <?php
 namespace Web\Controller;
-use Hal\Controller\Base_Controller;
+use App\Controller\Base_Controller;
 
 class Login_Controller extends Base_Controller
 {
@@ -78,6 +78,9 @@ class Login_Controller extends Base_Controller
 		$this->dispatcher->dispatch('member.login');
 	}
 
+	/**
+	 * @param $event
+	 */
 	public static function hello($event)
 	{
 		echo "Hello, events!";
@@ -93,6 +96,9 @@ class Login_Controller extends Base_Controller
 		exit;
 	}
 
+	/**
+	 * @param $data
+	 */
 	public function login_validate_math($data)
 	{
 

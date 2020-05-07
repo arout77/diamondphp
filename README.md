@@ -33,6 +33,7 @@ to be an indispensable new tool in your web development repertoire.
 
 ### Documentation
 Full and comprehensive documentation is currently in development, and is packaged along with the framework. Once the framework is installed, visit http://yoursite.com/documentation.
+Documentation is also available online at https://diamondphp.org/documentation.
 
 ### Requirements
 - Apache Server 2.2+ or Nginx Web Server

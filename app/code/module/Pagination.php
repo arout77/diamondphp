@@ -1,26 +1,52 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 
 class Pagination
 {
 
+	/**
+	 * @var mixed
+	 */
 	private $db;
+	/**
+	 * @var mixed
+	 */
 	private $route;
 	# Total records found
+	/**
+	 * @var mixed
+	 */
 	public $total;
 	# URL segment used to track current page
+	/**
+	 * @var mixed
+	 */
 	public $url_segment;
 	# Records per page to display; defaults to 10
+	/**
+	 * @var mixed
+	 */
 	public $per_page;
 	# SQL query offset
+	/**
+	 * @var mixed
+	 */
 	public $startpoint;
 
+	/**
+	 * @param $c
+	 */
 	public function __construct($c)
 	{
 		$this->db    = $c['database'];
 		$this->route = $c['router'];
 	}
 
+	/**
+	 * @param $sql
+	 * @param $url_segment
+	 * @param NULL $per_page
+	 */
 	public function config($sql, $url_segment = NULL, $per_page = 20)
 	{
 		if (is_null($url_segment))
@@ -42,6 +68,9 @@ class Pagination
 		$this->total = $query->rowCount();
 	}
 
+	/**
+	 * @param $adjacents
+	 */
 	public function paginate($adjacents = 5)
 	{
 		$page  = 1;

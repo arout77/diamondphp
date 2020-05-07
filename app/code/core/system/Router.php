@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
 /**
  * File: /app/code/core/system/Router.php
@@ -10,29 +10,78 @@ namespace Hal\Core;
 class Router
 {
 
+	/**
+	 * @var mixed
+	 */
 	public $controller;
+	/**
+	 * @var mixed
+	 */
 	public $controller_class;
+	/**
+	 * @var mixed
+	 */
 	private $default_controller;
+	/**
+	 * @var mixed
+	 */
 	public $action;
+	/**
+	 * @var mixed
+	 */
 	public $param;
+	/**
+	 * @var mixed
+	 */
 	public $param1;
+	/**
+	 * @var mixed
+	 */
 	public $param2;
+	/**
+	 * @var mixed
+	 */
 	public $param3;
+	/**
+	 * @var mixed
+	 */
 	public $param4;
+	/**
+	 * @var mixed
+	 */
 	public $param5;
+	/**
+	 * @var mixed
+	 */
 	private $config;
 	# A numerically indexed array of the URL segments (controller, action, parameters)
 	# Access each URL segment by index key; i.e.
 	# Controller would be $this->route->request[0], action would be $this->route->request[1],
 	# parameters would be $this->route->request[2], $this->route->request[3], etc.
 	# Breadcrumb helper relies on this
+	/**
+	 * @var mixed
+	 */
 	public $request;
 	// Files
+	/**
+	 * @var mixed
+	 */
 	public $controller_dir;
+	/**
+	 * @var mixed
+	 */
 	public $view_dir;
 	// Pagination
+	/**
+	 * @var mixed
+	 */
 	public $page;
 
+	/**
+	 * @param $default_controller
+	 * @param $config
+	 */
 	public function __construct($default_controller = 'Home', $config)
 	{
 

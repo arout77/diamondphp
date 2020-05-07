@@ -1,25 +1,61 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 require_once BASE_PATH . 'app/code/module/geoip/geoipcity.inc';
 require_once BASE_PATH . 'app/code/module/geoip/geoipregionvars.php';
 
 class Geo
 {
 	# Use MaxMind GeoIP data to determine user location
+	/**
+	 * @var mixed
+	 */
 	public $record;
+	/**
+	 * @var mixed
+	 */
 	public $ip_address;
+	/**
+	 * @var mixed
+	 */
 	public $latitude;
+	/**
+	 * @var mixed
+	 */
 	public $longitude;
+	/**
+	 * @var mixed
+	 */
 	public $city;
+	/**
+	 * @var mixed
+	 */
 	public $state;
+	/**
+	 * @var mixed
+	 */
 	public $state_code;
+	/**
+	 * @var mixed
+	 */
 	public $zipcode;
+	/**
+	 * @var mixed
+	 */
 	public $country;
+	/**
+	 * @var mixed
+	 */
 	protected $db;
 
 	# Search radius properties
+	/**
+	 * @var array
+	 */
 	public $radius = [];
 
+	/**
+	 * @param $db
+	 */
 	public function __construct($db)
 	{
 		$this->db = $db;
@@ -48,6 +84,9 @@ class Geo
 		\geoip_close($gi);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function ip()
 	{
 		return $this->ip_address;
@@ -62,6 +101,14 @@ class Geo
 	// $record->area_code . "\n";
 	// $record->continent_code . "\n";
 
+	/**
+	 * @param $lat1
+	 * @param $lon1
+	 * @param $lat2
+	 * @param $lon2
+	 * @param $unit
+	 * @return mixed
+	 */
 	public function distance($lat1, $lon1, $lat2, $lon2, $unit = "M")
 	{
 		$theta = $lon1 - $lon2;
@@ -94,6 +141,10 @@ class Geo
 		}
 	}
 
+	/**
+	 * @param $miles
+	 * @return mixed
+	 */
 	public function search_radius($miles)
 	{
 		/*
@@ -116,6 +167,10 @@ class Geo
 		*/
 	}
 
+	/**
+	 * @param $zip
+	 * @return mixed
+	 */
 	public function cities($zip)
 	{
 
@@ -148,6 +203,10 @@ class Geo
 		//    echo "<option value='" . $city['citycode'] ."'>" . $city['citycode'] . "</option>";
 	}
 
+	/**
+	 * @param $zip
+	 * @return mixed
+	 */
 	public function states($zip)
 	{
 		$q = " SELECT statecode FROM zips WHERE code = ? ";
@@ -159,6 +218,11 @@ class Geo
 		//    echo "<option value='" . $city['citycode'] ."'>" . $city['citycode'] . "</option>";
 	}
 
+	/**
+	 * @param $city
+	 * @param $state
+	 * @return mixed
+	 */
 	public function zipcode($city, $state)
 	{
 		$q = " SELECT code FROM zips WHERE citycode = ? AND statecode = ? ";

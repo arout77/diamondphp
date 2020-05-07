@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 	
 	/**
 	 *      =====  Methods available  =====

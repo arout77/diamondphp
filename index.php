@@ -1,7 +1,7 @@
 <?php
 // MIT License
 
-// Copyright (c) 2017 Andrew Rout
+// Copyright (c) 2020 Andrew Rout
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ if (!defined('BASE_PATH'))
 }
 
 // System initialization
-require_once BASE_PATH . 'app/code/core/system/init.php';
+require_once BASE_PATH . 'app/code/core/system/Init.php';
 
 // Start session. Be sure to only make changes to session options
 // within the .env configuration file.
@@ -59,4 +59,4 @@ if (!class_exists('Smarty'))
 }
 
 // Ready...steady...go!
-require_once SYSTEM_PATH . 'run.php';
+require_once SYSTEM_PATH . 'Run.php';

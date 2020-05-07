@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 
 /**
  * Hash the password using PHP's default settings
@@ -14,9 +14,9 @@ class Hash
 	public function encrypt($password, $cost = 10, $algo = PASSWORD_DEFAULT)
 	{
 		/*
-			 * Primary use is to hash passwords, but can also be used to hash
-			 * other data, such as credit card numbers, etc
-		*/
+		 * Primary use is to hash passwords, but can also be used to hash
+		 * other data, such as credit card numbers, etc
+		 */
 
 		// Generate random key for internal use
 		$bytes = random_bytes(5);

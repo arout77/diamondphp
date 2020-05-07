@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 
 /**
  * PhoneNumber public function provides a method to define
@@ -19,6 +19,10 @@ namespace Hal\Module;
  */
 class Formatter
 {
+	/**
+	 * @param $phoneNumber
+	 * @return mixed
+	 */
 	public function PhoneNumber($phoneNumber)
 	{
 
@@ -58,6 +62,10 @@ class Formatter
 
 	### Convert birth date to age (in years) ###
 
+	/**
+	 * @param $string
+	 * @return mixed
+	 */
 	public function age($string)
 	{
 		/**
@@ -72,6 +80,9 @@ class Formatter
 	}
 
 	### Format numbers to include commas
+	/**
+	 * @param $number
+	 */
 	public function int_format($number)
 	{
 		return number_format($number);
@@ -79,42 +90,63 @@ class Formatter
 
 	### Date and time formats ###
 
+	/**
+	 * @param $string
+	 */
 	public function time($string)
 	{
 		/* Example output:  7:17am */
 		return gmdate("g:ia", $string);
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function date($string)
 	{
 		/* Example output: 11/27/2013 */
 		return gmdate("n/d/Y", $string);
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function datereverse($string)
 	{
 		/* Example output: 2013/19/03 */
 		return gmdate("Y/d/n", $string);
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function datewords($string)
 	{
 		/* Example output: Monday, March 8, 2003 */
 		return gmdate("l, F d, Y", $string);
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function datewords_no_prefix($string)
 	{
 		/* Example output: March 8, 2003 */
 		return gmdate("F d, Y", $string);
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function datetime($string)
 	{
 		/* Example output: 11/27/2013 8:08am */
 		return gmdate("n/d/Y  g:ia", $string);
 	}
 
+	/**
+	 * @param $date
+	 */
 	public function date_to_timestamp($date)
 	{
 		/* Convert given month, day and year to a Unix timestamp */

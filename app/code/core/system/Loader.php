@@ -1,20 +1,47 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
 class Loader
 {
 
 	# The file being requested
+	/**
+	 * @var mixed
+	 */
 	public $_file;
 	# The directory containing requested file
+	/**
+	 * @var mixed
+	 */
 	protected $_dir;
+	/**
+	 * @var mixed
+	 */
 	protected $db;
+	/**
+	 * @var mixed
+	 */
 	public $toolbox;
+	/**
+	 * @var mixed
+	 */
 	public $data;
+	/**
+	 * @var mixed
+	 */
 	protected $config;
+	/**
+	 * @var mixed
+	 */
 	protected $session;
+	/**
+	 * @var mixed
+	 */
 	protected $log;
 
+	/**
+	 * @param $c
+	 */
 	public function __construct($c)
 	{
 
@@ -25,6 +52,10 @@ class Loader
 		$this->log     = $c['log'];
 	}
 
+	/**
+	 * @param $file
+	 * @param $data
+	 */
 	public function block($file, $data = NULL)
 	{
 
@@ -42,6 +73,10 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $file
+	 * @param $full_path
+	 */
 	public function file($file, $full_path = false)
 	{
 
@@ -70,6 +105,10 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $file
+	 * @return mixed
+	 */
 	public function model($file)
 	{
 
@@ -96,12 +135,20 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $helper
+	 * @return mixed
+	 */
 	public function toolbox($helper)
 	{
 		# Load a Toolbox helper
 		return $this->toolbox["$helper"];
 	}
 
+	/**
+	 * @param $file
+	 * @param $data
+	 */
 	public function view($file, $data = NULL)
 	{
 
@@ -119,6 +166,10 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $filename
+	 * @param $data
+	 */
 	public function viewerror($filename, $data = NULL)
 	{
 
@@ -132,6 +183,11 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $file
+	 * @param $data
+	 * @param NULL $app
+	 */
 	public function template($file, $data = NULL, $app = null)
 	{
 
@@ -149,6 +205,11 @@ class Loader
 		}
 	}
 
+	/**
+	 * @param $file
+	 * @param $data
+	 * @param NULL $app
+	 */
 	public function admin_template($file, $data = NULL, $app = null)
 	{
 

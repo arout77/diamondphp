@@ -1,18 +1,29 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
 class Event extends \Symfony\Component\EventDispatcher\Event
 {
+	/**
+	 * @var mixed
+	 */
 	protected $dispatcher;
 
-	public function __construct( $app )
+	/**
+	 * @param $app
+	 */
+	public function __construct($app)
 	{
 		$this->dispatcher = $app['dispatcher'];
 	}
 
-	public function _register( $name, $class, $callback ) 
+	/**
+	 * @param $name
+	 * @param $class
+	 * @param $callback
+	 */
+	public function _register($name, $class, $callback)
 	{
-		$this->dispatcher->addListener( "{$name}",array($class,$callback));
+		$this->dispatcher->addListener("{$name}", array($class, $callback));
 	}
 
 }

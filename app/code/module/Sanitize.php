@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 
 /**
  * Used to sanitize input / data and forms.
@@ -54,12 +54,30 @@ namespace Hal\Module;
 class Sanitize
 {
 	// Used to store key/values for form sanitation
+	/**
+	 * @var array
+	 */
 	public $data = [];
-	public $key  = [];
+	/**
+	 * @var array
+	 */
+	public $key = [];
+	/**
+	 * @var mixed
+	 */
 	private $config;
+	/**
+	 * @var mixed
+	 */
 	private $toolbox;
+	/**
+	 * @var string
+	 */
 	private $allowable_tags = '';
 
+	/**
+	 * @param $app
+	 */
 	public function __construct($app)
 	{
 		$this->config  = $app['config'];
@@ -97,6 +115,9 @@ class Sanitize
 		// End allowable tags
 	}
 
+	/**
+	 * @param $filename
+	 */
 	public function file($filename)
 	{
 		/**
@@ -128,6 +149,11 @@ class Sanitize
 		return apply_filters('sanitize_file_name', $filename, $filename_raw);
 	}
 
+	/**
+	 * @param $input
+	 * @param $allowable_tags
+	 * @return mixed
+	 */
 	public function xss($input, $allowable_tags = NULL)
 	{
 		/*
@@ -160,24 +186,37 @@ class Sanitize
 		return $this->data;
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function allow_format($string)
 	{
 		// Allow only text formatting tags to pass through HTML filter
 		return strip_tags($string, '<pre><code><var><samp><strong><em><u><i><b><s><sub><small><h1><h2><h3><h4><h5><h6><p><div><blockquote><ol><ul><li>');
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function allow_img($string)
 	{
 		// Allow only image tags to pass through HTML filter
 		return strip_tags($string, '<img>');
 	}
 
+	/**
+	 * @param $string
+	 */
 	public function allow_link($string)
 	{
 		// Allow only links to pass through HTML filter
 		return strip_tags($string, '<a>');
 	}
 
+	/**
+	 * @param $string
+	 * @param $allowable_tags
+	 */
 	public function clean($string, $allowable_tags)
 	{
 		// User specifies what HTML tags are allowed to pass through filter.
@@ -188,6 +227,10 @@ class Sanitize
 		return strip_tags($string, "{$allowable_tags}");
 	}
 
+	/**
+	 * @param $string
+	 * @param $warning
+	 */
 	public function remove_email($string, $warning = TRUE)
 	{
 		// Remove email addresses from string
@@ -203,6 +246,11 @@ class Sanitize
 		return preg_replace('/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i', "$warning", $string);
 	}
 
+	/**
+	 * @param $string
+	 * @param $warning
+	 * @return mixed
+	 */
 	public function remove_url($string, $warning = TRUE)
 	{
 		//** Remove URLs from string **//
@@ -235,6 +283,10 @@ class Sanitize
 		return $result;
 	}
 
+	/**
+	 * @param $helper
+	 * @return mixed
+	 */
 	public function toolbox($helper)
 	{
 		# Load a Toolbox helper

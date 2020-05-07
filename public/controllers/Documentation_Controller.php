@@ -1,9 +1,12 @@
 <?php
 namespace Web\Controller;
-use Hal\Controller\Base_Controller;
+use App\Controller\Base_Controller;
 
 class Documentation_Controller extends Base_Controller
 {
+	/**
+	 * @param $app
+	 */
 	public function __construct($app)
 	{
 		parent::__construct($app);
@@ -13,6 +16,9 @@ class Documentation_Controller extends Base_Controller
 		$this->template->assign('layout_close', 'docs/layout_close.tpl');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function index()
 	{
 		$data['load']  = $this->load;
@@ -21,6 +27,9 @@ class Documentation_Controller extends Base_Controller
 		return $this->template->assign('content', 'docs/index.tpl');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function introduction()
 	{
 		$data['load']  = $this->load;
@@ -43,6 +52,9 @@ class Documentation_Controller extends Base_Controller
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function mvc()
 	{
 		$data['load']  = $this->load;
@@ -75,6 +87,9 @@ class Documentation_Controller extends Base_Controller
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function core()
 	{
 		$data['load']  = $this->load;
@@ -120,6 +135,9 @@ class Documentation_Controller extends Base_Controller
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function modules()
 	{
 		$data['load']  = $this->load;

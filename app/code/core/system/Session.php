@@ -1,14 +1,26 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
 session_start();
 
 class Session
 {
+	/**
+	 * @var mixed
+	 */
 	public $id;
+	/**
+	 * @var array
+	 */
 	public $errors = [];
+	/**
+	 * @var mixed
+	 */
 	private $config;
 
+	/**
+	 * @param $config
+	 */
 	public function __construct($config)
 	{
 
@@ -46,6 +58,9 @@ class Session
 
 	}
 
+	/**
+	 * @param $key
+	 */
 	public function delete($key)
 	{
 		# Delete single item from $_SESSION
@@ -63,6 +78,10 @@ class Session
 		return session_destroy();
 	}
 
+	/**
+	 * @param $key
+	 * @return mixed
+	 */
 	public function get($key)
 	{
 		if (isset($_SESSION["$key"]))
@@ -76,6 +95,11 @@ class Session
 
 	}
 
+	/**
+	 * @param $key
+	 * @param $value
+	 * @return mixed
+	 */
 	public function set($key, $value)
 	{
 		return $_SESSION["$key"] = $value;
@@ -96,6 +120,9 @@ class Session
 		}
 	}
 
+	/**
+	 * @param $key
+	 */
 	public function verify($key)
 	{
 		if (isset($_SESSION[$key]))
