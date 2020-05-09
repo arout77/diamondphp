@@ -53,6 +53,26 @@ class Router
 	/**
 	 * @var mixed
 	 */
+	public $param6;
+	/**
+	 * @var mixed
+	 */
+	public $param7;
+	/**
+	 * @var mixed
+	 */
+	public $param8;
+	/**
+	 * @var mixed
+	 */
+	public $param9;
+	/**
+	 * @var mixed
+	 */
+	public $param10;
+	/**
+	 * @var mixed
+	 */
 	private $config;
 	# A numerically indexed array of the URL segments (controller, action, parameters)
 	# Access each URL segment by index key; i.e.
@@ -114,7 +134,7 @@ class Router
 			 *
 			 * $_request would have the following values:
 			 *
-			 * 	controller
+			 * 	    controller
 			 *  	action
 			 *  	param1
 			 *  	param2
@@ -135,7 +155,7 @@ class Router
 				$this->controller = trim(htmlentities(ucwords(strip_tags($_controller))));
 			}
 			else
-			// Something went wrong. Set to Home Controller
+			// No controller specified. Set to Home Controller
 			{
 				$this->controller = 'Home';
 			}
@@ -158,57 +178,71 @@ class Router
 				}
 			}
 
-			$_params[] = array_slice($_request, 2);
+			$_params[]  = array_slice($_request, 2);
+			$num_params = count($_params[0]);
 
-			foreach ($_params as $_param)
+			// var_export($_params);
+			for ($i = 0; $i < $num_params; $i++)
 			{
-				// Check for parameters
-				if (array_key_exists(0, $_param))
-				{
-					$this->param1 = trim(htmlentities(strip_tags($_param[0])));
-				}
-				else
-				{
-					$this->param1 = NULL;
-				}
+				// Params are numerically indexed start with 0. Add 1
+				// to each to assign correct param #
+				$paramOffset = $i + 1;
 
-				if (array_key_exists(1, $_param))
+				if (!empty($_params[0][$i]) && $_params[0][$i] != '')
 				{
-					$this->param2 = trim(htmlentities(strip_tags($_param[1])));
+					$this->param{$paramOffset} = $_params[0][$i];
 				}
-				else
-				{
-					$this->param2 = NULL;
-				}
-
-				if (array_key_exists(2, $_param))
-				{
-					$this->param3 = trim(htmlentities(strip_tags($_param[2])));
-				}
-				else
-				{
-					$this->param3 = NULL;
-				}
-
-				if (array_key_exists(3, $_param))
-				{
-					$this->param4 = trim(htmlentities(strip_tags($_param[3])));
-				}
-				else
-				{
-					$this->param4 = NULL;
-				}
-
-				if (array_key_exists(4, $_param))
-				{
-					$this->param5 = trim(htmlentities(strip_tags($_param[4])));
-				}
-				else
-				{
-					$this->param5 = NULL;
-				}
-
 			}
+
+			// foreach ($_params as $_param)
+			// {
+			// 	// Check for parameters
+			// 	if (array_key_exists(0, $_param))
+			// 	{
+			// 		$this->param1 = trim(htmlentities(strip_tags($_param[0])));
+			// 	}
+			// 	else
+			// 	{
+			// 		$this->param1 = NULL;
+			// 	}
+
+			// 	if (array_key_exists(1, $_param))
+			// 	{
+			// 		$this->param2 = trim(htmlentities(strip_tags($_param[1])));
+			// 	}
+			// 	else
+			// 	{
+			// 		$this->param2 = NULL;
+			// 	}
+
+			// 	if (array_key_exists(2, $_param))
+			// 	{
+			// 		$this->param3 = trim(htmlentities(strip_tags($_param[2])));
+			// 	}
+			// 	else
+			// 	{
+			// 		$this->param3 = NULL;
+			// 	}
+
+			// 	if (array_key_exists(3, $_param))
+			// 	{
+			// 		$this->param4 = trim(htmlentities(strip_tags($_param[3])));
+			// 	}
+			// 	else
+			// 	{
+			// 		$this->param4 = NULL;
+			// 	}
+
+			// 	if (array_key_exists(4, $_param))
+			// 	{
+			// 		$this->param5 = trim(htmlentities(strip_tags($_param[4])));
+			// 	}
+			// 	else
+			// 	{
+			// 		$this->param5 = NULL;
+			// 	}
+
+			// }
 
 		}
 		else if (!isset($_GET['request']) || empty($_GET['request']) || !isset($_controller))
