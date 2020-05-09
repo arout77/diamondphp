@@ -1,5 +1,5 @@
 <?php
-namespace Hal\Module;
+namespace App\Module;
 
 class Messenger
 {
@@ -24,8 +24,8 @@ class Messenger
 	}
 
 	/*----------------------------------------
-		     * Count all and unread messages functions
-	*/
+	 * Count all and unread messages functions
+	 */
 	public function count_all()
 	{
 		// Display total number of messages in inbox
