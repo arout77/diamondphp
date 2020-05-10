@@ -181,7 +181,6 @@ class Router
 			$_params[]  = array_slice($_request, 2);
 			$num_params = count($_params[0]);
 
-			// var_export($_params);
 			for ($i = 0; $i < $num_params; $i++)
 			{
 				// Params are numerically indexed start with 0. Add 1
@@ -190,59 +189,10 @@ class Router
 
 				if (!empty($_params[0][$i]) && $_params[0][$i] != '')
 				{
-					$this->param{$paramOffset} = $_params[0][$i];
+					$nParam = "param".$paramOffset;
+					$this->{$nParam} = $_params[0][$i];
 				}
 			}
-
-			// foreach ($_params as $_param)
-			// {
-			// 	// Check for parameters
-			// 	if (array_key_exists(0, $_param))
-			// 	{
-			// 		$this->param1 = trim(htmlentities(strip_tags($_param[0])));
-			// 	}
-			// 	else
-			// 	{
-			// 		$this->param1 = NULL;
-			// 	}
-
-			// 	if (array_key_exists(1, $_param))
-			// 	{
-			// 		$this->param2 = trim(htmlentities(strip_tags($_param[1])));
-			// 	}
-			// 	else
-			// 	{
-			// 		$this->param2 = NULL;
-			// 	}
-
-			// 	if (array_key_exists(2, $_param))
-			// 	{
-			// 		$this->param3 = trim(htmlentities(strip_tags($_param[2])));
-			// 	}
-			// 	else
-			// 	{
-			// 		$this->param3 = NULL;
-			// 	}
-
-			// 	if (array_key_exists(3, $_param))
-			// 	{
-			// 		$this->param4 = trim(htmlentities(strip_tags($_param[3])));
-			// 	}
-			// 	else
-			// 	{
-			// 		$this->param4 = NULL;
-			// 	}
-
-			// 	if (array_key_exists(4, $_param))
-			// 	{
-			// 		$this->param5 = trim(htmlentities(strip_tags($_param[4])));
-			// 	}
-			// 	else
-			// 	{
-			// 		$this->param5 = NULL;
-			// 	}
-
-			// }
 
 		}
 		else if (!isset($_GET['request']) || empty($_GET['request']) || !isset($_controller))
