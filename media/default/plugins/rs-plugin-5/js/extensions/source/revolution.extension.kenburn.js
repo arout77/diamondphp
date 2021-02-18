@@ -1,25 +1,34 @@
 /********************************************
- * REVOLUTION 5.0 EXTENSION - KEN BURN
- * @version: 1.0.0 (03.08.2015)
+ * REVOLUTION 5.4.6.5 EXTENSION - KEN BURN
+ * @version: 1.3.1 (15.05.2017)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
-
 (function($) {
-
-var _R = jQuery.fn.revolution;
+"use strict";
+var _R = jQuery.fn.revolution,
+	extension = {	alias:"KenBurns Min JS",
+					name:"revolution.extensions.kenburn.min.js",
+					min_core: "5.4",
+					version:"1.3.1"
+			  };
 
 ///////////////////////////////////////////
 // 	EXTENDED FUNCTIONS AVAILABLE GLOBAL  //
 ///////////////////////////////////////////
 jQuery.extend(true,_R, {
 
-	stopKenBurn : function(l) {			
+	stopKenBurn : function(l) {		
+		if (_R.compare_version(extension).check==="stop") return false;
+
 		if (l.data('kbtl')!=undefined)			
 		l.data('kbtl').pause();				
 	},
 
-	startKenBurn :  function(l,opt,prgs) {			
+	startKenBurn :  function(l,opt,prgs) {		
+
+		if (_R.compare_version(extension).check==="stop") return false;
+
 		var d = l.data(),
 			i = l.find('.defaultimg'),
 			s = i.data('lazyload') || i.data('src'),
@@ -35,12 +44,12 @@ jQuery.extend(true,_R, {
 
 		prgs = prgs || 0;
 
-
-
-		
+	
 		// NO KEN BURN IMAGE EXIST YET
 		if (l.find('.tp-kbimg').length==0) {
-			l.append('<div class="tp-kbimg-wrap" style="z-index:2;width:100%;height:100%;top:0px;left:0px;position:absolute;"><img class="tp-kbimg" src="'+s+'" style="position:absolute;" width="'+d.owidth+'" height="'+d.oheight+'"></div>');
+			var mediafilter = i.data('mediafilter');
+			mediafilter = mediafilter === undefined ? "" : mediafilter;
+			l.append('<div class="tp-kbimg-wrap '+mediafilter+'" style="z-index:2;width:100%;height:100%;top:0px;left:0px;position:absolute;"><img class="tp-kbimg" src="'+s+'" style="position:absolute;" width="'+d.owidth+'" height="'+d.oheight+'"></div>');
 			l.data('kenburn',l.find('.tp-kbimg'));
 		}
 
@@ -81,7 +90,7 @@ jQuery.extend(true,_R, {
 			kcalcL = function(cw,ch,d) {				
 				var f=d.scalestart/100,
 					fe=d.scaleend/100,
-					ofs = d.oofsetstart != undefined ? d.offsetstart.split(" ") || [0,0] : [0,0],
+					ofs = d.offsetstart != undefined ? d.offsetstart.split(" ") || [0,0] : [0,0],
 					ofe = d.offsetend != undefined ? d.offsetend.split(" ") || [0,0] : [0,0];
 				d.bgposition = d.bgposition == "center center" ? "50% 50%" : d.bgposition;
 				
@@ -111,6 +120,7 @@ jQuery.extend(true,_R, {
 				o.start.scale = f;	
 				o.end.scale = fe;
 
+				d.rotatestart = d.rotatestart===0 ? 0.01 : d.rotatestart;
 				o.start.rotation = d.rotatestart+"deg";
 				o.end.rotation = d.rotateend+"deg";		
 				
@@ -158,12 +168,26 @@ jQuery.extend(true,_R, {
 		
 		
 		kbtl.pause();
+
+
 		
 		anim.start.transformOrigin = "0% 0%";
 		anim.starto.transformOrigin = "0% 0%";	
 
 		kbtl.add(punchgs.TweenLite.fromTo(k,d.duration/1000,anim.start,anim.end),0);
 		kbtl.add(punchgs.TweenLite.fromTo(kw,d.duration/1000,anim.starto,anim.endo),0);
+
+		// ADD BLUR EFFECT ON THE ELEMENTS
+		if (d.blurstart!==undefined && d.blurend!==undefined &&  (d.blurstart!==0 || d.blurend!==0)) {
+			var blurElement = {a:d.blurstart},				
+				blurElementEnd = {a:d.blurend, ease:anim.endo.ease},
+				blurAnimation = new punchgs.TweenLite(blurElement, d.duration/1000, blurElementEnd);
+
+			blurAnimation.eventCallback("onUpdate", function(kw) {				
+				punchgs.TweenLite.set(kw,{filter:'blur('+blurElement.a+'px)',webkitFilter:'blur('+blurElement.a+'px)'});
+			},[kw]);
+			kbtl.add(blurAnimation,0);			
+		}
 			
 		kbtl.progress(prgs);
 		kbtl.play();	

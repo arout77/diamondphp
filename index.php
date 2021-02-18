@@ -1,7 +1,7 @@
 <?php
 // MIT License
 
-// Copyright (c) 2020 Andrew Rout
+// Copyright (c) 2021 Andrew Rout
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,38 +25,66 @@
  * An open source application development framework designed for PHP 7
  *
  * @package         Diamond PHP Framwework
- * @author          Andrew Rout [ andrew@diamondphp.com ]
- * @copyright       Copyright (c) 2017, Andrew Rout
- * @license         https://diamondphp.com/support/license
- * @link            https://diamondphp.com
+ * @author          Andrew Rout [ arout@diamondphp.org ]
+ * @copyright       Copyright (c) 2021, Andrew Rout
+ * @license         https://diamondphp.org/support/license
+ * @link            https://diamondphp.org
  * @since           Version 1.0.0
  * @filesource
  *
  */
+declare (strict_types = 1);
 
-// Defines the base path of the application
-if (!defined('BASE_PATH'))
-{
+define('DS', DIRECTORY_SEPARATOR);
+
+// Defines the location of the front controller (this file)
+// For security purposes, we recommend the front controller
+// to be the only PHP file stored in a publicly accessible folder
+if (!defined('BASE_PATH')) {
 	$dir = getcwd();
 	$dir = chop($dir);
 	$dir = chop($dir, "/");
-	define('BASE_PATH', $dir . '/');
+	define('BASE_PATH', $dir . DS);
 }
 
-// System initialization
-require_once BASE_PATH . 'app/code/core/system/Init.php';
+// If you moved your .env file to another directory,
+// remove BASE_PATH . below and enter the full file path
+define('ENV_PATH', BASE_PATH . '.env');
+$file = ENV_PATH;
+
+// Check for and attempt to fix read permissions to the .env file
+// Will not work on all servers
+$fp = fileperms($file);
+if (file_exists($file)) {
+	if (substr(sprintf('%o', $fp), -4) != 0644) {
+		chmod($file, 0644);
+	}
+}
+
+// Either the $file variable above is set incorrectly,
+// or we just cannot read the file. Alert user and abort.
+if (!is_readable($file)) {
+	exit('<h3>Either the <span style="color: red;">.env</span> global configuration file was not found,
+		or does not have read permissions. Exiting...</h3>');
+}
+unset($file);
+unset($fp);
+
+require_once BASE_PATH . 'vendor' . DS . 'autoload.php';
+
+// If installed in a subdirectory, enter name of subdirectory
+// folder here. Otherwise, leave blank
+$subdir = '';
+
+// Import service locator
+require_once BASE_PATH . 'app' . DS . 'code' . DS . 'core' . DS . 'system' . DS . 'Factory.php';
+
+// Load path definitions
+require_once $app['config']->setting('system_path') . 'Paths.php';
 
 // Start session. Be sure to only make changes to session options
 // within the .env configuration file.
 $app['session']->start();
 
-// Import Smarty template engine
-// Version 3.1.30 is released with the framework
-// Future patch will use Composer to handle Smarty updates
-if (!class_exists('Smarty'))
-{
-	require_once SMARTY_PATH . 'libs/Smarty.php';
-}
-
 // Ready...steady...go!
-require_once SYSTEM_PATH . 'Run.php';
+require_once $app['config']->setting('system_path') . 'Run.php';

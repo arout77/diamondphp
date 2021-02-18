@@ -1,13 +1,18 @@
 /********************************************
- * REVOLUTION 5.2 EXTENSION - NAVIGATION
- * @version: 1.2.3 (02.03.2016)
+ * REVOLUTION 5.4.6.5 EXTENSION - NAVIGATION
+ * @version: 1.3.5 (06.04.2017)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile();
+	_ISM = _R.is_mobile(),
+	extension = {	alias:"Navigation Min JS",
+					name:"revolution.extensions.navigation.min.js",
+					min_core: "5.4.0",
+					version:"1.3.5"
+			  };
 
 
 ///////////////////////////////////////////
@@ -98,6 +103,7 @@ jQuery.extend(true,_R, {
 	// PUT NAVIGATION IN POSITION AND MAKE SURE THUMBS AND TABS SHOWING TO THE RIGHT POSITION
 	manageNavigation : function(opt) {
 		
+
 		
 		var	lof = _R.getHorizontalOffset(opt.c.parent(),"left"),
 			rof = _R.getHorizontalOffset(opt.c.parent(),"right");
@@ -108,14 +114,14 @@ jQuery.extend(true,_R, {
 				opt.navigation.bullets.h_offset_old = opt.navigation.bullets.h_offset_old === undefined ? opt.navigation.bullets.h_offset : opt.navigation.bullets.h_offset_old;
 				opt.navigation.bullets.h_offset = opt.navigation.bullets.h_align==="center" ? opt.navigation.bullets.h_offset_old+lof/2 -rof/2: opt.navigation.bullets.h_offset_old+lof-rof;
 			}
-			setNavElPositions(opt.c.find('.tp-bullets'),opt.navigation.bullets);		
+			setNavElPositions(opt.c.find('.tp-bullets'),opt.navigation.bullets,opt);		
 		}
 		
 		if (ckNO(opt.navigation.thumbnails)) 
-			setNavElPositions(opt.c.parent().find('.tp-thumbs'),opt.navigation.thumbnails);		
+			setNavElPositions(opt.c.parent().find('.tp-thumbs'),opt.navigation.thumbnails,opt);		
 
 		if (ckNO(opt.navigation.tabs))
-			setNavElPositions(opt.c.parent().find('.tp-tabs'),opt.navigation.tabs);		
+			setNavElPositions(opt.c.parent().find('.tp-tabs'),opt.navigation.tabs,opt);		
 		
 		if (ckNO(opt.navigation.arrows)) {
 			
@@ -127,8 +133,8 @@ jQuery.extend(true,_R, {
 				opt.navigation.arrows.right.h_offset_old = opt.navigation.arrows.right.h_offset_old === undefined ? opt.navigation.arrows.right.h_offset : opt.navigation.arrows.right.h_offset_old;
 				opt.navigation.arrows.right.h_offset = opt.navigation.arrows.right.h_align==="right" ? opt.navigation.arrows.right.h_offset_old+rof : opt.navigation.arrows.right.h_offset_old+lof;
 			}
-			setNavElPositions(opt.c.find('.tp-leftarrow.tparrows'),opt.navigation.arrows.left);
-			setNavElPositions(opt.c.find('.tp-rightarrow.tparrows'),opt.navigation.arrows.right);
+			setNavElPositions(opt.c.find('.tp-leftarrow.tparrows'),opt.navigation.arrows.left,opt);
+			setNavElPositions(opt.c.find('.tp-rightarrow.tparrows'),opt.navigation.arrows.right,opt);
 		}
 
 
@@ -142,7 +148,7 @@ jQuery.extend(true,_R, {
 
 	// MANAGE THE NAVIGATION
 	 createNavigation : function(container,opt) {
-
+	 	if (_R.compare_version(extension).check==="stop") return false;
 		var cp = container.parent(),		
 			_a = opt.navigation.arrows, _b = opt.navigation.bullets, _c = opt.navigation.thumbnails, _d = opt.navigation.tabs,
 			a = ckNO(_a), b = ckNO(_b), c = ckNO(_c), d = ckNO(_d);
@@ -224,10 +230,11 @@ jQuery.extend(true,_R, {
 			
 			if (_a.enable === true) {
 				var inst = _a.tmp;
-
-				jQuery.each(opt.thumbs[pi].params,function(i,obj) {
-					inst = inst.replace(obj.from,obj.to);
-				});	
+				if (opt.thumbs[pi]!=undefined) {
+					jQuery.each(opt.thumbs[pi].params,function(i,obj) {
+						inst = inst.replace(obj.from,obj.to);
+					});	
+				}
 				_a.left.j.html(inst);
 				inst = _a.tmp;
 				if (ni>opt.slideamount) return;
@@ -235,8 +242,14 @@ jQuery.extend(true,_R, {
 					inst = inst.replace(obj.from,obj.to);
 				});	
 				_a.right.j.html(inst);
-				punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});
-				punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});			
+				
+				if (!_a.rtl) {				
+					punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});
+					punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});			
+				} else {
+					punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});
+					punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});			
+				}
 			}
 
 			
@@ -284,7 +297,9 @@ jQuery.extend(true,_R, {
 		if (c) swipeAction(cp.find('.tp-thumbs'),opt);
 		if (d) swipeAction(cp.find('.tp-tabs'),opt);
 		if (opt.sliderType==="carousel") swipeAction(container,opt,true);
-		if (opt.navigation.touch.touchenabled=="on") swipeAction(container,opt,"swipebased");
+		if ((opt.navigation.touch.touchOnDesktop==="on") || (opt.navigation.touch.touchenabled=="on" && _ISM)) swipeAction(container,opt,"swipebased");
+		
+		
 	}
 
 });
@@ -428,12 +443,12 @@ var initKeyboard = function(container,opt) {
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 39) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==40)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 0;
-			_R.callingNewSlide(opt,container,1);					
+			_R.callingNewSlide(container,1);					
 		}
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 37) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==38)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 1;
-			_R.callingNewSlide(opt,container,-1);									
+			_R.callingNewSlide(container,-1);									
 		}
 	});		
 };
@@ -462,6 +477,8 @@ var initMouseScroll = function(container,opt) {
 				ret = true;
 			if (opt.navigation.mouseScrollNavigation=="carousel") 
 				fs = ls = false;								
+		
+
 		if (psi==-1) {				
 
 			if(res.pixelY<bl) {
@@ -469,16 +486,16 @@ var initMouseScroll = function(container,opt) {
 				if (!fs) {					
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					} 
 					ret = false;
 				}
 				if (!ls) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					}					
 					ret = false;			 
 				}
@@ -488,16 +505,16 @@ var initMouseScroll = function(container,opt) {
 			 	if (!ls) {			 					 		
 				 	opt.sc_indicator="arrow";
 				 	if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					} 				
 					ret = false;
 				}
 				if (!fs) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					}		
 					ret = false;
 				}
@@ -537,13 +554,17 @@ var isme = function (a,c,e) {
 };
 
 // 	-	SET THE SWIPE FUNCTION //	
+
+
 var swipeAction = function(container,opt,vertical) {	
 		
-	container.data('opt',opt);
+	//container[0].opt = opt;
 
 	// TOUCH ENABLED SCROLL
 	var _ = opt.carousel;
 	jQuery(".bullet, .bullets, .tp-bullets, .tparrows").addClass("noSwipe");
+		
+
 	
 	_.Limit = "endless";			
 	var notonbody =  _ISM || _R.get_browser()==="Firefox",
@@ -572,22 +593,27 @@ var swipeAction = function(container,opt,vertical) {
 		swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData) {			
 					
 
+			
+
 			var withinslider = isme('rev_slider_wrapper',container,event),
 				withinthumbs =  isme('tp-thumbs',container,event),
 				withintabs =  isme('tp-tabs',container,event),
 				starget = jQuery(this).attr('class'),
 				istt = starget.match(/tp-tabs|tp-thumb/gi) ? true : false;
 								
-
+			
 				
 			// SWIPE OVER SLIDER, TO SWIPE SLIDES IN CAROUSEL MODE
 			if (opt.sliderType==="carousel" && 
 				(((phase==="move" || phase==="end" || phase=="cancel") &&  (opt.dragStartedOverSlider && !opt.dragStartedOverThumbs && !opt.dragStartedOverTabs))
 				 || (phase==="start" && withinslider>0 && withinthumbs===0 && withintabs===0))) {				
-									
+				
+				if (_ISM && (direction ==="up" || direction==="down")) return;
+			
 				opt.dragStartedOverSlider = true;
 				distance = (direction && direction.match(/left|up/g)) ?  Math.round(distance * -1) : distance = Math.round(distance * 1);
 				
+
 				switch (phase) {
 					case "start":								
 						if (_.positionanim!==undefined) {											
@@ -596,10 +622,11 @@ var swipeAction = function(container,opt,vertical) {
 						}
 						_.overpull = "none";																						
 						_.wrap.addClass("dragged");		
+						
 					break;
 					case "move":	
 										
-
+							opt.c.find('.tp-withaction').addClass("tp-temporarydisabled");
 							_.slide_offset = _.infinity==="off" ? _.slide_globaloffset + distance : _R.simp(_.slide_globaloffset + distance, _.maxwidth);
 							
 							if (_.infinity==="off") {
@@ -625,7 +652,10 @@ var swipeAction = function(container,opt,vertical) {
 							_R.carouselToEvalPosition(opt,direction);							
 							opt.dragStartedOverSlider = false;
 							opt.dragStartedOverThumbs = false;
-							opt.dragStartedOverTabs = false;																									
+							opt.dragStartedOverTabs = false;	
+							setTimeout(function() {
+								opt.c.find('.tp-withaction').removeClass("tp-temporarydisabled");							
+							},19);
 					break;
 				}
 			}  else
@@ -723,12 +753,12 @@ var swipeAction = function(container,opt,vertical) {
 					
 					if ((swipe_wait_dir=="horizontal" && direction == "left") || (swipe_wait_dir=="vertical" && direction == "up")) {
 						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,opt.c,1);
+						_R.callingNewSlide(opt.c,1);
 						return false;
 					}
 					if ((swipe_wait_dir=="horizontal" && direction == "right") || (swipe_wait_dir=="vertical" && direction == "down")) {
 						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,opt.c,-1);	
+						_R.callingNewSlide(opt.c,-1);	
 						return false;
 					}
 
@@ -789,6 +819,7 @@ var showHideNavElements = function(container,opt,dir,speed) {
 
 // ADD ARROWS
 var initArrows = function(container,o,opt) {
+
 	// SET oIONAL CLASSES
 	o.style = o.style === undefined ? "" : o.style;
 	o.left.style = o.left.style === undefined ? "" : o.left.style;
@@ -820,8 +851,8 @@ var initArrows = function(container,o,opt) {
 	o.padding_bottom = parseInt((opt.carousel.padding_bottom||0),0);
 	
 	// POSITION OF ARROWS
-	setNavElPositions(la,o.left);
-	setNavElPositions(ra,o.right);
+	setNavElPositions(la,o.left,opt);
+	setNavElPositions(ra,o.right,opt);
 
 	o.left.opt = opt;
 	o.right.opt = opt;
@@ -832,27 +863,28 @@ var initArrows = function(container,o,opt) {
 
 
 // PUT ELEMENTS VERTICAL / HORIZONTAL IN THE RIGHT POSITION
-var putVinPosition = function(el,o) {
+var putVinPosition = function(el,o,opt) {
+	
 	var elh = el.outerHeight(true),
 		elw = el.outerWidth(true),
-		oh = o.opt== undefined ? 0 : o.opt.conh == 0 ? o.opt.height : o.opt.conh,
-		by = o.container=="layergrid" ? o.opt.sliderLayout=="fullscreen" ? o.opt.height/2 - (o.opt.gridheight[o.opt.curWinRange]*o.opt.bh)/2 : (o.opt.autoHeight=="on" || (o.opt.minHeight!=undefined && o.opt.minHeight>0)) ? oh/2 - (o.opt.gridheight[o.opt.curWinRange]*o.opt.bh)/2  : 0 : 0,		
+		oh = o.opt== undefined ? 0 : opt.conh == 0 ? opt.height : opt.conh,
+		by = o.container=="layergrid" ? opt.sliderLayout=="fullscreen" ? opt.height/2 - (opt.gridheight[opt.curWinRange]*opt.bh)/2 : (opt.autoHeight=="on" || (opt.minHeight!=undefined && opt.minHeight>0)) ? oh/2 - (opt.gridheight[opt.curWinRange]*opt.bh)/2  : 0 : 0,		
 		a = o.v_align === "top" ? {top:"0px",y:Math.round(o.v_offset+by)+"px"} : o.v_align === "center" ? {top:"50%",y:Math.round(((0-elh/2)+o.v_offset))+"px"} : {top:"100%",y:Math.round((0-(elh+o.v_offset+by)))+"px"};					
 	if (!el.hasClass("outer-bottom")) punchgs.TweenLite.set(el,a);	
 	
 };
 
-var putHinPosition = function(el,o) {
-
+var putHinPosition = function(el,o,opt) {
+	
 	var elh = el.outerHeight(true),
 		elw = el.outerWidth(true),
-		bx = o.container=="layergrid" ? o.opt.sliderType==="carousel" ? 0 : o.opt.width/2 - (o.opt.gridwidth[o.opt.curWinRange]*o.opt.bw)/2 : 0,
+		bx = o.container=="layergrid" ? opt.sliderType==="carousel" ? 0 : opt.width/2 - (opt.gridwidth[opt.curWinRange]*opt.bw)/2 : 0,
 		a = o.h_align === "left" ? {left:"0px",x:Math.round(o.h_offset+bx)+"px"} : o.h_align === "center" ? {left:"50%",x:Math.round(((0-elw/2)+o.h_offset))+"px"} : {left:"100%",x:Math.round((0-(elw+o.h_offset+bx)))+"px"};	
 	punchgs.TweenLite.set(el,a);
 };
 
 // SET POSITION OF ELEMENTS
-var setNavElPositions = function(el,o) {
+var setNavElPositions = function(el,o,opt) {
 
 	var wrapper =  
 		el.closest('.tp-simpleresponsive').length>0 ? 
@@ -865,8 +897,8 @@ var setNavElPositions = function(el,o) {
 		ww = wrapper.width(),
 		wh = wrapper.height();	
 
-	putVinPosition(el,o);
-	putHinPosition(el,o);
+	putVinPosition(el,o,opt);
+	putHinPosition(el,o,opt);
 
 	if (o.position==="outer-left" && (o.sliderLayout=="fullwidth" || o.sliderLayout=="fullscreen")) 
 		punchgs.TweenLite.set(el,{left:(0-el.outerWidth())+"px",x:o.h_offset+"px"});
@@ -911,12 +943,12 @@ var setNavElPositions = function(el,o) {
 		// SPAN IS ENABLED
 		if (o.span===true && o.direction==="vertical") {
 			punchgs.TweenLite.set(el,{maxHeight:(cpt+cpb+(wh-2*wpad))+"px",height:(cpt+cpb+(wh-2*wpad))+"px",top:(0-cpt),y:0});					
-			putVinPosition(mask,o);
+			putVinPosition(mask,o,opt);
 		} else 
 
 		if (o.span===true && o.direction==="horizontal") {
 			punchgs.TweenLite.set(el,{maxWidth:"100%",width:(ww-2*wpad)+"px",left:0,x:0});					
-			putHinPosition(mask,o);
+			putHinPosition(mask,o,opt);
 		}
 	}
 };
@@ -984,7 +1016,7 @@ var addBullet = function(container,o,li,opt) {
 	bw.addClass("nav-dir-"+o.direction);
 
 	// PUT ALL CONTAINER IN POSITION
-	setNavElPositions(bw,o);		
+	setNavElPositions(bw,o,opt);		
 };
 
 
@@ -1075,8 +1107,8 @@ var addThumb = function(container,o,li,what,opt) {
 		_margin = (o.position === "outer-top" || o.position==="outer-bottom") && (o.h_align==="center") ? "auto" : "0";
 	
 
-	tm.css({maxWidth:maxw+"px",maxHeight:maxh+"px",overflow:"hidden",position:"relative"});		
-	t.css({maxWidth:(maxw)+"px",/*margin:_margin, */maxHeight:maxh+"px",overflow:"visible",position:position,background:cHex(o.wrapper_color,o.wrapper_opacity),padding:o.wrapper_padding+"px",boxSizing:"contet-box"});
+	tm.css({maxWidth:maxw+"px",maxHeight:maxh+"px",overflow:"hidden",position:"relative"});			
+	t.css({maxWidth:(maxw)+"px",/*margin:_margin, */maxHeight:maxh+"px",overflow:"visible",position:position,background:o.wrapper_color,padding:o.wrapper_padding+"px",boxSizing:"contet-box"});
 
 	
 	
@@ -1102,7 +1134,7 @@ var addThumb = function(container,o,li,what,opt) {
 	t.addClass("nav-dir-"+o.direction);
 	
 	// PUT ALL CONTAINER IN POSITION		
-	setNavElPositions(t,o);	
+	setNavElPositions(t,o,opt);	
 };
 
 var setONHeights = function(o) {

@@ -3,8 +3,7 @@ namespace App\System;
 
 session_start();
 
-class Session
-{
+class Session {
 	/**
 	 * @var mixed
 	 */
@@ -21,13 +20,11 @@ class Session
 	/**
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 
 		$this->config = $config;
 
-		if (empty($this->id))
-		{
+		if (empty($this->id)) {
 			self::start();
 		}
 	}
@@ -35,24 +32,19 @@ class Session
 	/*--------------------------------------------
 		 *	Session handling functions
 	*/
-	public function data()
-	{
+	public function data() {
 		$data = $_SESSION;
 
-		if (!empty($data))
-		{
+		if (!empty($data)) {
 			echo '<div class="console"><h3>Current Session Information</h3>';
 			echo '<table class="table"><th>Session Key</th><th>Value</th>';
 
-			foreach ($data as $key => $value)
-			{
+			foreach ($data as $key => $value) {
 				echo '<tr><td><strong>' . $key . ':</strong></td><td>' . $value . '</td></tr>';
 			}
 
 			echo '</table></div>';
-		}
-		else
-		{
+		} else {
 			echo '<div class="console"><h3>No Session Information Available</h3></div>';
 		}
 
@@ -61,15 +53,13 @@ class Session
 	/**
 	 * @param $key
 	 */
-	public function delete($key)
-	{
+	public function delete($key) {
 		# Delete single item from $_SESSION
 		$data = $_SESSION[$key];
 		session_unset($data);
 	}
 
-	public function flush()
-	{
+	public function flush() {
 		# Destroy entire session
 		self::start();
 		$this->id = FALSE;
@@ -82,14 +72,10 @@ class Session
 	 * @param $key
 	 * @return mixed
 	 */
-	public function get($key)
-	{
-		if (isset($_SESSION["$key"]))
-		{
+	public function get($key) {
+		if (isset($_SESSION["$key"])) {
 			return $_SESSION["$key"];
-		}
-		else
-		{
+		} else {
 			return FALSE;
 		}
 
@@ -100,15 +86,13 @@ class Session
 	 * @param $value
 	 * @return mixed
 	 */
-	public function set($key, $value)
-	{
+	public function set($key, $value) {
 		return $_SESSION["$key"] = $value;
 	}
 
-	public function start()
-	{
-		if (empty($this->id))
-		{
+	public function start() {
+
+		if (session_status() < 2) {
 			session_start([
 				'cache_limiter'   => $this->config->setting('session.cache_limiter'),
 				'cookie_domain'   => $this->config->setting('session.cookie_domain'),
@@ -116,6 +100,7 @@ class Session
 				'cookie_lifetime' => $this->config->setting('session.cookie_lifetime'),
 				'use_strict_mode' => $this->config->setting('session.use_strict_mode'),
 			]);
+
 			$this->id = session_regenerate_id();
 		}
 	}
@@ -123,14 +108,10 @@ class Session
 	/**
 	 * @param $key
 	 */
-	public function verify($key)
-	{
-		if (isset($_SESSION[$key]))
-		{
+	public function verify($key) {
+		if (isset($_SESSION[$key])) {
 			return TRUE;
-		}
-		else
-		{
+		} else {
 			return FALSE;
 		}
 

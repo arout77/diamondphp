@@ -1,8 +1,9 @@
 {
 	"require": {
+        "geoip2/geoip2": "~2.0",
         "pimple/pimple": "~3.0",
-        "symfony/event-dispatcher": "^3.1",
-        "smarty/smarty": "~3.1"
+        "smarty/smarty": "~3.1", 
+        "symfony/event-dispatcher": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -12,10 +13,10 @@
             "App\\CoreControllerOverride\\": "app/code/override/controllers",
             "App\\Config\\": "app/code/core/config",
             "App\\Controller\\": "app/code/core/system/controllers",
-            "App\\Model\\": "app/code/core/models",
+            "App\\Model\\": "app/code/core/system/models",
             "App\\ModelOverride\\": "public/override/models",
             "App\\CoreModelOverride\\": "app/code/override/models",
-            "App\\Module\\": "app/code/module",
+            "App\\Plugin\\": "app/code/plugins",
             "Web\\Controller\\": "public/controllers",
             "Web\\Model\\": "public/models"
         }

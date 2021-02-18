@@ -12,13 +12,13 @@ You have registered on our site, but have not confirmed your account yet. Please
     <h1>Password successfully reset</h1>
     <!-- LOGIN -->
     <div>
-      <form class="white-row" method="post" action="login/login_validate">
+      <form class="white-row" method="post" action="{$smarty.const.SITE_URL}login/login_validate">
       <h2><small>You may now login with your new password</small></h2>
         <div class="row">
           <div class="form-group">
             <div class="col-md-12">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="Email address" class="form-control">
+              <label>Username / Email</label>
+              <input type="text" name="email" placeholder="Enter username or email address" class="form-control">
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ You have registered on our site, but have not confirmed your account yet. Please
     <div class="form-block center-block">
       <h2 class="title">Login</h2>
       <hr>
-      <form class="form-horizontal" method="post" action="{$smarty.const.BASE_URL}login/login_validate">
+      <form class="form-horizontal" method="post" action="{$smarty.const.SITE_URL}login/login_validate">
       {if $route eq 'error_math'}
             {* Previous login attempt failed *}
             <div class="alert alert-danger text-center"><button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -78,14 +78,14 @@ You have registered on our site, but have not confirmed your account yet. Please
                *}
         {/if}
         <div class="form-group has-feedback">
-          <label for="email" class="col-sm-3 control-label">Email</label>
+          <label for="email" class="col-sm-4 control-label">Username / Email</label>
           <div class="col-sm-8">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
             <i class="fa fa-at form-control-feedback"></i>
           </div>
         </div>
         <div class="form-group has-feedback">
-          <label for="password" class="col-sm-3 control-label">Password</label>
+          <label for="password" class="col-sm-4 control-label">Password</label>
           <div class="col-sm-8">
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
             <i class="fa fa-lock form-control-feedback"></i>
@@ -93,7 +93,7 @@ You have registered on our site, but have not confirmed your account yet. Please
         </div>
         {if $login_math}
         <div class="form-group has-feedback">
-          <label for="math" class="col-sm-3 control-label">Are you human? Math problem:</label>
+          <label for="math" class="col-sm-4 control-label">Are you human? Math problem:</label>
           <div class="col-sm-8">
               <span class="input-group-addon">
                 <strong>{$a} x {$b} =</strong>
@@ -103,7 +103,7 @@ You have registered on our site, but have not confirmed your account yet. Please
         </div>
         {/if}
         <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-8">                   
+          <div class="col-sm-offset-4 col-sm-8">                   
             <button type="submit" class="btn btn-group btn-default btn-sm">Log In</button>
             <span class="text-center text-muted">Login with</span>
             <ul class="social-links colored circle clearfix">
@@ -120,7 +120,7 @@ You have registered on our site, but have not confirmed your account yet. Please
         <div class="white-row">
           <p> Enter your email address below and follow the instructions to reset your password </p>
           <h6>Email Address</h6>
-          <form class="input-group" method="post" action="{$smarty.const.BASE_URL}login/forgot_password">
+          <form class="input-group" method="post" action="{$smarty.const.SITE_URL}login/forgot_password">
             <input type="text" class="form-control" name="email" id="email" placeholder="Email Address" required=required />
             <span class="input-group-btn"><button class="btn btn-primary" style="margin-top: 0px" type="submit">Reset Password</button></span>
           </form>
@@ -128,7 +128,7 @@ You have registered on our site, but have not confirmed your account yet. Please
       </div>
       </div>
     </div>
-    <p class="text-center space-top">Don't have an account yet? <a href="{$smarty.const.BASE_URL}signup">Sign up</a> now.</p>
+    <p class="text-center space-top">Don't have an account yet? <a href="{$smarty.const.SITE_URL}signup">Sign up</a> now.</p>
 
     <!-- LOGIN -->
 

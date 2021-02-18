@@ -14,7 +14,7 @@
 <h3>DEBUG CONSOLE</h3>
 >  <strong>MESSAGE: CONTROLLER NOT FOUND</strong>
 >
->  Please make sure that <span class="btn-danger">{$controller}_Controller.php</span> exists in your Controllers directory:
+>  How to fix this error: make sure that <span class="btn-danger">{$controller}_Controller.php</span> exists in your Controllers directory:
 > 
 >  {$smarty.const.CONTROLLERS_PATH}
 >
@@ -31,5 +31,5 @@
 >  Finally, ensure that the index() method exists within the {$controller} class. Each controller falls back
 >  on the index() method as the default action.
 >
->  View <a href="{$smarty.const.BASE_URL}documentation/mvc/controllers">the Controllers documentation</a> for more information.
+>  View <a href="{$smarty.const.BASE_URL}documentation/mvc/controllers" style="color: #ff6666">the Controllers documentation</a> for more information.
 </pre>

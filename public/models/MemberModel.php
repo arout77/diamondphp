@@ -1,15 +1,13 @@
 <?php
 
-class MemberModel extends App\Model\System_Model 
-{
-	public function select($limit = 0) 
-	{
+class MemberModel extends App\Model\System_Model  {
+	
+	public function select($limit = 0) {
 		# Get all member profiles
 		if ($limit !== 0) {
-			$limit1 = (int) $this->toolbox('sanitize')->xss($limit * 10);
-			$query = "SELECT * FROM users WHERE hidden = 0 LIMIT $limit1, 20";
+			$query = "SELECT * FROM users LIMIT $limit";
 		} else {
-			$limit = $this->toolbox('sanitize')->xss("0, 20");
+			$limit = $this->plugin('sanitize')->xss("0, 20");
 			$query = "SELECT * FROM users WHERE hidden = 0 LIMIT {$limit}";
 		}
 
@@ -59,10 +57,10 @@ class MemberModel extends App\Model\System_Model
 	public function select_gender($limit = 0, $gender = 'all') {
 		# Get all member profiles
 		if ($limit !== 0) {
-			$limit1 = (int) $this->toolbox('sanitize')->xss($limit * 10);
+			$limit1 = (int) $this->plugin('sanitize')->xss($limit * 10);
 			$query = "SELECT * FROM users WHERE hidden = ? AND gender = ? LIMIT $limit1, 20";
 		} else {
-			$limit = $this->toolbox('sanitize')->xss("0, 20");
+			$limit = $this->plugin('sanitize')->xss("0, 20");
 			$query = "SELECT * FROM users WHERE hidden = ? AND gender = ? LIMIT {$limit}";
 		}
 
@@ -74,7 +72,7 @@ class MemberModel extends App\Model\System_Model
 
 	public function get_member_id($username) {
 		# Fetch member ID
-		$username = $this->toolbox('sanitize')->xss($username);
+		$username = $this->plugin('sanitize')->xss($username);
 		$r = $this->db->prepare("SELECT member_id FROM users WHERE username = ?");
 		$r->execute([$username]);
 		if ($r) {
@@ -88,7 +86,7 @@ class MemberModel extends App\Model\System_Model
 
 	public function email_exists($email) {
 		# Check if the submitted email already exists; reurns true/false
-		$email = $this->toolbox('sanitize')->xss($email);
+		$email = $this->plugin('sanitize')->xss($email);
 		$r = $this->db->prepare("SELECT email FROM users WHERE email = ?");
 		$r->execute([$email]);
 		if ($r) {
@@ -102,7 +100,7 @@ class MemberModel extends App\Model\System_Model
 
 	public function get_username($memberid) {
 		# Fetch username
-		$id = (int) $this->toolbox('sanitize')->xss($memberid);
+		$id = (int) $this->plugin('sanitize')->xss($memberid);
 		$r = $this->db->prepare("SELECT username FROM users WHERE member_id = ?");
 		$r->execute([$id]);
 		foreach ($r as $r) {
@@ -151,8 +149,8 @@ class MemberModel extends App\Model\System_Model
 		# Used for editing profiles
 		if ($_POST) {
 
-			$form = $this->toolbox('sanitize')->xss($_POST);
-			$phone = $this->toolbox('formatter')->PhoneNumber($form['phone']);
+			$form = $this->plugin('sanitize')->xss($_POST);
+			$phone = $this->plugin('formatter')->PhoneNumber($form['phone']);
 
 			$r = $this->db->prepare("
 				UPDATE users
@@ -167,7 +165,7 @@ class MemberModel extends App\Model\System_Model
 	public function image_update() {
 		# Update profile avatar
 		if ($_POST) {
-			$form = $this->toolbox('sanitize')->xss($_POST);
+			$form = $this->plugin('sanitize')->xss($_POST);
 
 			$r = $this->db->prepare("
 				UPDATE users
@@ -234,17 +232,22 @@ class MemberModel extends App\Model\System_Model
 
 	public function check_login($form) {
 		# Check if login is valid
-		$query = "SELECT * FROM `users` WHERE `email` = ?";
-
-		$row = $this->db->prepare($query);
-		$row->execute([$form['email']]);
+		if(str_contains($form['email'], '@')) {
+			$query = "SELECT * FROM `users` WHERE `email` = ?";
+			$row = $this->db->prepare($query);
+			$row->execute([$form['email']]);
+		} else {
+			$query = "SELECT * FROM `users` WHERE `username` = ?";
+			$row = $this->db->prepare($query);
+			$row->execute([$form['email']]);
+		}
 
 		foreach ($row as $result) {
 
 			if (empty($result)) {
 				# Email not found, or not confirmed
 				return FALSE;
-			} elseif ($this->toolbox('hash')->verify($form['password'], $result['password']) == FALSE) {
+			} elseif ($this->plugin('hash')->verify($form['password'], $result['password']) == FALSE) {
 				# Email found, wrong password
 				return FALSE;
 			} elseif ($result['confirmed'] == '0') {
@@ -259,15 +262,15 @@ class MemberModel extends App\Model\System_Model
 				$this->session->set('first_name', $result['first_name']);
 				$this->session->set('last_name', $result['last_name']);
 				$this->session->set('role', $result['role']);
-				$this->session->set('age', $this->toolbox('formatter')->age($result['dob']));
+				$this->session->set('age', $this->plugin('formatter')->age($result['dob']));
 				$this->session->set('gender', $result['gender']);
 				$this->session->set('latitude', $result['latitude']);
 				$this->session->set('longitude', $result['longitude']);
 
 				# Update user table
-				$ip = $this->toolbox('geoip')->ip();
-				$lat = $this->toolbox('geoip')->latitude;
-				$long = $this->toolbox('geoip')->longitude;
+				$ip = $this->plugin('geoip')->ip();
+				$lat = $this->plugin('geoip')->latitude;
+				$long = $this->plugin('geoip')->longitude;
 
 				$update = $this->db->prepare("
                 	UPDATE users
@@ -286,11 +289,11 @@ class MemberModel extends App\Model\System_Model
 		# Create a new member; i.e. signup form
 		try
 		{
-			$form['password'] = $this->toolbox('hash')->encrypt($form['password']);
-			$form['phone'] = $this->toolbox('formatter')->PhoneNumber($form['phone']);
-			$latitude = $this->toolbox('geoip')->latitude;
-			$longitude = $this->toolbox('geoip')->longitude;
-			$ip = $this->toolbox('geoip')->ip();
+			$form['password'] = $this->plugin('hash')->encrypt($form['password']);
+			$form['phone'] = $this->plugin('formatter')->PhoneNumber($form['phone']);
+			$latitude = $this->plugin('geoip')->latitude;
+			$longitude = $this->plugin('geoip')->longitude;
+			$ip = $this->plugin('geoip')->ip();
 			if ($this->config->setting('signup_email_confirmation') === TRUE) {
 				$confirmed = (int) 0;
 			} else {
@@ -320,7 +323,7 @@ class MemberModel extends App\Model\System_Model
 	}
 
 	public function update_password($password, $email) {
-		$password = $this->toolbox('hash')->encrypt($password);
+		$password = $this->plugin('hash')->encrypt($password);
 		$q = "UPDATE users SET password = ? WHERE email = ?";
 		$r = $this->db->prepare($q);
 		$r->execute([$password, $email]);

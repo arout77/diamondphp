@@ -1,20 +1,19 @@
 <?php
 namespace App\System;
 
-class Config
-{
-
+class Config {
+	
 	public $setting = [];
 	private $db;
+	const DS = DIRECTORY_SEPARATOR;
 
-	public function __construct($env)
-	{
-
+	public function __construct($env) {
+		
 		# Database Connection
-		$this->setting['db_host'] = $env->get_global_configuration('db_host');
+		$this->setting['db_host'] 	= $env->get_global_configuration('db_host');
 		$this->setting['db_name'] = $env->get_global_configuration('db_name');
-		$this->setting['db_user'] = $env->get_global_configuration('db_user');
-		$this->setting['db_pass'] = $env->get_global_configuration('db_pass');
+		$this->setting['db_user'] 	= $env->get_global_configuration('db_user');
+		$this->setting['db_pass'] 	= $env->get_global_configuration('db_pass');
 
 		$this->setting['default_controller'] = $env->get_global_configuration('default_controller');
 
@@ -49,13 +48,7 @@ class Config
 		$this->setting['debug_mode'] = $env->get_global_configuration('debug_mode');
 
 		$this->setting['log_errors'] = $env->get_global_configuration('log_errors');
-
-		# Controllers directory
-		$this->setting['controllers_path'] = BASE_PATH . $env->get_global_configuration('controllers_path');
-
-		# Models directory
-		$this->setting['models_path'] = BASE_PATH . $env->get_global_configuration('models_path');
-
+		$this->setting['log_path'] = $env->get_global_configuration('log_path');
 		$this->setting['log_file_max_size'] = $env->get_global_configuration('log_file_max_size');
 
 		# Name of the directory storing template files ( css/js/img, etc. )
@@ -91,8 +84,8 @@ class Config
 		$this->setting['img_type'] = $env->get_global_configuration('img_type');
 
 		/*----------------------------------------
-			 * Global messenger inbox settings
-		*/
+		 * Global messenger inbox settings
+		 */
 		# Enable the messenger system by setting this to true
 		$this->setting['inbox_enabled'] = $env->get_global_configuration('inbox_enabled');
 
@@ -117,18 +110,36 @@ class Config
 		$this->setting['site_url'] = $env->get_global_configuration('site_url');
 
 		#== Global system settings ==#
-
+		
 		# Location of front controller
 		$this->setting['BASE_PATH'] = BASE_PATH;
+		
+		# Location of app folder
+		$this->setting['app_path'] = $env->get_global_configuration('app_path');
 
 		# Location of the system directory
-		$this->setting['system_folder'] = $this->setting['BASE_PATH'] . 'app/code/core/system/';
+		$this->setting['system_path'] = $this->setting['app_path'] . 'code'. self::DS .'core'. self::DS .'system'. self::DS;
+		
+		# Location of the plugins directory
+		$this->setting['plugins_path'] = $this->setting['app_path'] . 'code'. self::DS .'plugins'. self::DS;
 
 		# Location of the public directory
-		$this->setting['public_folder'] = $this->setting['BASE_PATH'] . 'public/';
+		$this->setting['public_path'] = $env->get_global_configuration('public_path');
+		
+		# Controllers directory
+		$this->setting['controllers_path'] = $this->setting['public_path'] . 'controllers' . DS;
+
+		# Models directory
+		$this->setting['models_path'] = $this->setting['public_path'] . 'models' . DS;
+		
+		# Var folder
+		$this->setting['var_path'] = $env->get_global_configuration('var_path');
+		
+		# Vendor folder
+		$this->setting['vendor_folder'] = $env->get_global_configuration('vendor_folder');
 
 		# Location of template directory
-		$this->setting['template_folder'] = $this->setting['BASE_PATH'] . 'app/design/frontend/' . $this->setting['template_name'] . '/';
+		$this->setting['template_folder'] = $this->setting['app_path'] . 'design/frontend/' . $this->setting['template_name'] . '/';
 
 		# Location of admin template directory
 		$this->setting['admin_template_folder'] = $this->setting['BASE_PATH'] . 'app/design/admin/' . $this->setting['template_name'] . '/';
@@ -146,12 +157,9 @@ class Config
 		$this->setting['notify_img_size'] = number_format(round($size / pow(1024, ($i = floor(log($size, 1024)))), 2)) . ' ' . $unit[$i];
 
 		# Enable / disable Memcached helper
-		if (extension_loaded('memcached'))
-		{
+		if (extension_loaded('memcached')) {
 			$this->setting['memcached'] = TRUE;
-		}
-		else
-		{
+		} else {
 			$this->setting['memcached'] = FALSE;
 		}
 
@@ -181,8 +189,7 @@ class Config
 		$this->setting['software_version'] = '1.0.0';
 	}
 
-	public final function setting($setting = null)
-	{
+	public final function setting($setting) {
 		return $this->setting["$setting"];
 	}
 
@@ -191,16 +198,13 @@ class Config
 	 *
 	 * @return void
 	 */
-	private function __clone()
-	{
-	}
+	private function __clone() {}
 
 	/**
-	 * Private unserialize method to prevent unserializing
+	 * Unserialize method to prevent unserializing
 	 *
 	 * @return void
 	 */
-	private function __wakeup()
-	{
-	}
+	public function __wakeup() {}
+	
 }

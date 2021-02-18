@@ -1,29 +1,23 @@
 <?php
 /**
- * file: /app/code/core/system/factory.php
- * System initialization begins here
+ * file: /app/code/System/system/Factory.php
  *
  * We will use Pimple to create our services
  * and manage dependencies
  */
-// use \R as R;
 
 $app = new \Pimple\Container();
 
-$app['global_config_import'] = function ()
-{
-	$file = BASE_PATH . '.env';
-	return new \Hal\Core\Import($file);
+$app['global_config_import'] = function () {
+	return new \App\System\Import(ENV_PATH);
 };
 
-$app['config'] = function ($c)
-{
-	return new \Hal\Config\Config($c['global_config_import']);
+$app['config'] = function ($c) {
+	return new \App\System\Config($c['global_config_import']);
 };
 
 # Set error reporting level [via Config.php]
-switch ($app['config']->setting('error_reports'))
-{
+switch ($app['config']->setting('error_reports')) {
 case "ON":
 	ini_set('display_errors', 1);
 	error_reporting(E_ALL & ~E_NOTICE);
@@ -40,235 +34,203 @@ default:
 }
 
 # Set log file
-if ($app['config']->setting('log_errors') == "TRUE")
-{
+if ($app['config']->setting('log_errors') == "TRUE") {
 	ini_set("log_errors", TRUE);
-	include_once 'paths.php';
-	ini_set('error_log', LOG_PATH . 'system.log');
+	ini_set('error_log', $app['config']->setting('log_path') . 'system.log');
 }
 
 # Set time zone [via Config.php]
 date_default_timezone_set($app['config']->setting('time_zone'));
 
-$app['router'] = function ($c)
-{
-	return new \Hal\Core\Router($c['config']->setting('default_controller'), $c['config']);
+$app['router'] = function ($c) {
+	return new \App\System\Router($c['config']->setting('default_controller'), $c['config']);
 };
 
-$app['cron'] = function ($c)
-{
-	return new \Hal\Core\Cron;
+$app['database'] = function ($c) {
+	return new \App\System\Database($c);
 };
 
-$app['dispatcher'] = new Hal\Core\Dispatch;
-
-$app['registry'] = function ($c)
-{
-	return new \Hal\Core\Registry($c);
+$app['database_info'] = function ($c) {
+	$db = new \App\System\Database($c);
+	return $db->sql_info($c);
 };
 
-$app['event'] = function ($c)
-{
-	return new \Hal\Core\Event($c);
+$app['load'] = function ($c) {
+	return new \App\System\Loader($c);
 };
 
-$app['system_block'] = function ($c)
-{
-	return new \Hal\Block\System_Block($c);
+$app['log'] = function ($c) {
+	return new \App\System\Logger();
 };
 
-$app['parse'] = function ($c)
-{
-	return new \Hal\Core\Parse($c);
+$app['base_controller'] = function ($c) {
+	return new \App\Controller\Base_Controller($c);
 };
 
-$app['database'] = function ($c)
-{
-	return new \Hal\Core\Database($c);
+$app['system_model'] = function ($c) {
+	return new \App\Model\System_Model($c['database'], $c['toolbox'], $c);
 };
 
-$app['orm'] = function ($c)
-{
-	// Create instance of redbean orm
-	require_once VENDOR_PATH . 'gabordemooij/redbean/RedBeanPHP/R.php';
-	return \RedBeanPHP\R::setup("mysql:host=" . $c['config']->setting('db_host') . ";
-		dbname=" . $c['config']->setting('db_name') . "", $c['config']->setting('db_user'), $c['config']->setting('db_pass'));
-
-	// uncomment the below in production environment to prevent database columns from changing
-	// R::freeze( TRUE );
+$app['toolbox'] = function ($app) {
+	// Used to pass the toolbox as a function parameter to other objects
+	return $app;
 };
 
-$app['view'] = function ($c)
-{
-	return new \Hal\Core\SystemView;
+$app['plugin_core'] = function ($c) {
+	return new \App\System\Plugins($c['config'], $c['database'], $c['toolbox'], $c['load']);
 };
 
-$app['cache'] = function ($c)
-{
-	return new \Hal\Core\Cache;
-};
-
-$app['load'] = function ($c)
-{
-	return new \Hal\Core\Loader($c);
-};
-
-$app['system_model'] = function ($c)
-{
-	return new \Hal\Model\System_Model($c['database'], $c['toolbox'], $c);
-};
-
-$app['template'] = function ($c)
-{
-	return new \Hal\Core\Template($c);
-};
-
-$app['log'] = function ($c)
-{
-	return new \Hal\Core\Logger();
-};
-
-$app['base_controller'] = function ($c)
-{
-	return new \Hal\Controller\Base_Controller($c);
-};
-
-$app['code_generator'] = function ($c)
-{
-	return new \Hal\Core\Codegenerator($c);
-};
-
-/*********************
- *   Toolbox helpers
- *********************/
-$app['breadcrumbs'] = function ($c)
-{
-	$bc = new \Hal\Module\Breadcrumbs($c['router'], $c['config']);
-	$bc->show();
-	return $bc;
-};
-
-$app['cookie'] = function ($c)
-{
-	return new \Hal\Core\Cookie;
-};
-
-$app['email'] = function ($c)
-{
-	return new \Hal\Module\Email($c);
-};
-
-$app['formatter'] = function ($c)
-{
-	return new \Hal\Module\Formatter;
-};
-
-$app['friends'] = function ($c)
-{
-	return new \Hal\Module\Friends($c['database'], $c['toolbox'], $c['system_model']);
+$app['formatter'] = function ($c) {
+	return new \App\Plugin\Formatter;
 };
 
 // new geo module
-$app['geoip'] = function ($c)
-{
-	$geo_db_file = BASE_PATH . 'var/install/GeoLite2-City.mmdb';
-	return new \Hal\Module\Geoip($geo_db_file, $c['database']);
+$app['geoip'] = function ($c) {
+	$geo_db_file = PLUGINS_PATH . 'GeoLite2-City.mmdb';
+	return new \App\Plugin\Geoip($geo_db_file, $c['database']);
 };
 
-$app['hash'] = function ($c)
-{
-	return new \Hal\Module\Hash;
+$app['hash'] = function ($c) {
+	return new \App\Plugin\Hash;
 };
 
-$app['image'] = function ($c)
-{
-	return new \Hal\Module\Image($c['config'], $c['toolbox']);
+$app['login'] = function ($c) {
+	return new \App\Plugin\Login($c['config'], $c['database'], $c['toolbox'], $c['load']);
 };
 
-$app['input'] = function ($c)
-{
-	return new \Hal\Module\Input($c['sanitize'], $c['validate']);
+$app['pagination'] = function ($c) {
+	return new \App\Plugin\Pagination($c);
 };
 
-$app['memcached'] = function ($c)
-{
-	$host            = $c['config']->setting('memcached_host');
-	$port            = $c['config']->setting('memcached_port');
-	return $instance = new \Hal\Module\Cache($host, $port);
-	return $instance->connect($host, $port);
-	if (!$connect)
-	{
-		$c['log']->save('Could not connect to Memcached');}
-	// return $_s->connect();
+$app['sanitize'] = function ($c) {
+	return new \App\Plugin\Sanitize($c);
 };
 
-$app['messenger'] = function ($c)
-{
-	return new \Hal\Module\Messenger($c['database'], $c['toolbox']);
+$app['session'] = function ($c) {
+	return new \App\System\Session($c['config']);
 };
 
-$app['mysql'] = function ($c)
-{
-	return new \Hal\Module\Mysql($c);
+$app['template'] = function ($c) {
+	return new \App\System\Template($c);
 };
 
-$app['opcache'] = function ($c)
-{
-	return new \Hal\Core\Opcache;
-};
+$app['title'] = function ($app) {
 
-$app['pagination'] = function ($c)
-{
-	return new \Hal\Module\Pagination($c);
-};
-
-$app['performance'] = function ($c)
-{
-	return new \Hal\Module\Performance;
-};
-
-$app['sanitize'] = function ($c)
-{
-	return new \Hal\Module\Sanitize($c);
-};
-
-$app['search'] = function ($c)
-{
-	return new \Hal\Module\Search($c['database']);
-};
-
-$app['session'] = function ($c)
-{
-	return new \Hal\Core\Session($c['config']);
-};
-
-$app['slider'] = function ($c)
-{
-	return new \Hal\Module\Slider($c);
-};
-
-$app['title'] = function ($app)
-{
-
-	$title = new \Hal\Module\Title($app['toolbox']);
+	$title = new \App\Plugin\Title($app['toolbox']);
 	require_once MODULES_PATH . 'Titlesettings.php';
 	# Pass the Titlesettings() function from the included file above to $title->set()
 	$title->set(Titlesettings($app));
 	return $title;
 };
 
-$app['validate'] = function ($c)
-{
-	return new \Hal\Module\Validation;
+$app['validate'] = function ($c) {
+	return new \App\Plugin\Validation;
 };
 
-$app['toolbox'] = function ($app)
-{
-	// Used to pass the toolbox as a function parameter to other objects
-	return $app;
+$app['whitelist'] = function ($c) {
+	return new \App\Plugin\Whitelist;
 };
 
-$app['whitelist'] = function ($c)
-{
-	return new \Hal\Module\Whitelist;
+/*
+
+$app['cron'] = function ($c) {
+return new \App\System\Cron;
 };
+
+$app['dispatcher'] = new App\System\Dispatch;
+
+$app['registry'] = function ($c) {
+return new \App\System\Registry($c);
+};
+
+$app['event'] = function ($c) {
+return new \App\System\Event($c);
+};
+
+$app['system_block'] = function ($c) {
+return new \App\Block\System_Block($c);
+};
+
+$app['parse'] = function ($c) {
+return new \App\System\Parse($c);
+};
+
+// $app['orm'] = function ($c) {
+// Create instance of redbean orm
+// 	require_once VENDOR_PATH . 'gabordemooij/redbean/RedBeanPHP/R.php';
+// 	return \RedBeanPHP\R::setup("mysql:host=" . $c['config']->setting('db_host') . ";
+// 		dbname=" . $c['config']->setting('db_name') . "", $c['config']->setting('db_user'), $c['config']->setting('db_pass'));
+
+// uncomment the below in production environment to prevent database columns from changing
+// R::freeze( TRUE );
+// };
+
+$app['view'] = function ($c) {
+return new \App\System\SystemView;
+};
+
+$app['cache'] = function ($c) {
+return new \App\System\Cache;
+};
+
+$app['code_generator'] = function ($c) {
+return new \App\System\Codegenerator($c);
+};
+
+#   Toolbox helpers
+$app['breadcrumbs'] = function ($c) {
+$bc = new \App\Plugin\Breadcrumbs($c['router'], $c['config']);
+$bc->show();
+return $bc;
+};
+
+$app['cookie'] = function ($c) {
+return new \App\System\Cookie;
+};
+
+$app['email'] = function ($c) {
+return new \App\Plugin\Email($c);
+};
+
+$app['friends'] = function ($c) {
+return new \App\Plugin\Friends($c['database'], $c['toolbox'], $c['system_model']);
+};
+
+$app['image'] = function ($c) {
+return new \App\Plugin\Image($c['config'], $c['toolbox']);
+};
+
+$app['input'] = function ($c) {
+return new \App\Plugin\Input($c['sanitize'], $c['validate']);
+};
+
+$app['memcached'] = function ($c) {
+$host            = $c['config']->setting('memcached_host');
+$port            = $c['config']->setting('memcached_port');
+return $instance = new \App\Plugin\Cache($host, $port);
+return $instance->connect($host, $port);
+if (!$connect) {
+$c['log']->save('Could not connect to Memcached');}
+// return $_s->connect();
+};
+
+$app['messenger'] = function ($c) {
+return new \App\Plugin\Messenger($c['database'], $c['toolbox']);
+};
+
+$app['mysql'] = function ($c) {
+return new \App\Plugin\Mysql($c);
+};
+
+$app['opcache'] = function ($c) {
+return new \App\System\Opcache;
+};
+
+$app['performance'] = function ($c) {
+return new \App\Plugin\Performance;
+};
+
+$app['search'] = function ($c) {
+return new \App\Plugin\Search($c['database']);
+};
+ */

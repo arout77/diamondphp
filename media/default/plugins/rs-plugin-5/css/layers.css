@@ -11,6 +11,12 @@ email:     	info@themepunch.com
 website:   	http://www.themepunch.com
 -----------------------------------------------------------------------------*/
 
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .tp-caption.Twitter-Content a,.tp-caption.Twitter-Content a:visited
 {
 	color:#0084B4!important;
@@ -228,9 +234,7 @@ website:   	http://www.themepunch.com
 }
 
 .tp-caption.boxshadow,.boxshadow
-{
-	-moz-box-shadow:0 0 20px rgba(0,0,0,0.5);
-	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.5);
+{		
 	box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
@@ -271,8 +275,8 @@ website:   	http://www.themepunch.com
 
 .tp-caption.largeblackbg,.largeblackbg
 {
-	-moz-border-radius:0;
-	-webkit-border-radius:0;
+	
+	
 	background-color:#000;
 	border-radius:0;
 	color:#fff;
@@ -287,8 +291,8 @@ website:   	http://www.themepunch.com
 
 .tp-caption.largepinkbg,.largepinkbg
 {
-	-moz-border-radius:0;
-	-webkit-border-radius:0;
+	
+	
 	background-color:#db4360;
 	border-radius:0;
 	color:#fff;
@@ -303,8 +307,8 @@ website:   	http://www.themepunch.com
 
 .tp-caption.largewhitebg,.largewhitebg
 {
-	-moz-border-radius:0;
-	-webkit-border-radius:0;
+	
+	
 	background-color:#fff;
 	border-radius:0;
 	color:#000;
@@ -319,8 +323,8 @@ website:   	http://www.themepunch.com
 
 .tp-caption.largegreenbg,.largegreenbg
 {
-	-moz-border-radius:0;
-	-webkit-border-radius:0;
+	
+	
 	background-color:#67ae73;
 	border-radius:0;
 	color:#fff;
@@ -408,8 +412,8 @@ website:   	http://www.themepunch.com
 .tp-caption.lightgrey_divider,.lightgrey_divider
 {
 	background-color:rgba(235,235,235,1);
-	background-position:initial initial;
-	background-repeat:initial initial;
+	background-position:initial;
+	background-repeat:initial;
 	border-color:#222;
 	border-style:none;
 	border-width:0;
@@ -858,7 +862,7 @@ website:   	http://www.themepunch.com
 	border-radius:0 0 0 0;
 	border-style:none;
 	border-width:0;
-	font-family:Permanent Marker;
+	font-family:"Permanent Marker";
 	font-style:normal;
 	padding:0;
 	text-decoration:none;
@@ -890,7 +894,7 @@ website:   	http://www.themepunch.com
 	border-style:none;
 	border-width:0;
 	color:#fff;
-	font-family:Nothing you could do;
+	font-family:"Nothing you could do";
 	font-size:30px;
 	font-style:normal;
 	font-weight:400;
@@ -1232,7 +1236,7 @@ website:   	http://www.themepunch.com
 	border-style:none;
 	border-width:0;
 	color:rgba(255,255,255,1.00);
-	font-family:Roboto Slab;
+	font-family:"Roboto Slab";
 	font-size:70px;
 	font-style:normal;
 	font-weight:400;
@@ -1249,7 +1253,7 @@ website:   	http://www.themepunch.com
 	border-style:none;
 	border-width:0;
 	color:rgba(255,255,255,1.00);
-	font-family:Roboto Slab;
+	font-family:"Roboto Slab";
 	font-size:15px;
 	font-style:normal;
 	font-weight:300;
@@ -2525,8 +2529,8 @@ website:   	http://www.themepunch.com
     -o-transition: background-color 0.5s;
     -ms-transition: background-color 0.5s;
     transition: background-color 0.5s;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
+    
+    
     border-radius: 0px;
 }
 
@@ -3095,8 +3099,8 @@ website:   	http://www.themepunch.com
     border: 0;
     background: #009aee;
     color: #fff;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
+    
+    
     border-radius: 0px;
 }
 
@@ -3115,7 +3119,7 @@ website:   	http://www.themepunch.com
         line-height: 70px;
         font-weight: 700;
         font-style: normal;
-        font-family: Roboto Condensed;
+        font-family: "Roboto Condensed";
         padding: 0px 0px 10px 0px;
         text-decoration: none;
         text-align: left;
@@ -3133,7 +3137,7 @@ website:   	http://www.themepunch.com
         line-height: 25px;
         font-weight: 700;
         font-style: italic;
-        font-family: Playfair Display;
+        font-family: ""Playfair Display"";
         padding: 0px 0px 10px 0px;
         text-decoration: none;
         text-align: left;
@@ -3150,7 +3154,7 @@ website:   	http://www.themepunch.com
         line-height: 30px;
         font-weight: 400;
         font-style: normal;
-        font-family: Roboto Condensed;
+        font-family: "Roboto Condensed";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: center;
@@ -3225,7 +3229,7 @@ website:   	http://www.themepunch.com
         line-height: 25px;
         font-weight: 700;
         font-style: italic;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0px 0px 10px 0px;
         text-decoration: none;
         text-align: left;
@@ -3242,7 +3246,7 @@ website:   	http://www.themepunch.com
         line-height: 70px;
         font-weight: 700;
         font-style: normal;
-        font-family: Roboto Condensed;
+        font-family: "Roboto Condensed";
         padding: 0px 0px 10px 0px;
         text-decoration: none;
         text-align: center;
@@ -3289,7 +3293,7 @@ website:   	http://www.themepunch.com
         line-height: 30px;
         font-weight: 400;
         font-style: normal;
-        font-family: Roboto Condensed;
+        font-family: "Roboto Condensed";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: center;
@@ -3306,7 +3310,7 @@ website:   	http://www.themepunch.com
         line-height: 15px;
         font-weight: 400;
         font-style: normal;
-        font-family: Roboto Condensed;
+        font-family: "Roboto Condensed";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: center;
@@ -3351,7 +3355,7 @@ website:   	http://www.themepunch.com
         line-height: 70px;
         font-weight: 400;
         font-style: normal;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: center;
@@ -3458,7 +3462,7 @@ website:   	http://www.themepunch.com
         line-height: 50px;
         font-weight: 400;
         font-style: normal;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: left;
@@ -3475,7 +3479,7 @@ website:   	http://www.themepunch.com
         line-height: 50px;
         font-weight: 400;
         font-style: normal;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0px 0px 0px 0px;
         text-decoration: none;
         text-align: left;
@@ -3493,7 +3497,7 @@ website:   	http://www.themepunch.com
         line-height: 40px;
         font-weight: 400;
         font-style: normal;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0 0 0 0px;
         text-decoration: none;
         background-color: transparent;
@@ -3502,7 +3506,7 @@ website:   	http://www.themepunch.com
         border-width: 0px;
         border-radius: 0 0 0 0px;
         text-align: center;
-        type: text
+        
     }
     .tp-caption.Woo-Rating,
     .Woo-Rating {
@@ -3520,7 +3524,7 @@ website:   	http://www.themepunch.com
         border-width: 0px;
         border-radius: 0 0 0 0px;
         text-align: left;
-        type: text
+        
     }
     .tp-caption.Woo-SubTitle,
     .Woo-SubTitle {
@@ -3539,7 +3543,7 @@ website:   	http://www.themepunch.com
         border-radius: 0 0 0 0px;
         text-align: center;
         letter-spacing: 2px;
-        type: text
+        
     }
     .tp-caption.Woo-PriceLarge,
     .Woo-PriceLarge {
@@ -3557,7 +3561,7 @@ website:   	http://www.themepunch.com
         border-width: 0px;
         border-radius: 0 0 0 0px;
         text-align: center;
-        type: text
+        
     }
     .tp-caption.Woo-ProductInfo,
     .Woo-ProductInfo {
@@ -3575,7 +3579,7 @@ website:   	http://www.themepunch.com
         border-width: 1px;
         border-radius: 4px 4px 4px 4px;
         text-align: left;
-        type: button
+        
     }
     .tp-caption.Woo-ProductInfo:hover,
     .Woo-ProductInfo:hover {
@@ -3603,7 +3607,7 @@ website:   	http://www.themepunch.com
         border-width: 1px;
         border-radius: 4px 4px 4px 4px;
         text-align: left;
-        type: button
+        
     }
     .tp-caption.Woo-AddToCart:hover,
     .Woo-AddToCart:hover {
@@ -3622,7 +3626,7 @@ website:   	http://www.themepunch.com
         line-height: 40px;
         font-weight: 400;
         font-style: normal;
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         padding: 0 0 0 0px;
         text-decoration: none;
         background-color: transparent;
@@ -3631,7 +3635,7 @@ website:   	http://www.themepunch.com
         border-width: 0px;
         border-radius: 0 0 0 0px;
         text-align: center;
-        type: text
+        
     }
     .tp-caption.Woo-SubTitle,
     .Woo-SubTitle {
@@ -3650,7 +3654,7 @@ website:   	http://www.themepunch.com
         border-radius: 0 0 0 0px;
         text-align: center;
         letter-spacing: 2px;
-        type: text
+        
     }
     .tp-caption.Woo-PriceLarge,
     .Woo-PriceLarge {
@@ -3668,7 +3672,7 @@ website:   	http://www.themepunch.com
         border-width: 0px;
         border-radius: 0 0 0 0px;
         text-align: center;
-        type: text
+        
     }
     .tp-caption.Woo-ProductInfo,
     .Woo-ProductInfo {
@@ -3686,7 +3690,7 @@ website:   	http://www.themepunch.com
         border-width: 1px;
         border-radius: 4px 4px 4px 4px;
         text-align: left;
-        type: button
+        
     }
     .tp-caption.Woo-ProductInfo:hover,
     .Woo-ProductInfo:hover {
@@ -3714,7 +3718,7 @@ website:   	http://www.themepunch.com
         border-width: 1px;
         border-radius: 4px 4px 4px 4px;
         text-align: left;
-        type: button
+        
     }
     .tp-caption.Woo-AddToCart:hover,
     .Woo-AddToCart:hover {
@@ -4267,11 +4271,9 @@ tp-caption.Team-Thumb,
 .tp-caption.SleekLanding-ButtonBG,
 .SleekLanding-ButtonBG {
     color: rgba(0, 0, 0, 1.00);
-    font-size: px;
-    line-height: px;
+        
     font-weight: 700;
-    font-style: normal;
-    font-family: ;
+    font-style: normal;    
     padding: 0 0 0 0px;
     text-decoration: none;
     text-align: left;
@@ -4280,9 +4282,7 @@ tp-caption.Team-Thumb,
     border-style: solid;
     border-width: 0px;
     border-radius: 5px 5px 5px 5px;
-    text-align: left;
-    -webkit-box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
+    text-align: left;    
     box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.15)
 }
 .tp-caption.SleekLanding-SmallTitle,
@@ -4383,7 +4383,7 @@ tp-caption.Team-Thumb,
     line-height: 40px;
     font-weight: 400;
     font-style: normal;
-    font-family: Playfair Display;
+    font-family: "Playfair Display";
     padding: 0 0 0 0px;
     text-decoration: none;
     background-color: transparent;
@@ -4656,8 +4656,8 @@ tp-caption.Team-Thumb,
     -o-transition: background-color 0.5s;
     -ms-transition: background-color 0.5s;
     transition: background-color 0.5s;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
+    
+    
     border-radius: 0px;
 }
 #mc_embed_signup input#mce-EMAIL[type="email"]:focus {
@@ -4677,8 +4677,8 @@ tp-caption.Team-Thumb,
     border: 1px solid #009aee;
     background: #009aee;
     color: #fff;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
+    
+    
     border-radius: 0px;
 }
 #mc_embed_signup input#mc-embedded-subscribe:hover {
@@ -4874,7 +4874,7 @@ tp-caption.Team-Thumb,
     line-height: 20px;
     font-weight: 400;
     font-style: normal;
-    font-family: Permanent Marker;
+    font-family: "Permanent Marker";
     padding: 0 0 0 0px;
     text-decoration: none;
     text-align: left;
@@ -4913,4 +4913,893 @@ tp-caption.Team-Thumb,
     border-width: 0px;
     border-radius: 0px 0px 0px 0px;
     cursor: pointer
+}
+.tp-caption.Twitter-Content a,
+.tp-caption.Twitter-Content a:visited {
+    color: #0084B4 !important
+}
+.tp-caption.Twitter-Content a:hover {
+    color: #0084B4 !important;
+    text-decoration: underline !important
+}
+.tp-caption.CreativeFrontPage-Btn,
+.CreativeFrontPage-Btn {
+    color: rgba(255, 255, 255, 1.00);
+    font-size: 14px;
+    line-height: 60px;
+    font-weight: 900;
+    font-style: normal;
+    font-family: Roboto;
+    padding: 0px 50px 0px 50px;
+    text-decoration: none;
+    text-align: left;
+    background-color: rgba(0, 104, 92, 1.00);
+    border-color: rgba(0, 0, 0, 1.00);
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 4px 4px 4px 4px;
+    letter-spacing: 2px
+}
+.tp-caption.CreativeFrontPage-Btn:hover,
+.CreativeFrontPage-Btn:hover {
+    color: rgba(255, 255, 255, 1.00);
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-color: rgba(0, 0, 0, 1.00);
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer
+}
+.tp-caption.CreativeFrontPage-Menu,
+.CreativeFrontPage-Menu {
+    color: rgba(255, 255, 255, 1.00);
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: roboto;
+    padding: 0 0 0 0px;
+    text-decoration: none;
+    text-align: left;
+    background-color: transparent;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0px;
+    border-radius: 0 0 0 0px;
+    letter-spacing: 2px
+}
+.tp-flip-index {
+    z-index: 1000 !important;
+}
+.tp-caption.Twitter-Content a,
+.tp-caption.Twitter-Content a:visited {
+    color: #0084B4 !important
+}
+.tp-caption.Twitter-Content a:hover {
+    color: #0084B4 !important;
+    text-decoration: underline !important
+}
+.tp-caption.FullScreenMenu-Category,
+.FullScreenMenu-Category {
+    color: rgba(17, 17, 17, 1.00);
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    font-style: normal;
+    font-family: BenchNine;
+    padding: 21px 30px 16px 30px;
+    text-decoration: none;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.90);
+    border-color: transparent;
+    border-style: none;
+    border-width: 0px;
+    border-radius: 0 0 0 0px;
+    letter-spacing: 3px
+}
+.tp-caption.FullScreenMenu-Title,
+.FullScreenMenu-Title {
+    color: rgba(255, 255, 255, 1.00);
+    font-size: 65px;
+    line-height: 70px;
+    font-weight: 700;
+    font-style: normal;
+    font-family: BenchNine;
+    padding: 21px 30px 16px 30px;
+    text-decoration: none;
+    text-align: left;
+    background-color: rgba(17, 17, 17, 0.90);
+    border-color: transparent;
+    border-style: none;
+    border-width: 0px;
+    border-radius: 0 0 0 0px
+}
+.tp-caption.Twitter-Content a,
+.tp-caption.Twitter-Content a:visited {
+    color: #0084B4 !important
+}
+.tp-caption.Twitter-Content a:hover {
+    color: #0084B4 !important;
+    text-decoration: underline !important
+}
+.tp-caption.TechJournal-Button,
+.TechJournal-Button {
+    color: rgba(255, 255, 255, 1.00);
+    font-size: 13px;
+    line-height: 40px;
+    font-weight: 900;
+    font-style: normal;
+    font-family: Raleway;
+    padding: 1px 30px 1px 30px;
+    text-decoration: none;
+    text-align: left;
+    background-color: rgba(138, 0, 255, 1.00);
+    border-color: rgba(0, 0, 0, 1.00);
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 0px 0px 0px 0px;
+    letter-spacing: 3px
+}
+.tp-caption.TechJournal-Button:hover,
+.TechJournal-Button:hover {
+    color: rgba(0, 0, 0, 1.00);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 1.00);
+    border-color: rgba(0, 0, 0, 1.00);
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 0px 0px 0px 0px;
+    cursor: pointer
+}
+.tp-caption.TechJournal-Big,
+.TechJournal-Big {
+    color: rgba(255, 255, 255, 1.00);
+    font-size: 120px;
+    line-height: 120px;
+    font-weight: 900;
+    font-style: normal;
+    font-family: Raleway;
+    padding: 0 0 0 0px;
+    text-decoration: none;
+    text-align: left;
+    background-color: transparent;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0px;
+    border-radius: 0 0 0 0px;
+    letter-spacing: 0px
+}
+.rev_slider {
+    overflow: hidden;
+}
+.effect_layer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.tp-caption.Twitter-Content a,
+    .tp-caption.Twitter-Content a:visited {
+        color: #0084B4 !important
+    }
+    .tp-caption.Twitter-Content a:hover {
+        color: #0084B4 !important;
+        text-decoration: underline !important
+    }
+    #menu_forcefullwidth {
+        z-index: 5000;
+        position: fixed !important;
+        top: 0px;
+        left: 0px;
+        width: 100%
+    }
+    .tp-caption.FullSiteBlock-Title,
+    .FullSiteBlock-Title {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 55px;
+        line-height: 65px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link,
+    .FullSiteBlock-Link {
+        color: rgba(0, 150, 255, 1.00);
+        font-size: 25px;
+        line-height: 24px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link:hover,
+    .FullSiteBlock-Link:hover {
+        color: rgba(51, 51, 51, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-DownButton,
+    .FullSiteBlock-DownButton {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 32px;
+        font-weight: 500;
+        font-style: normal;
+        font-family: Roboto;
+        padding: 1px 1px 1px 1px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: rgba(51, 51, 51, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-DownButton:hover,
+    .FullSiteBlock-DownButton:hover {
+        color: rgba(0, 150, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: rgba(0, 150, 255, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-Title,
+    .FullSiteBlock-Title {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 55px;
+        line-height: 65px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link,
+    .FullSiteBlock-Link {
+        color: rgba(0, 150, 255, 1.00);
+        font-size: 25px;
+        line-height: 24px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link:hover,
+    .FullSiteBlock-Link:hover {
+        color: rgba(51, 51, 51, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-DownButton,
+    .FullSiteBlock-DownButton {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 32px;
+        font-weight: 500;
+        font-style: normal;
+        font-family: Roboto;
+        padding: 1px 1px 1px 1px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: rgba(51, 51, 51, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-DownButton:hover,
+    .FullSiteBlock-DownButton:hover {
+        color: rgba(0, 150, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: rgba(0, 150, 255, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-Title,
+    .FullSiteBlock-Title {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 55px;
+        line-height: 65px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-DownButton,
+    .FullSiteBlock-DownButton {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 32px;
+        font-weight: 500;
+        font-style: normal;
+        font-family: Roboto;
+        padding: 1px 1px 1px 1px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: rgba(51, 51, 51, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-DownButton:hover,
+    .FullSiteBlock-DownButton:hover {
+        color: rgba(0, 150, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: rgba(0, 150, 255, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-Title,
+    .FullSiteBlock-Title {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 55px;
+        line-height: 65px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link,
+    .FullSiteBlock-Link {
+        color: rgba(0, 150, 255, 1.00);
+        font-size: 25px;
+        line-height: 24px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link:hover,
+    .FullSiteBlock-Link:hover {
+        color: rgba(51, 51, 51, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-DownButton,
+    .FullSiteBlock-DownButton {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 32px;
+        font-weight: 500;
+        font-style: normal;
+        font-family: Roboto;
+        padding: 1px 1px 1px 1px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: rgba(51, 51, 51, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-DownButton:hover,
+    .FullSiteBlock-DownButton:hover {
+        color: rgba(0, 150, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: rgba(0, 150, 255, 1.00);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 30px 30px 30px 30px;
+        cursor: pointer
+    }
+    .rev_slider {
+        overflow: hidden;
+    }
+    .effect_layer {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    .gyges .tp-thumb {
+        opacity: 1
+    }
+    .gyges .tp-thumb-img-wrap {
+        padding: 3px;
+        background-color: rgba(0, 0, 0, 0.25);
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 0px;
+        box-sizing: border-box;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+    }
+    .gyges .tp-thumb-image {
+        padding: 3px;
+        display: block;
+        box-sizing: border-box;
+        position: relative;
+        -webkit-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    }
+    .gyges .tp-thumb:hover .tp-thumb-img-wrap,
+    .gyges .tp-thumb.selected .tp-thumb-img-wrap {
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(255, 255, 255, 1)));
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+    .tp-caption.FullSiteBlock-Title,
+    .FullSiteBlock-Title {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 55px;
+        line-height: 65px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link,
+    .FullSiteBlock-Link {
+        color: rgba(0, 150, 255, 1.00);
+        font-size: 25px;
+        line-height: 24px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-Link:hover,
+    .FullSiteBlock-Link:hover {
+        color: rgba(51, 51, 51, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.FullSiteBlock-FooterLink,
+    .FullSiteBlock-FooterLink {
+        color: rgba(85, 85, 85, 1.00);
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: left;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: left
+    }
+    .tp-caption.FullSiteBlock-FooterLink:hover,
+    .FullSiteBlock-FooterLink:hover {
+        color: rgba(0, 150, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .fb-share-button.fb_iframe_widget iframe {
+        width: 115px!important;
+    }
+    #tp-socialwrapper {
+        opacity: 0;
+    }
+
+        .tp-caption.Twitter-Content a,
+    .tp-caption.Twitter-Content a:visited {
+        color: #0084B4 !important
+    }
+    .tp-caption.Twitter-Content a:hover {
+        color: #0084B4 !important;
+        text-decoration: underline !important
+    }
+    #menu_forcefullwidth {
+        z-index: 5000;
+        position: fixed !important;
+        top: 0px;
+        left: 0px;
+        width: 100%
+    }
+    #tp-menubg {
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+        /* FF3.6-15 */
+        
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d9000000', endColorstr='#00000000', GradientType=0);
+        /* IE6-9 */
+    }
+    #mc_embed_signup input[type="email"] {
+        font-family: "Lato", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        background-color: #fff;
+        color: #888 !important;
+        line-height: 46px;
+        padding: 0 20px;
+        cursor: text;
+        border: 0;
+        width: 400px;
+        margin-bottom: 0px;
+        -webkit-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        -ms-transition: background-color 0.5s;
+        transition: background-color 0.5s;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    #mc_embed_signup input[type="email"]::-webkit-input-placeholder {
+        color: #888 !important;
+    }
+    #mc_embed_signup input[type="email"]::-moz-placeholder {
+        color: #888 !important;
+    }
+    #mc_embed_signup input[type="email"]:-ms-input-placeholder {
+        color: #888 !important;
+    }
+    #mc_embed_signup input[type="email"]:focus {
+        background-color: #f5f5f5;
+        color: #454545;
+    }
+    #mc_embed_signup input#mc-embedded-subscribe,
+    #mc_embed_signup input#mc-embedded-subscribe:focus {
+        font-family: "Lato", sans-serif;
+        line-height: 46px;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0 30px;
+        border: 0;
+        background: #f04531;
+        text-transform: none;
+        color: #fff;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    #mc_embed_signup input#mc-embedded-subscribe:hover {
+        background: #e03727;
+    }
+    @media only screen and (max-width: 767px) {
+        #mc_embed_signup input[type="email"] {
+            width: 260px;
+        }
+    }
+    @media only screen and (max-width: 480px) {
+        #mc_embed_signup input[type="email"] {
+            width: 160px;
+        }
+    }
+    #rev_slider_167_6 .uranus.tparrows {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0);
+    }
+    #rev_slider_167_6 .uranus.tparrows:before {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 40px;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+    }
+    #rev_slider_167_6 .uranus.tparrows:hover:before {
+        opacity: 0.75;
+    }
+    .tp-caption.FullSiteBlock-SubTitle,
+    .FullSiteBlock-SubTitle {
+        color: rgba(51, 51, 51, 1.00);
+        font-size: 25px;
+        line-height: 34px;
+        font-weight: 300;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: center;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        text-align: center
+    }
+    .tp-caption.ParallaxWebsite-FooterItem,
+    .ParallaxWebsite-FooterItem {
+        color: rgba(255, 255, 255, 0.50);
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Lato;
+        padding: 0 0 0 0px;
+        text-decoration: none;
+        text-align: left;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px
+    }
+    .tp-caption.ParallaxWebsite-FooterItem:hover,
+    .ParallaxWebsite-FooterItem:hover {
+        color: rgba(255, 255, 255, 1.00);
+        text-decoration: none;
+        background-color: transparent;
+        border-color: transparent;
+        border-style: none;
+        border-width: 0px;
+        border-radius: 0 0 0 0px;
+        cursor: pointer
+    }
+    .fb-share-button.fb_iframe_widget iframe {
+        width: 115px!important;
+    }
+    iframe.twitter-share-button {
+        display: none;
+    }
+    .fb-share-button.fb_iframe_widget iframe {
+        display: none;
+    }
+
+    .tp-caption.FullSiteBlock-Link, 
+    .FullSiteBlock-Link {
+    color: rgba(0,150,255,1.00);
+    font-size: 25px;
+    line-height: 24px;
+    font-weight: 300;
+    font-style: normal;
+    font-family: Lato;
+    padding: 0 0 0 0px;
+    text-decoration: none;
+    text-align: center;
+    background-color: transparent;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0px;
+    border-radius: 0 0 0 0px;
+    text-align: center;
 }

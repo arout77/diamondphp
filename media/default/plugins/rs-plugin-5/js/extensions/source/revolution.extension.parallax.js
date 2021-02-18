@@ -1,34 +1,30 @@
 /********************************************
- * REVOLUTION 5.1.6 EXTENSION - PARALLAX
- * @version: 1.3 (14.01.2016)
+ * REVOLUTION 5.4.6.5 EXTENSION - PARALLAX
+ * @version: 2.2.3 (17.05.2017)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile();
+	_ISM = _R.is_mobile(),
+	extension = {	alias:"Parallax Min JS",
+					name:"revolution.extensions.parallax.min.js",
+					min_core: "5.4.5",
+					version:"2.2.3"
+			  };
 
 jQuery.extend(true,_R, {	
-	/*callStaticDDDParallax: function(container,opt,li) {
-		// STATIC 3D PARALLAX MOVEMENTS
-	    if (opt.parallax && (opt.parallax.ddd_path=="static" || opt.parallax.ddd_path=="both")) {
-			var coo = {},
-				path = li.data('3dpath');
-			coo.li = li;
-			if (path.split(',').length>1) {
-				coo.h = parseInt(path.split(',')[0],0);
-				coo.v = parseInt(path.split(',')[1],0);				
-				container.trigger('trigger3dpath',coo);
-			}		
-		}
-	},*/
-
-	checkForParallax : function(container,opt) {
-		
+	
+	checkForParallax : function(container,opt) {		
+		if (_R.compare_version(extension).check==="stop") return false;
 		var _ = opt.parallax;
 
+		if (_.done) return;
+		_.done = true;
+
 		if (_ISM && _.disable_onmobile=="on") return false;
+
 
 		if (_.type=="3D" || _.type=="3d") {			
 			punchgs.TweenLite.set(opt.c,{overflow:_.ddd_overflow});
@@ -39,10 +35,7 @@ jQuery.extend(true,_R, {
 			}
 		}
 		
-		
-		opt.li.each(function() {
-			var li = jQuery(this);
-							
+		function setDDDInContainer(li) {
 			if (_.type=="3D" || _.type=="3d") {
 				li.find('.slotholder').wrapAll('<div class="dddwrapper" style="width:100%;height:100%;position:absolute;top:0px;left:0px;overflow:hidden"></div>');				
 				li.find('.tp-parallax-wrap').wrapAll('<div class="dddwrapper-layer" style="width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:5;overflow:'+_.ddd_layer_overflow+';"></div>');				
@@ -53,8 +46,6 @@ jQuery.extend(true,_R, {
 				var dddw = li.find('.dddwrapper'),
 					dddwl = li.find('.dddwrapper-layer'),
 					dddwlbg = li.find('.dddwrapper-layertobggroup');
-
-				
 
 				dddwlbg.appendTo(dddw);
 								
@@ -67,15 +58,42 @@ jQuery.extend(true,_R, {
 				punchgs.TweenLite.set(dddwl,{force3D:"auto",transformOrigin:"50% 50%",zIndex:5});					
 				punchgs.TweenLite.set(opt.ul,{transformStyle:"preserve-3d",transformPerspective:1600});					
 			}
-						
+		}
+
+		opt.li.each(function() {
+			setDDDInContainer(jQuery(this));						
 		});
+
+		if ((_.type=="3D" || _.type=="3d") && opt.c.find('.tp-static-layers').length>0) {
+			punchgs.TweenLite.set(opt.c.find('.tp-static-layers'),{top:0, left:0,width:"100%",height:"100%"});
+			setDDDInContainer(opt.c.find('.tp-static-layers'));
+		}
+		_.pcontainers = new Array();
+		_.pcontainer_depths = new Array();
+		_.bgcontainers = new Array();
+		_.bgcontainer_depths = new Array();
+
+		opt.c.find('.tp-revslider-slidesli .slotholder, .tp-revslider-slidesli .rs-background-video-layer').each(function() {
+			var t = jQuery(this),
+				l = t.data('bgparallax') || opt.parallax.bgparallax;		
+			l = l == "on" ? 1 : l;				
+			if (l!==undefined && l!=="off") {									
+				_.bgcontainers.push(t);
+				_.bgcontainer_depths.push(opt.parallax.levels[parseInt(l,0)-1]/100);
+			}
+		})
+
+		
 
 		for (var i = 1; i<=_.levels.length;i++)				
 			opt.c.find('.rs-parallaxlevel-'+i).each(function() {					
 				var pw = jQuery(this),
 					tpw = pw.closest('.tp-parallax-wrap');												
+				
 				tpw.data('parallaxlevel',_.levels[i-1])
-				tpw.addClass("tp-parallax-container");								
+				tpw.addClass("tp-parallax-container");
+				_.pcontainers.push(tpw);
+				_.pcontainer_depths.push(_.levels[i-1]);
 			});		
 
 		
@@ -115,13 +133,7 @@ jQuery.extend(true,_R, {
 						diffv = (opt.conh/2 - (event.pageY-t)),
 						s = _.speed/1000 || 3;
 				}
-								
-				/*if (event.type=="trigger3dpath") {
-					diffh = data.h;
-					diffv = data.v;					
-					_.ddd_lasth = diffh;
-					_.ddd_lastv = diffv;
-				}*/
+				
 
 				if (event.type=="mouseleave") {
 					diffh = _.ddd_lasth || 0;
@@ -129,21 +141,10 @@ jQuery.extend(true,_R, {
 					s = 1.5;									
 				}
 
-				/*if (_.ddd_path=="static") {
-					diffh = _.ddd_lasth || 0;
-					diffv = _.ddd_lastv || 0;							
-				}*/
-				var pcnts = [];
-				currslide.find(".tp-parallax-container").each(function(i){					
-					pcnts.push(jQuery(this));
-				});
-				container.find('.tp-static-layers .tp-parallax-container').each(function(){
-					pcnts.push(jQuery(this));
-				});
 				
-				jQuery.each(pcnts, function() {
-					var pc = jQuery(this),
-						bl = parseInt(pc.data('parallaxlevel'),0),
+				for (var i=0;i<_.pcontainers.length;i++) {				
+					var pc = _.pcontainers[i],
+						bl = _.pcontainer_depths[i],
 						pl = _.type=="3D" || _.type=="3d" ? bl/200 : bl/100,
 						offsh =	 diffh * pl,
 						offsv =	 diffv * pl;		
@@ -151,11 +152,11 @@ jQuery.extend(true,_R, {
 							punchgs.TweenLite.to(pc,s,{force3D:"auto",x:offsh,ease:punchgs.Power3.easeOut,overwrite:"all"});
 						else
 							punchgs.TweenLite.to(pc,s,{force3D:"auto",x:offsh,y:offsv,ease:punchgs.Power3.easeOut,overwrite:"all"});
-				});
+				};
 
 				if (_.type=="3D" || _.type=="3d") {
-					var sctor = '.tp-revslider-slidesli .dddwrapper, .dddwrappershadow, .tp-revslider-slidesli .dddwrapper-layer';
-					if (opt.sliderType==="carousel") sctor = ".tp-revslider-slidesli .dddwrapper, .tp-revslider-slidesli .dddwrapper-layer";
+					var sctor = '.tp-revslider-slidesli .dddwrapper, .dddwrappershadow, .tp-revslider-slidesli .dddwrapper-layer, .tp-static-layers .dddwrapper-layer';
+					if (opt.sliderType==="carousel") sctor = ".tp-revslider-slidesli .dddwrapper, .tp-revslider-slidesli .dddwrapper-layer, .tp-static-layers .dddwrapper-layer";
 					opt.c.find(sctor).each(function() {										
 						var t = jQuery(this),
 							pl = _.levels[_.levels.length-1]/200,										
@@ -183,7 +184,7 @@ jQuery.extend(true,_R, {
 							else 								
 								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 						else 
-							punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
+							punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 																	
 						if (event.type=="mouseleave")
 						 	punchgs.TweenLite.to(jQuery(this),3.8,{z:0, ease:punchgs.Power3.easeOut});
@@ -228,11 +229,11 @@ jQuery.extend(true,_R, {
 					});
 					
 					if (_.type=="3D" || _.type=="3d") {
-						var sctor = '.tp-revslider-slidesli .dddwrapper, .dddwrappershadow, .tp-revslider-slidesli .dddwrapper-layer';
-						if (opt.sliderType==="carousel") sctor = ".tp-revslider-slidesli .dddwrapper, .tp-revslider-slidesli .dddwrapper-layer";
+						var sctor = '.tp-revslider-slidesli .dddwrapper, .dddwrappershadow, .tp-revslider-slidesli .dddwrapper-layer, .tp-static-layers .dddwrapper-layer';
+						if (opt.sliderType==="carousel") sctor = ".tp-revslider-slidesli .dddwrapper, .tp-revslider-slidesli .dddwrapper-layer, .tp-static-layers .dddwrapper-layer";
 						opt.c.find(sctor).each(function() {			
 							var t = jQuery(this),
-								pl = _.levels[_.levels.length-1]/200
+								pl = _.levels[_.levels.length-1]/200,
 								offsh =	diffh * pl,
 								offsv =	diffv * pl*3,
 								offrv = opt.conw == 0 ? 0 :  Math.round((diffh / opt.conw * pl)*500) || 0,
@@ -257,7 +258,7 @@ jQuery.extend(true,_R, {
 								else 								
 									punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 							else 
-								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
+								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, ease:punchgs.Power3.easeOut,overwrite:"all"});
 																	
 							if (event.type=="mouseleave")
 							 	punchgs.TweenLite.to(jQuery(this),3.8,{z:0, ease:punchgs.Power3.easeOut});
@@ -266,8 +267,23 @@ jQuery.extend(true,_R, {
 				}			 
 		}
 				
+		// COLLECT ALL ELEMENTS WHICH NEED FADE IN/OUT ON PARALLAX SCROLL
+		var _s = opt.scrolleffect;
+		_s.bgs = new Array();		
+
+		if (_s.on) {		
+			if (_s.on_slidebg==="on")
+				for (var i=0;i<opt.allslotholder.length;i++) {													
+					_s.bgs.push(opt.allslotholder[i]);
+				}
+								
+			_s.multiplicator_layers = parseFloat(_s.multiplicator_layers);
+			_s.multiplicator = parseFloat(_s.multiplicator);	
+		}
+		if (_s.layers!==undefined && _s.layers.length===0) _s.layers = false;
+		if (_s.bgs!==undefined && _s.bgs.length===0) _s.bgs = false;	
+
 		_R.scrollTicker(opt,container);
-		
 
 	},
 	
@@ -280,9 +296,15 @@ jQuery.extend(true,_R, {
 				punchgs.TweenLite.ticker.fps(150);
 				punchgs.TweenLite.ticker.addEventListener("tick",function() {_R.scrollHandling(opt);},container,false,1);
 			} else {				
-				jQuery(window).on('scroll mousewheel DOMMouseScroll', function() {				
-					_R.scrollHandling(opt,true);					
-				});
+				document.addEventListener('scroll',function(e) {						
+					_R.scrollHandling(opt,true);											
+				}, {passive:true});
+
+				/*window.addEventListener('mousewheel',function(e) {
+					_R.scrollHandling(opt,true);
+				}, {passive:true});
+
+				window.addEventListener('DOMMouseScroll',function() {_R.scrollHandling(opt,true);}, {passive:true});*/
 			}		
 				
 		}		
@@ -292,38 +314,21 @@ jQuery.extend(true,_R, {
 
 
 	//	-	SET POST OF SCROLL PARALLAX	-
-	scrollHandling : function(opt,fromMouse) {	
-	
-		opt.lastwindowheight = opt.lastwindowheight || jQuery(window).height();
+	scrollHandling : function(opt,fromMouse,speedoverwrite) {	
+		opt.lastwindowheight = opt.lastwindowheight || window.innerHeight;
+		opt.conh = opt.conh===0 || opt.conh===undefined ? opt.infullscreenmode ? opt.minHeight : opt.c.height() : opt.conh;
+		if (opt.lastscrolltop==window.scrollY && !opt.duringslidechange && !fromMouse) return false;		
+		punchgs.TweenLite.delayedCall(0.2,saveLastScroll,[opt,window.scrollY]);
 
-		var t = opt.c.offset().top,
-			st = jQuery(window).scrollTop(),					
-			b = new Object(),
+		var b = opt.c[0].getBoundingClientRect(),
 			_v = opt.viewPort,
 			_ = opt.parallax;
-
 		
-		if (opt.lastscrolltop==st && !opt.duringslidechange && !fromMouse) return false;
-		//if (opt.lastscrolltop==st) return false;
-
-		
-
-		function saveLastScroll(opt,st) {			
-			opt.lastscrolltop = st;			
-		}
-		punchgs.TweenLite.delayedCall(0.2,saveLastScroll,[opt,st]);
-
-		b.top = (t-st);		
-		b.h = opt.conh==0 ? opt.c.height() : opt.conh;		
-		b.bottom = (t-st) + b.h;
-
-		var proc = b.top<0 || b.h>opt.lastwindowheight ? b.top / b.h : b.bottom>opt.lastwindowheight ? (b.bottom-opt.lastwindowheight) / b.h : 0;
+		var proc = b.top<0 || b.height>opt.lastwindowheight ? b.top / b.height : b.bottom>opt.lastwindowheight ? (b.bottom-opt.lastwindowheight) / b.height : 0;
 		opt.scrollproc = proc;
 
 		if (_R.callBackHandling)
 			_R.callBackHandling(opt,"parallax","start");
-
-		
 
 		if (_v.enable) {
 			var area = 1-Math.abs(proc);
@@ -333,7 +338,6 @@ jQuery.extend(true,_R, {
 			 if (_v.visible_area.indexOf('%')!==-1) 
 				_v.visible_area = parseInt(_v.visible_area)/100;
 			
-
 		 	if (1-_v.visible_area<=area) {
 				if (!opt.inviewport) {
 					opt.inviewport = true;
@@ -346,50 +350,115 @@ jQuery.extend(true,_R, {
 				}
 			}
 		}
-
-			
+					
 		// SCROLL BASED PARALLAX EFFECT 
-		if (_ISM && opt.parallax.disable_onmobile=="on") return false;
-
-		var pt = new punchgs.TimelineLite();
-		pt.pause();
+		if (_ISM && _.disable_onmobile=="on") return false;
 
 		if (_.type!="3d" && _.type!="3D") {
-			if (_.type=="scroll" || _.type=="scroll+mouse" || _.type=="mouse+scroll") 
-				opt.c.find(".tp-parallax-container").each(function(i) {
-					var pc = jQuery(this),
-						pl = parseInt(pc.data('parallaxlevel'),0)/100,
-						offsv =	proc * -(pl*opt.conh) || 0;
-					
-					pc.data('parallaxoffset',offsv);					
-					pt.add(punchgs.TweenLite.set(pc,{force3D:"auto",y:offsv}),0);
-				});		
+			if (_.type=="scroll" || _.type=="scroll+mouse" || _.type=="mouse+scroll") 		
+				if (_.pcontainers) 		
+					for (var i=0;i<_.pcontainers.length;i++) {
+						if (_.pcontainers[i].length>0) {
+							var pc = _.pcontainers[i],
+								pl = _.pcontainer_depths[i]/100,						
+								offsv = Math.round((proc * -(pl*opt.conh)*10))/10 || 0,
+								s = speedoverwrite!==undefined ? speedoverwrite :  _.speedls/1000 || 0;
+							pc.data('parallaxoffset',offsv);		
+							punchgs.TweenLite.to(pc,s,{overwrite:"auto",force3D:"auto",y:offsv})
+						}
+					}											
+			if (_.bgcontainers)
+				for (var i=0;i<_.bgcontainers.length;i++) {
+					var t = _.bgcontainers[i],
+						l = _.bgcontainer_depths[i],			
+						offsv =	proc * -(l*opt.conh) || 0,
+						s = speedoverwrite!==undefined ? speedoverwrite : _.speedbg/1000 || 0;	
 
-			opt.c.find('.tp-revslider-slidesli .slotholder, .tp-revslider-slidesli .rs-background-video-layer').each(function() {	
-			console.log("hey")		
-				var t = jQuery(this),
-					l = t.data('bgparallax') || opt.parallax.bgparallax;				
-					l = l == "on" ? 1 : l;						
-					if (l!== undefined || l !== "off") {
-
-						var pl = opt.parallax.levels[parseInt(l,0)-1]/100,
-						offsv =	proc * -(pl*opt.conh) || 0;		
-
-
-						if (jQuery.isNumeric(offsv))																					
-							pt.add(punchgs.TweenLite.set(t,{position:"absolute",top:"0px",left:"0px",backfaceVisibility:"hidden",force3D:"true",y:offsv+"px"}),0);								
-					}
-			});
+					punchgs.TweenLite.to(t,s,{position:"absolute",top:"0px",left:"0px",backfaceVisibility:"hidden",force3D:"true",y:offsv+"px"});											
+				}							
 		}
 
+		// SCROLL BASED BLUR,FADE,GRAYSCALE EFFECT
+		var _s = opt.scrolleffect;
+		if (_s.on && (_s.disable_on_mobile!=="on" || !_ISM)) { 
+			
+			var _fproc = Math.abs(proc)-(_s.tilt/100);
+			_fproc = _fproc<0 ? 0 : _fproc;			
+			if (_s.layers!==false) {									
+				var fadelevel = 1 - (_fproc *_s.multiplicator_layers),
+					seo = { backfaceVisibility:"hidden",force3D:"true",z:0.001,perspective:600};
+				if (_s.direction=="top" && proc>=0) fadelevel=1;
+				if (_s.direction=="bottom" && proc<=0) fadelevel=1;
+				fadelevel = fadelevel>1 ? 1 : fadelevel < 0 ? 0 : fadelevel;	
+								
+
+				if (_s.fade==="on")
+					seo.opacity = fadelevel;
+
+				if (_s.scale==="on") {					
+					var scalelevel = (fadelevel);
+					seo.scale = 1+(1-scalelevel);	
+					
+				}
+
+				if (_s.blur==="on") {					
+					var blurlevel = (1-fadelevel) * _s.maxblur;
+					seo['-webkit-filter'] = 'blur('+blurlevel+'px)';
+					seo['filter'] = 'blur('+blurlevel+'px)';
+				}
+
+				
+				if (_s.grayscale==="on") {					
+					var graylevel = (1-fadelevel) * 100,
+						gf = 'grayscale('+graylevel+'%)';
+					seo['-webkit-filter'] = seo['-webkit-filter']===undefined ? gf : seo['-webkit-filter']+' '+gf;
+					seo['filter'] = seo['filter']===undefined ? gf: seo['filter']+' '+gf;
+				}				
+				punchgs.TweenLite.set(_s.layers,seo);    								
+			}
+
+			if (_s.bgs!==false) {									
+				var fadelevel = 1 - (_fproc *_s.multiplicator),
+					seo = { backfaceVisibility:"hidden",force3D:"true"};
+				if (_s.direction=="top" && proc>=0) fadelevel=1;
+				if (_s.direction=="bottom" && proc<=0) fadelevel=1;					
+				fadelevel = fadelevel>1 ? 1 : fadelevel < 0 ? 0 : fadelevel;
+
+				if (_s.fade==="on")
+					seo.opacity = fadelevel;
+
+				if (_s.scale==="on") {					
+					var scalelevel = fadelevel;
+					//seo.scale = scalelevel;
+					punchgs.TweenLite.set(jQuery('.tp-kbimg-wrap'),{transformOrigin:"50% 50%",scale:scalelevel,force3D:true})
+				}
+
+				if (_s.blur==="on") {					
+					var blurlevel = (1-fadelevel) * _s.maxblur;
+					seo['-webkit-filter'] = 'blur('+blurlevel+'px)';
+					seo['filter'] = 'blur('+blurlevel+'px)';
+				}
+
+				
+				if (_s.grayscale==="on") {					
+					var graylevel = (1-fadelevel) * 100,
+						gf = 'grayscale('+graylevel+'%)';
+					seo['-webkit-filter'] = seo['-webkit-filter']===undefined ? gf : seo['-webkit-filter']+' '+gf;
+					seo['filter'] = seo['filter']===undefined ? gf: seo['filter']+' '+gf;
+				}
+
+				punchgs.TweenLite.set(_s.bgs,seo);    								
+			}
+		}		
+		
 		if (_R.callBackHandling)
 			_R.callBackHandling(opt,"parallax","end");		
 		
-		pt.play(0);
 	}
 		
 });
 
+function saveLastScroll(opt,st) { opt.lastscrolltop = st;}
 
 
 //// END OF PARALLAX EFFECT	

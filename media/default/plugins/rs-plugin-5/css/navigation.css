@@ -258,7 +258,7 @@ website:    http://www.themepunch.com
 	height:40px;
 	position:absolute;
 	display:block;
-	z-index:100;
+	z-index:10000;
 }
 .custom.tparrows:hover {
 	background:#000;
@@ -514,7 +514,7 @@ website:    http://www.themepunch.com
   min-height:70px;
   position:absolute;
   display:block;
-  z-index:100;
+  z-index:1000;
   border-radius:35px;   
 }
 
@@ -999,7 +999,7 @@ website:    http://www.themepunch.com
 	height:100px;
 	position:absolute;
 	display:block;
-	z-index:100;
+	z-index:1000;
 }
 
 .hades.tparrows:before {
@@ -1254,7 +1254,7 @@ website:    http://www.themepunch.com
     min-height:70px;
   position:absolute;
   display:block;
-  z-index:100;
+  z-index:1000;
 }
 .hebe.tparrows:hover {
 }
@@ -1451,7 +1451,7 @@ website:    http://www.themepunch.com
 	height:40px;
 	position:absolute;
 	display:block;
-	z-index:100;
+	z-index:1000;
     border-radius:50%;
 }
 .hephaistos.tparrows:hover {
@@ -1532,7 +1532,7 @@ website:    http://www.themepunch.com
 	height:110px;
 	position:absolute;
 	display:block;
-	z-index:100;
+	z-index:1000;
 }
 
 .hermes.tparrows:before {
@@ -1755,7 +1755,7 @@ website:    http://www.themepunch.com
 	height:40px;
 	position:absolute;
 	display:block;
-	z-index:100;
+	z-index:1000;
     border-radius: 50%;
 }
 .hesperiden.tparrows:hover {
@@ -1834,7 +1834,7 @@ website:    http://www.themepunch.com
     margin-top:-10px;
     color:#fff;
     display:block;
-    z-index:1000;
+    z-index:10000;
     background-color:#000;
     padding:5px 10px; 
     bottom:0px;

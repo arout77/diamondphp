@@ -1,12 +1,17 @@
 /********************************************
- * REVOLUTION 5.0 EXTENSION - CAROUSEL
- * @version: 1.0.2 (01.10.2015)
+ * REVOLUTION 5.4.6.5 EXTENSION - CAROUSEL
+ * @version: 1.2.1 (18.11.2016)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
-var _R = jQuery.fn.revolution;
+"use strict";
+var _R = jQuery.fn.revolution,
+	extension = {	alias:"Carousel Min JS",
+					name:"revolution.extensions.carousel.min.js",
+					min_core: "5.3.0",
+					version:"1.2.1"
+			  };
 
 	///////////////////////////////////////////
 	// 	EXTENDED FUNCTIONS AVAILABLE GLOBAL  //
@@ -14,17 +19,24 @@ var _R = jQuery.fn.revolution;
 jQuery.extend(true,_R, {
 
 	// CALCULATE CAROUSEL POSITIONS
-	prepareCarousel : function(opt,a,direction) {	
+	prepareCarousel : function(opt,a,direction,speed) {	
+
+		if (_R.compare_version(extension).check==="stop") return false;
 
 		direction = opt.carousel.lastdirection = dircheck(direction,opt.carousel.lastdirection);		
+		
 		setCarouselDefaults(opt);	
 			
 		opt.carousel.slide_offset_target = getActiveCarouselOffset(opt);
-		
-		if (a==undefined) 	
-			_R.carouselToEvalPosition(opt,direction);		
-		else 	
-			animateCarousel(opt,direction,false);	
+
+		if (speed!==undefined) {
+				animateCarousel(opt,direction,false,0);
+		} else {
+			if (a==undefined) 	
+				_R.carouselToEvalPosition(opt,direction);		
+			else 	
+				animateCarousel(opt,direction,false);	
+		}
 			
 	},
 
@@ -62,7 +74,7 @@ jQuery.extend(true,_R, {
 		var _ = opt.carousel,
 			slidepositions = new Array(),
 			len = _.slides.length,
-			leftlimit = _.horizontal_align ==="right" ? leftlimit = opt.width : 0;
+			leftlimit = _.horizontal_align ==="right" ? opt.width : 0;
 		
 
 		for (var i=0;i<len;i++) {					
@@ -275,16 +287,23 @@ var dircheck = function(d,b) {
 }
 
 // ANIMATE THE CAROUSEL WITH OFFSETS
-var animateCarousel = function(opt,direction,nsae) {
+var animateCarousel = function(opt,direction,nsae,speed) {
+
 	var _ = opt.carousel;
 	direction = _.lastdirection = dircheck(direction,_.lastdirection);		
 	
-	var animobj = new Object();	
+	var animobj = new Object(),
+		_ease = nsae ? punchgs.Power2.easeOut : _.easing;
+
 	animobj.from = 0;
 	animobj.to = _.slide_offset_target;
+	speed = speed===undefined ? _.speed/1000 : speed;
+	speed = nsae ? 0.4 : speed; 
+	
+
 	if (_.positionanim!==undefined)
 		_.positionanim.pause();
-	_.positionanim = punchgs.TweenLite.to(animobj,1.2,{from:animobj.to,
+	_.positionanim = punchgs.TweenLite.to(animobj,speed,{from:animobj.to,
 		onUpdate:function() {					
 			_.slide_offset = _.slide_globaloffset + animobj.from;
 			_.slide_offset = _R.simp(_.slide_offset , _.maxwidth);
@@ -298,8 +317,8 @@ var animateCarousel = function(opt,direction,nsae) {
 			_R.organiseCarousel(opt,direction,false,true);	
 			var li = jQuery(opt.li[_.focused]);	
 			opt.c.find('.next-revslide').removeClass("next-revslide");
-			if (nsae) _R.callingNewSlide(opt,opt.c,li.data('index'));
-		}, ease:punchgs.Expo.easeOut});	
+			if (nsae) _R.callingNewSlide(opt.c,li.data('index'));
+		}, ease:_ease});	
 }
 
 

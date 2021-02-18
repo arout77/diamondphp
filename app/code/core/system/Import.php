@@ -1,8 +1,7 @@
 <?php
 namespace App\System;
 
-class Import
-{
+class Import {
 
 	/**
 	 * @var array
@@ -16,8 +15,7 @@ class Import
 	/**
 	 * @param $file
 	 */
-	public function __construct($file)
-	{
+	public function __construct($file) {
 		$this->file = $file;
 	}
 
@@ -25,8 +23,7 @@ class Import
 	 * @param $setting
 	 * @return mixed
 	 */
-	public function get_global_configuration($setting)
-	{
+	public function get_global_configuration($setting) {
 		// Locate the global .env file
 		$getLine = $setting;
 
@@ -41,8 +38,7 @@ class Import
 		$pattern = "/^.*$pattern.*\$/m";
 
 		// search, and store all matching occurences in $matches
-		if (preg_match_all($pattern, $contents, $matches))
-		{
+		if (preg_match_all($pattern, $contents, $matches)) {
 
 			// Return the line from the .env file
 			$line = implode("\n", $matches[0]);
@@ -57,12 +53,10 @@ class Import
 	 * @param $line
 	 * @return mixed
 	 */
-	private function setting_value($line)
-	{
+	private function setting_value($line) {
 
 		// Now extracting the double-quoted value
-		if (preg_match('/"([^"]+)"/', $line, $m))
-		{
+		if (preg_match('/"([^"]+)"/', $line, $m)) {
 			return $m[1];
 		}
 

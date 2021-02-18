@@ -3,13 +3,11 @@
 namespace App\System;
 use Smarty;
 
-if (!class_exists('Smarty'))
-{
-	require SMARTY_PATH . 'libs/Smarty.php';
+if (!class_exists('Smarty')) {
+	require SMARTY_DIR . 'Smarty.class.php';
 }
 
-class Template extends Smarty
-{
+class Template extends Smarty {
 	/**
 	 * @var mixed
 	 */
@@ -39,16 +37,15 @@ class Template extends Smarty
 	/**
 	 * @param $app
 	 */
-	public function __construct($app)
-	{
+	public function __construct($app) {
 		parent::__construct();
 
+		$this->app    = $app;
 		$this->config = $app['config'];
 		$this->load   = $app['load'];
 		$this->route  = $app['router'];
 
-		if ($this->route->controller == 'Admin')
-		{
+		if ($this->route->controller == 'Admin') {
 			$this->is_admin = TRUE;
 		}
 	}
