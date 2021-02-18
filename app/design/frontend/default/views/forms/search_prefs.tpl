@@ -5,7 +5,7 @@
     <div class="form-block center-block">
         <h2 class="title">Search Preferences</h2>
         <hr>
-        <form class="form-horizontal" id="search_prefs" name="search_prefs" role="form" method="post" action="{$smarty.const.BASE_URL}member/update_search_prefs">
+        <form class="form-horizontal" id="search_prefs" name="search_prefs" role="form" method="post" action="{$smarty.const.SITE_URL}member/update_search_prefs">
             
             <div class="form-group has-feedback">
                 <label for="gender" class="col-sm-3 control-label">Gender <span class="text-danger small">*</span></label>
@@ -208,7 +208,7 @@
                 <li>Help us keep track of the awesome websites built with Diamond PHP</li>
             </ul>
             <hr class="half-margins" />
-            <p class="white-row text-center styleBackground"> Already have an account? <a href=" {$smarty.const.BASE_URL}login">Member Login</a> </p>
+            <p class="white-row text-center styleBackground"> Already have an account? <a href=" {$smarty.const.SITE_URL}login">Member Login</a> </p>
     </div>
 </div>
     

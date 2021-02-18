@@ -31,4 +31,5 @@
 
 		<link href="{$smarty.const.SITE_URL}media/default/css/style.css" rel="stylesheet">
 		<link href="{$smarty.const.SITE_URL}media/default/css/custom.css" rel="stylesheet">
+		<script type = "text/javascript" src = "{$smarty.const.SITE_URL}media/default/js/vue.js"></script>
 	</head>

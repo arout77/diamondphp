@@ -50,5 +50,22 @@
 		<a href="{$data.site_url}documentation" target="_blank">View documentation locally</a>
 	</table>
 	</div>
+{literal}
+	<div id = "vue_det">
+         <h1>Firstname : {{firstname}}</h1>
+         <h1>Lastname : {{lastname}}</h1>
+         <div v-html="htmlcontent"></div>
+      </div>
 
+      <script type = "text/javascript">
+         var vm = new Vue({
+			   el: '#vue_det',
+			   data: {
+			      firstname : "Ria",
+			      lastname  : "Singh",
+			      htmlcontent : "<div><h1>Vue Js Template</h1></div>"
+			   }
+			})
+      </script>
+{/literal}
 </div>

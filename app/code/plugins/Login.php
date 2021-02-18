@@ -167,4 +167,31 @@ class Login extends Plugin_Core {
 		}
 	}
 
+	public function change_password() {
+		if ($_POST) {
+			$password  = $_POST['password'];
+			$cpassword = $_POST['confirm_password'];
+			if ($password !== $cpassword) {
+				return FALSE;
+			}
+
+			if ($this->model('Member')->update_password($password, $this->toolbox('session')->get('email'))) {
+				$data['saved']          = 'Password successfully updated';
+				$data['saved_message']  = 'To keep your account secure, it is recommended to change your passwords at least every 90 days, and create a unique password for different sites.';
+				$data['data_saved_btn'] = '<a href="#" data-dismiss="alert" class="btn btn-dark btn-sm">Close</a>';
+			} else {
+				$data['saved']          = 'Problem updating password';
+				$data['saved_message']  = 'There was a problem saving your password. Please make sure that your passwords match, and do not contain any illegal characters.';
+				$data['data_saved_btn'] = '<a href="#" data-dismiss="alert" class="btn btn-dark btn-sm">Close</a>';
+			}
+
+			$this->template->assign('new_pw_saved', $data['saved']);
+			$this->template->assign('data_saved_message', $data['saved_message']);
+			$this->template->assign('data_saved_btn', $data['data_saved_btn']);
+			$this->template->assign('content', 'forms/change_password.tpl');
+		} else {
+			$this->template->assign('content', 'forms/change_password.tpl');
+		}
+	}
+
 }

@@ -38,11 +38,11 @@ legend {
     
     <p>
         You will find that much of your coding will involve the use of the 
-        <a href="{$smarty.const.BASE_URL}documentation/modules/overview">Developer Toolbox</a>, as it comes with the ability to handle many different 
+        <a href="{$smarty.const.SITE_URL}documentation/modules/overview">Developer Toolbox</a>, as it comes with the ability to handle many different 
         scenarios that are common to most websites.
     </p>
     <p>
-    	Database transactions are handled using PDO directly. A service locator is provided that eliminates the need to import the database each time you need to use it, and initiates the connection for you. View the <a href="{$smarty.const.BASE_URL}documentation/functions/database">database documentation</a> for more information.<br>We may port the Doctrine ORM in the near future to replace this functionality, if user feedback indicates that is what the users want.<br>
+    	Database transactions are handled using PDO directly. A service locator is provided that eliminates the need to import the database each time you need to use it, and initiates the connection for you. View the <a href="{$smarty.const.SITE_URL}documentation/functions/database">database documentation</a> for more information.<br>We may port the Doctrine ORM in the near future to replace this functionality, if user feedback indicates that is what the users want.<br>
         <em>UPDATE: Redbean has been included with the framework. You can use it, or the built in service locator for PDO, or both.</em>
     </p>
     
