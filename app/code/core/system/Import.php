@@ -1,15 +1,28 @@
 <?php
-namespace Hal\Core;
+namespace App\System;
 
 class Import {
 
+	/**
+	 * @var array
+	 */
 	public $error = [];
+	/**
+	 * @var mixed
+	 */
 	public $file;
 
+	/**
+	 * @param $file
+	 */
 	public function __construct($file) {
 		$this->file = $file;
 	}
 
+	/**
+	 * @param $setting
+	 * @return mixed
+	 */
 	public function get_global_configuration($setting) {
 		// Locate the global .env file
 		$getLine = $setting;
@@ -36,6 +49,10 @@ class Import {
 		return $this->error = "Invalid configuration setting: {$setting}";
 	}
 
+	/**
+	 * @param $line
+	 * @return mixed
+	 */
 	private function setting_value($line) {
 
 		// Now extracting the double-quoted value

@@ -13,7 +13,7 @@
 <div class="white-row">
 <legend><strong>Syntax and Basic Usage</strong></legend>
 <p>
-	The Toolbox is accessible from inside <a href="{$smarty.const.BASE_URL}support/docs/controllers">controllers</a>, <a href="{$smarty.const.BASE_URL}support/docs/models">models</a> and <a href="{$smarty.const.BASE_URL}support/docs/views">views</a> using the following class method call: 
+	The Toolbox is accessible from inside <a href="{$smarty.const.SITE_URL}support/docs/controllers">controllers</a>, <a href="{$smarty.const.SITE_URL}support/docs/models">models</a> and <a href="{$smarty.const.SITE_URL}support/docs/views">views</a> using the following class method call: 
         <code>$this->toolbox(' name_of_tool ')</code><br> 
     To determine which helpers are available and the name to call them with, <a href="#helpers">click here</a> or view the <code>/vendor/Fusion/Toolbox/</code> directory.
         <div class="alert alert-info"><i class="fa fa-info-circle"></i> 
@@ -22,7 +22,7 @@
         </div>
 </p>
 <p>
-    In the above example, we are accessing the <a href="{$smarty.const.BASE_URL}support/toolbox/geoip">GeoIP helper</a>. 
+    In the above example, we are accessing the <a href="{$smarty.const.SITE_URL}support/toolbox/geoip">GeoIP helper</a>. 
     To access data from the GeoIP helper, we would simply implement method chaining: <br>
 	<code>$this->toolbox(' geoip ')->ip_address()</code>
 </p>
@@ -60,33 +60,33 @@
 	<div class="row">
         <div class="col-md-4">
             <ul class="list-icon star color">
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/breadcrumbs">Breadcrumbs</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/useragent">Browser Data</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/ckeditor">CKEditor</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/formatter">Data Formatter</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/sanitize">Data Sanitization</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/validation">Form Validation</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/breadcrumbs">Breadcrumbs</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/useragent">Browser Data</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/ckeditor">CKEditor</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/formatter">Data Formatter</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/sanitize">Data Sanitization</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/validation">Form Validation</a></li>
             </ul>
         </div>
 
         <div class="col-md-4">
             <ul class="list-icon star color">
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/friends">Friends</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/geoip">GeoIP</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/gritter">Gritter Notifications</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/images">Image Uploader</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/messenger">Messenger</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/mobile">Mobile Detection</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/friends">Friends</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/geoip">GeoIP</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/gritter">Gritter Notifications</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/images">Image Uploader</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/messenger">Messenger</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/mobile">Mobile Detection</a></li>
             </ul>
         </div>
 
         <div class="col-md-4">
             <ul class="list-icon star color">
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/title">Page Titles</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/pagination">Pagination</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/hash">Password / Data Encryption</a></li>
-                <li><a href="{$smarty.const.BASE_URL}support/toolbox/phpword">PHPWord</a></li>
-                <li><a href="{$smarty.const.BASE_URL}documentation/core/sessions">User authentication / Login</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/title">Page Titles</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/pagination">Pagination</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/hash">Password / Data Encryption</a></li>
+                <li><a href="{$smarty.const.SITE_URL}support/toolbox/phpword">PHPWord</a></li>
+                <li><a href="{$smarty.const.SITE_URL}documentation/core/sessions">User authentication / Login</a></li>
             </ul>
         </div>
 	</div>

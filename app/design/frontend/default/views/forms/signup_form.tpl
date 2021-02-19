@@ -17,7 +17,7 @@
     <div class="form-block center-block">
         <h2 class="title">Create Account</h2>
         <hr>
-        <form class="form-horizontal" id="signup" name="signup" role="form" method="post" action="{$smarty.const.BASE_URL}signup/signup_validate">
+        <form class="form-horizontal" id="signup" name="signup" role="form" method="post" action="{$smarty.const.SITE_URL}signup/signup_validate">
             <div class="form-group has-feedback">
                 <label for="first_name" class="col-sm-3 control-label">First Name <span class="text-danger small">*</span></label>
                 <div class="col-sm-8">
@@ -141,7 +141,7 @@
                 <li>Help us keep track of the awesome websites built with Diamond PHP</li>
             </ul>
             <hr class="half-margins" />
-            <p class="white-row text-center styleBackground"> Already have an account? <a href=" {$smarty.const.BASE_URL}login">Member Login</a> </p>
+            <p class="white-row text-center styleBackground"> Already have an account? <a href=" {$smarty.const.SITE_URL}login">Member Login</a> </p>
     </div>
 </div>
     
@@ -348,7 +348,7 @@ $(document).ready(function()
         var zip = $(this).val();
         $.ajax(
          {  
-            url:" {$smarty.const.BASE_URL}block/get_city/" + zip,
+            url:" {$smarty.const.SITE_URL}block/get_city/" + zip,
             type:"post",
             data: { zip:$(this).val()},
             success:function(response)
@@ -366,7 +366,7 @@ $(document).ready(function()
         var zip = $(this).val();
         $.ajax(
          {  
-            url:" {$smarty.const.BASE_URL}block/get_state/" + zip,
+            url:" {$smarty.const.SITE_URL}block/get_state/" + zip,
             type:"post",
             data: { zip:$(this).val()},
             success:function(response)
@@ -409,7 +409,7 @@ function check_availability()
     var username = $('#username').val();  
 
     //use ajax to run the check  
-    $.post(" {$smarty.const.BASE_URL}block/check_username/" + username,  {  username: username },  
+    $.post(" {$smarty.const.SITE_URL}block/check_username/" + username,  {  username: username },  
         function(result) {   
             //if the result is 0
             if(result == 0) {   
@@ -452,13 +452,13 @@ function check_email_availability()
     var email = $('#email').val();  
 
     //use ajax to run the check  
-    $.post(" {$smarty.const.BASE_URL}block/check_email/",  {  email: email },
+    $.post(" {$smarty.const.SITE_URL}block/check_email/",  {  email: email },
         function(result) {   
             //if the result is 0
             if(result == 0) {   
                 $('#email_availability_result').removeClass("btn btn-danger btn-sm").addClass("btn btn-success btn-sm").html(email + ' is available');  
             }else {   
-                $('#email_availability_result').removeClass("btn btn-success btn-sm").addClass("btn btn-danger btn-sm").html(email + ' is already registered. <br>Please <a style="color:yellow" href=" {$smarty.const.BASE_URL}login">reset your password</a> if you have forgotten it.');  
+                $('#email_availability_result').removeClass("btn btn-success btn-sm").addClass("btn btn-danger btn-sm").html(email + ' is already registered. <br>Please <a style="color:yellow" href=" {$smarty.const.SITE_URL}login">reset your password</a> if you have forgotten it.');  
             }  
     } );  
   
