@@ -1,4 +1,19 @@
 {
+    "name": "diamondphp/diamondphp",
+    "type": "library",
+    "description": "Fully featured PHP 8 compatible framework",
+    "keywords": ["framework","PHP 8"],
+    "homepage": "https://github.com/arout77/diamondphp",
+    "version": "0.9.2-beta",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Rout",
+            "email": "arout@diamondphp.org",
+            "homepage": "https://diamondphp.org",
+            "role": "Developer"
+        }
+    ],
 	"require": {
         "geoip2/geoip2": "~2.0",
         "pimple/pimple": "~3.0",
