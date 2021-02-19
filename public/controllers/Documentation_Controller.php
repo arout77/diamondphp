@@ -1,11 +1,12 @@
 <?php
 namespace Web\Controller;
-use Hal\Controller\Base_Controller;
+use App\Controller\Base_Controller;
 
-class Documentation_Controller extends Base_Controller
-{
-	public function __construct($app)
-	{
+class Documentation_Controller extends Base_Controller {
+	/**
+	 * @param $app
+	 */
+	public function __construct($app) {
 		parent::__construct($app);
 		$this->template->assign('sidebar', 'docs/toc.tpl');
 		$this->template->assign('content', 'docs/toc.tpl');
@@ -13,21 +14,27 @@ class Documentation_Controller extends Base_Controller
 		$this->template->assign('layout_close', 'docs/layout_close.tpl');
 	}
 
-	public function index()
-	{
+	/**
+	 * @return mixed
+	 */
+	public function index() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 
-		return $this->template->assign('content', 'docs/index.tpl');
+		$this->template->display('template/head.tpl');
+		$this->template->display('template/body.tpl');
+		$this->template->display('docs/index.tpl');
+		$this->template->display('template/footer.tpl');
 	}
 
-	public function introduction()
-	{
+	/**
+	 * @return mixed
+	 */
+	public function introduction() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 		$page          = $data['route']->param1;
-		switch ($page)
-		{
+		switch ($page) {
 		case "requirements":
 			$this->template->assign('content', 'docs/introduction/requirements.tpl');
 			break;
@@ -39,24 +46,28 @@ class Documentation_Controller extends Base_Controller
 			break;
 
 		default:
-			return $this->template->assign('content', 'docs/index.tpl');
+			return $this->template->display('docs/index.tpl');
 		}
 	}
 
-	public function mvc()
-	{
+	/**
+	 * @return mixed
+	 */
+	public function mvc() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 		$page          = $data['route']->param1;
-		switch ($page)
-		{
+		switch ($page) {
 		case "controllers":
 			$this->template->assign('title', 'Controllers');
 			$this->template->assign('subtitle', 'Creating Controllers');
 			$this->template->assign('use_it', '');
 			$this->template->assign('icon', 'flag');
 			$this->template->assign('lead', "The controller's job is to handle data that the user inputs or submits, and update the model accordingly. The controller’s life blood is the user; without user interactions, the controller has no purpose. It is the only part of the pattern the user should be interacting with.");
-			$this->template->assign('content', 'docs/mvc/controllers.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/mvc/controllers.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 		case "models":
 			$this->template->assign('title', 'Models');
@@ -64,24 +75,34 @@ class Documentation_Controller extends Base_Controller
 			$this->template->assign('use_it', 'Use it: <code>$this->model(\'Example\');</code>');
 			$this->template->assign('icon', 'database');
 			$this->template->assign('lead', "Models interact directly with your database. The model will perform your sql query and return the result, from which your controllers and views can then access the data.");
-			$this->template->assign('content', 'docs/mvc/models.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/mvc/models.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 		case "views":
-			$this->template->assign('content', 'docs/mvc/views.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/mvc/views.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 
 		default:
-			return $this->template->assign('content', 'docs/index.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/index.tpl');
+			$this->template->display('template/footer.tpl');
 		}
 	}
 
-	public function core()
-	{
+	/**
+	 * @return mixed
+	 */
+	public function core() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 		$page          = $data['route']->param1;
-		switch ($page)
-		{
+		switch ($page) {
 		case "cron":
 			$this->template->assign('content', 'docs/core/cron.tpl');
 			break;
@@ -120,13 +141,14 @@ class Documentation_Controller extends Base_Controller
 		}
 	}
 
-	public function modules()
-	{
+	/**
+	 * @return mixed
+	 */
+	public function modules() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 		$page          = $data['route']->param1;
-		switch ($page)
-		{
+		switch ($page) {
 		case "breadcrumbs":
 			$this->template->assign('content', 'docs/modules/breadcrumbs.tpl');
 			break;
@@ -216,20 +238,17 @@ class Documentation_Controller extends Base_Controller
 		}
 	}
 
-	public function docs()
-	{
+	public function docs() {
 		$this->index();
 	}
 
-	public function faq()
-	{
+	public function faq() {
 		$data['load']  = $this->load;
 		$data['route'] = $this->route;
 		$this->template->assign('content', 'docs/faq.tpl');
 	}
 
-	public function license()
-	{
+	public function license() {
 
 		$this->template->assign('content', 'docs/license.tpl');
 	}

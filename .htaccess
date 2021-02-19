@@ -36,19 +36,19 @@ RewriteRule ^(.+) index.php/$1 [L]
 
 # Protect .env files 
 <FilesMatch "^\.env">
-  Order deny, allow
+  Order allow,deny
   Deny from all
 </FilesMatch>
 
 # Protect .log files
 <FilesMatch "^\.log">
-  Order deny, allow
+  Order allow,deny
   Deny from all
 </FilesMatch>
 
 # Protect config.* files
 <FilesMatch "^config(\..*)?$">
-  Order deny,allow
+  Order allow,deny
   Deny from all
 </FilesMatch>
 

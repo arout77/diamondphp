@@ -28,14 +28,14 @@
 				<legend>Introduction</legend>
 
 				<p>
-					DiamondPHP implements the <a href="http://smarty.net">Smarty 3 template engine</a> to generate templates and view files. If you are familiar with MVC frameworks, or have already read through the <a href="{$smarty.const.BASE_URL}documentation/mvc/controllers">Controllers</a> and <a href="{$smarty.const.BASE_URL}documentation/mvc/models">Models</a> portion of the documentation, you'll already know that controllers and models do not present data, they only manage it. Views are what is responsible for outputting HTML and content to the browser.
+					DiamondPHP implements the <a href="http://smarty.net">Smarty 3 template engine</a> to generate templates and view files. If you are familiar with MVC frameworks, or have already read through the <a href="{$smarty.const.SITE_URL}documentation/mvc/controllers">Controllers</a> and <a href="{$smarty.const.SITE_URL}documentation/mvc/models">Models</a> portion of the documentation, you'll already know that controllers and models do not present data, they only manage it. Views are what is responsible for outputting HTML and content to the browser.
 				</p>
 
 				<legend>File location</legend>
 				<p>
 					View files are stored inside the following location:<br>
 					<code>/app/design/frontend/template_name/views/</code><br><br>
-					Change "template_name" to the name of your template, as set in the <a href="{$smarty.const.BASE_URL}documentation/introduction/configuration">Configuration file</a>.
+					Change "template_name" to the name of your template, as set in the <a href="{$smarty.const.SITE_URL}documentation/introduction/configuration">Configuration file</a>.
 				</p>
 				<p>
 					It is highly recommended to create separate folders for your view files for each corresponding controller. For example, store view files for the Member controller in the following directory:<br>
@@ -126,8 +126,8 @@ Hello, {ldelim}$user{rdelim}
 						<h4>Important</h4> <em>The Smarty template engine provides functions that allows you to retrieve data directly from your database. An example of that is seen in the link above.</em>
 						<strong> DO NOT USE VIEW FILES TO MAKE DATABASE CALLS!</strong><br>
 						Instead, use the provided 
-						<a class="blue" href="{$smarty.const.BASE_URL}documentation/core/database">database functionality</a> and/or 
-						<a class="blue" href="{$smarty.const.BASE_URL}documentation/mvc/models">Models</a> within your controller, and then pass that data to your view file using the <code>$this->template->assign()</code> function.
+						<a class="blue" href="{$smarty.const.SITE_URL}documentation/core/database">database functionality</a> and/or 
+						<a class="blue" href="{$smarty.const.SITE_URL}documentation/mvc/models">Models</a> within your controller, and then pass that data to your view file using the <code>$this->template->assign()</code> function.
 					</div>
 				</p>
 			
@@ -138,7 +138,7 @@ Hello, {ldelim}$user{rdelim}
 			{* <ul class="links pull-left">
 				<li><i class="fa fa-comment-o pr-5"></i> <a href="#">0 comments</a></li> 
 			</ul> *}
-			<div class="fb-comments" data-href="{$smarty.const.BASE_URL}documentation/mvc/views" data-numposts="10"></div>
+			<div class="fb-comments" data-href="{$smarty.const.SITE_URL}documentation/mvc/views" data-numposts="10"></div>
 			{* <a class="pull-right link" href="blog-post.html"><span>Read more</span></a> *}
 		</footer>
 	</article>

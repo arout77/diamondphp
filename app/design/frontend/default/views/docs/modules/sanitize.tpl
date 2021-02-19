@@ -11,7 +11,7 @@
 </p>
 
 <p>
-	The purpose of the Sanitize helper is to give you control over what is and is not allowed to be <em>safely</em> submitted. It is important to note that this does not replace the <a href="{$smarty.const.BASE_URL}documentation/modules/validation" target="_blank">form validation helper</a>, but is designed to be used <em>along with</em> the validation helper. No form validation is performed or supported in the Sanitize helper.
+	The purpose of the Sanitize helper is to give you control over what is and is not allowed to be <em>safely</em> submitted. It is important to note that this does not replace the <a href="{$smarty.const.SITE_URL}documentation/modules/validation" target="_blank">form validation helper</a>, but is designed to be used <em>along with</em> the validation helper. No form validation is performed or supported in the Sanitize helper.
 </p>
 
 <p>

@@ -77,7 +77,7 @@ $this->template->assign('members', $users);
 	</p>
 
 <h4>More information</h4>
-Visit the <a href="{$smarty.const.BASE_URL}documentation/mvc/controllers" target="_blank">Controllers documentation</a> and <a href="{$smarty.const.BASE_URL}documentation/mvc/views" target="_blank">Views documentation</a> to learn more about controllers and views.
+Visit the <a href="{$smarty.const.SITE_URL}documentation/mvc/controllers" target="_blank">Controllers documentation</a> and <a href="{$smarty.const.SITE_URL}documentation/mvc/views" target="_blank">Views documentation</a> to learn more about controllers and views.
 </div>
 
 {include file=$layout_close}

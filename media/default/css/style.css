@@ -427,7 +427,7 @@ tbody {
 	box-shadow: 0px 0px 10px #cacaca;;
 }
 .pattern-1 { 
-	background-image: url("../images/pattern-1.png");
+	background-image: url("../images/pattern1.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
@@ -441,42 +441,47 @@ tbody {
 	box-shadow: none;
 }
 .pattern-2 { 
-	background-image: url("../images/pattern-2.png");
+	background-image: url("../images/pattern2.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-3 { 
-	background-image: url("../images/pattern-3.png");
+	background-image: url("../images/pattern3.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-4 { 
-	background-image: url("../images/pattern-4.png");
+	background-image: url("../images/pattern4.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-5 { 
-	background-image: url("../images/pattern-5.png");
+	background-image: url("../images/pattern5.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-6 { 
-	background-image: url("../images/pattern-6.png");
+	background-image: url("../images/pattern6.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-7 { 
-	background-image: url("../images/pattern-7.png");
+	background-image: url("../images/pattern7.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-8 { 
-	background-image: url("../images/pattern-8.png");
+	background-image: url("../images/pattern8.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }
 .pattern-9 { 
-	background-image: url("../images/pattern-9.png");
+	background-image: url("../images/pattern9.png");
+	background-repeat: repeat;
+	background-position: 0 0; 
+}
+.pattern-10 { 
+	background-image: url("../images/pattern10.png");
 	background-repeat: repeat;
 	background-position: 0 0; 
 }

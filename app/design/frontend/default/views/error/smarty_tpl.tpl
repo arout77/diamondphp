@@ -23,5 +23,5 @@
 >
 >  <span class="btn-danger">{$smarty.const.CONTROLLERS_PATH}{$controller_filename}</span>
 >
->  View <a href="{$smarty.const.BASE_URL}documentation/mvc/views">the Views documentation</a> for more information.
+>  View <a href="{$smarty.const.SITE_URL}documentation/mvc/views">the Views documentation</a> for more information.
 </pre>

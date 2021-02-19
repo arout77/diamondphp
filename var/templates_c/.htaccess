@@ -1,0 +1,32 @@
+# Disable directory browsing
+Options -Indexes
+
+# Protect .htaccess and .htpasswd files
+<FilesMatch "^\.ht">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect .env files 
+<FilesMatch "^\.env">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect .log files
+<FilesMatch "^\.log">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect config.* files
+<FilesMatch "^config(\..*)?$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect files depending on extension
+<FilesMatch "^(.*)\.(inc|inc\.php|tpl|tpl\.php|sql|txt|dat|csv|exe|dll)$">
+  Order deny,allow
+  Deny from all
+</FilesMatch>

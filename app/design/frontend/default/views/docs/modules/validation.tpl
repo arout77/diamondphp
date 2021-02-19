@@ -3,13 +3,11 @@
 
 <p>
 	To load the validation helper, we call it as follows:<br> 
-	<code>$this->toolbox('validate')->form($param_one, $param_two)</code>.<br>
-	<em><i class="fa fa-info-circle"></i> Note that $param_one and $param_two are generic placeholders for demonstration purposes only. 
-	See below for more details.</em>
+	<code>$this->toolbox('validate')</code>.<br>
 </p>
 
 <p>
-	The form() function takes two parameters ($param_one and $param_two in the above example). Both parameters <strong>must be an array</strong>.
+	The form() function takes two parameters. Both parameters <strong>must be an array</strong>.
 </p>
 
 <p>

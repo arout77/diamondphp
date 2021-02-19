@@ -1,52 +1,94 @@
 <?php
-namespace Hal\Model;
+namespace App\Model;
 
-class System_Model
-{
+class System_Model {
+	/**
+	 * @var mixed
+	 */
 	protected $block;
+	/**
+	 * @var mixed
+	 */
 	protected $db;
+	/**
+	 * @var mixed
+	 */
 	protected $config;
+	/**
+	 * @var mixed
+	 */
 	public $session;
 	// Data accessed by views / controllers
+	/**
+	 * @var mixed
+	 */
 	public $data;
+	/**
+	 * @var mixed
+	 */
 	public $hash;
+	/**
+	 * @var mixed
+	 */
 	public $log;
-	protected $toolbox;
+	/**
+	 * @var mixed
+	 */
+	protected $plugin;
+	/**
+	 * @var mixed
+	 */
 	protected $load;
 
-	public function __construct($db, $toolbox, $config)
-	{
+	/**
+	 * @param $db
+	 * @param $plugin
+	 * @param $config
+	 */
+	public function __construct($db, $plugin, $config) {
 		$this->db      = $db;
 		$this->config  = $config['config'];
-		$this->toolbox = $toolbox;
+		$this->plugin  = $plugin;
 		$this->log     = $config['log'];
 		$this->session = self::session();
 		//$this->hash         = self::hash();
 	}
 
-	public function encrypt($string)
-	{
+	/**
+	 * @param $string
+	 * @return mixed
+	 */
+	public function encrypt($string) {
 		# Encrypt using password_hash()
-		$hash = new \Hal\Module\Hash;
+		$hash = new \App\Plugin\Hash;
 		return $hash->encrypt($string);
 	}
 
-	public function verify($string, $base)
-	{
+	/**
+	 * @param $string
+	 * @param $base
+	 * @return mixed
+	 */
+	public function verify($string, $base) {
 		# Decrypt hash from encrypt()
-		$hash = new \Hal\Module\Hash;
+		$hash = new \App\Plugin\Hash;
 		return $hash->verify($string, $base);
 	}
 
-	public function session()
-	{
-		return $this->toolbox["session"];
+	/**
+	 * @return mixed
+	 */
+	public function session() {
+		return $this->plugin["session"];
 	}
 
-	public function toolbox($helper)
-	{
-		# Load a Toolbox helper
-		return $this->toolbox["$helper"];
+	/**
+	 * @param $helper
+	 * @return mixed
+	 */
+	public function plugin($helper) {
+		# Load a plugin helper
+		return $this->plugin["$helper"];
 	}
 
 }

@@ -1,8 +1,9 @@
 <div class="white-row">
+{$status}
 
 <legend>Change password</legend>
         
-        <form method="post" id="cpass" class="white-row styleBackground" action="{$smarty.const.BASE_URL}member/change_password">
+        <form method="post" id="cpass" class="white-row styleBackground" action="{$smarty.const.SITE_URL}member/change_password">
 			
 			<div>
                 <div class="form-group">

@@ -47,7 +47,7 @@ class Example_Controller extends Base_Controller
 		<p>The URL structure would thus look like this:</p>
 		<p>http://yoursite.com/controller/action/parameter1</p>
 		<p>
-		For more information on URLs and parameters, visit the <a href="{$smarty.const.BASE_URL}documentation/core/router" target="_blank">Router documentation</a>.
+		For more information on URLs and parameters, visit the <a href="{$smarty.const.SITE_URL}documentation/core/router" target="_blank">Router documentation</a>.
 		</p>
 	</p>
 
@@ -92,12 +92,12 @@ class Example_Controller extends Base_Controller
 	<p>
 		<legend style="width: auto;">Accessing the Database</legend>
 		Generally, it is good practice to avoid making database calls from your controller; you'll want to create your queries inside your models, and access that model instead. There may be circumstances where you need to access a database table within your controllers directly, and you can do so using the <code>$this->db</code> function call. 
-		See the <a href="{$smarty.const.BASE_URL}documentation/core/database" target="_blank">Database documentation</a> for more information on usage.
+		See the <a href="{$smarty.const.SITE_URL}documentation/core/database" target="_blank">Database documentation</a> for more information on usage.
 	</p>
 
 	<p>
 		<legend style="width: auto;">Accessing the Developer Toolbox</legend>
-		The Developer Toolbox provides many useful features, such as form validation, session management, member management and much, much more. Visit the <a href="{$smarty.const.BASE_URL}documentation/modules/overview" target="_blank">Toolbox documentation</a> for more information on usage and available features.
+		The Developer Toolbox provides many useful features, such as form validation, session management, member management and much, much more. Visit the <a href="{$smarty.const.SITE_URL}documentation/modules/overview" target="_blank">Toolbox documentation</a> for more information on usage and available features.
 	</p>
 
 	<p>
@@ -117,7 +117,7 @@ class Example_Controller extends Base_Controller
 
 	<p>
 		<legend style="width: auto;">Overriding Controllers</legend>
-		DiamondPHP offers the ability to override controllers. Generally speaking, it should be rare that you ever need to override any of your controllers or models. Overriding is primarily made available for creating your own custom plugins (as well as third party plugin developers) that work with existing controllers. Visit the <a href="{$smarty.const.BASE_URL}documentation/core/override" target="_blank">Class Overrides documentation</a> for more information on usage.
+		DiamondPHP offers the ability to override controllers. Generally speaking, it should be rare that you ever need to override any of your controllers or models. Overriding is primarily made available for creating your own custom plugins (as well as third party plugin developers) that work with existing controllers. Visit the <a href="{$smarty.const.SITE_URL}documentation/core/override" target="_blank">Class Overrides documentation</a> for more information on usage.
 	</p>
 
 {include file=$layout_close}
