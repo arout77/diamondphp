@@ -1,0 +1,8 @@
+title: Diamondphp
+description: Diamond PHP is a fully featured framework built for PHP 7 and offers extreme performance, a modular architecture, elegant syntax and an easy to use philosophy.
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-midnight
+
+gems:
+  - jekyll-mentions
