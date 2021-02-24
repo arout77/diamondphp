@@ -36,17 +36,29 @@ class Documentation_Controller extends Base_Controller {
 		$page          = $data['route']->param1;
 		switch ($page) {
 		case "requirements":
-			$this->template->assign('content', 'docs/introduction/requirements.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/introduction/requirements.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 		case "install":
-			$this->template->assign('content', 'docs/introduction/install.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/introduction/install.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 		case "configuration":
-			$this->template->assign('content', 'docs/introduction/configuration.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/introduction/configuration.tpl');
+			$this->template->display('template/footer.tpl');
 			break;
 
 		default:
-			return $this->template->display('docs/index.tpl');
+			$this->template->display('template/head.tpl');
+			$this->template->display('template/body.tpl');
+			$this->template->display('docs/index.tpl');
+			$this->template->display('template/footer.tpl');
 		}
 	}
 

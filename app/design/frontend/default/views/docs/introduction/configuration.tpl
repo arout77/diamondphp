@@ -4,8 +4,7 @@
     <fieldset>
     <legend id="" style="width: auto;">Configuring Your New Installation</legend>
     <p>
-        Diamond PHP has been designed to minimize the amount of configuration needed for each installation; we like software that 
-        works out of the box!
+        Diamond PHP has been designed to minimize the amount of configuration needed for each installation; we like software that works out of the box!
     </p>
     <p>
         Once installation is complete, there is only one more step to take before using the framework. Rename the file <code>.env.example</code> to <code>.env</code>. This file is located in the root directory, alongside the <var>.htaccess</var> file.
@@ -15,17 +14,19 @@
     </p>
 
     <p>
+        Below are the options you will find in the configuration file. The only required settings that you must complete are the the site URL and timezone, as well as your database connection settings if you are using a database. The rest are optional.
+    <p>
     <div class="row">
         <ol class="col-xs-6">
             <h5>Site Settings</h5>
-            <li><a href="#db">Database</a></li>
+            <li><a href="#db">Database</a> [required if you are using a database]</li>
             <li><a href="#email">Site Email</a></li>
             <li><a href="#name">Site Name</a></li>
             <li><a href="#slogan">Site Slogan</a></li>
-            <li><a href="#site_url">Site URL</a></li>
+            <li><a href="#site_url">Site URL</a> [required]</li>
             <li><a href="#emailconfirm">Signup Email Confirmation</a></li>
             <li><a href="#phone">Telephone</a></li>
-            <li><a href="#tz">Time Zone</a></li>
+            <li><a href="#tz">Time Zone</a> [required]</li>
             <li><a href="#login">Two-step login</a></li>
         </ol>
 
@@ -100,7 +101,7 @@
     </p>
     <hr>
     <p>
-        <blockquote id="tz"><strong>Timezone</strong> <small><code>time_zone = "America/New_York"</code> (line 54)</small></blockquote>
+        <blockquote id="tz"><strong>Timezone</strong> <small><code>time_zone = "America/New_York"</code> (line 32)</small></blockquote>
         Enter your server timezone here. Default value is <code>'America/New_York'</code>.<br>
         Visit the <a href="http://php.net/manual/en/timezones.php" target="_blank">PHP timezone</a> documentation for a complete list of supported timezones.
     </p>
@@ -132,11 +133,11 @@
         <div class="alert alert-info"><strong>Moving application files out of webroot</strong></div>
 
         <h5>1. Via Front Controller</h5>
-        This is by far the simplest and most fool-proof method, but may not be possible for some users that do not have access to SSH or a file manager that gives you access to directories above your web root directory (your web root directory is typically named 'public_html', 'www' or 'htdocs' on most Apache servers).<br><br>
+        This is the most secure method method, but may not be possible for some users that do not have access to SSH or a file manager that gives you access to directories above your web root directory (your web root directory is typically named 'public_html', 'www' or 'htdocs' on most Apache servers).<br><br>
         Assuming you have access to those directories, simply follow the below steps:<br><br>
         1. Move all of the following files and folders up one level from your web root:<br>
-        <code>app/, public/, vendor/ and var/</code> folders<br>
-        <code>composer.json, composer.lock and .env</code> files<br><br>
+        <code>- app/, public/, vendor/ and var/</code> folders<br>
+        <code>- composer.json, composer.lock and .env</code> files<br><br>Example: move those files from <var><strong>/usr/home/example/public_html</strong></var> to <var><strong>/usr/home/example</strong></var><br><br>
         2. After moving the above files and folders, go back to your web root, and open up the front controller file (index.php)<br>
         &nbsp;&nbsp;&nbsp;- Find the following constant on or around line 43: <code>define('BASE_PATH', $dir . '/');</code><br>
         &nbsp;&nbsp;&nbsp;- Change it to the following: <code>define('BASE_PATH', $dir . '/../');</code><br><br>
