@@ -3,30 +3,28 @@
 
     <legend style="width: auto;">Installation</legend>
     <p>
-        Installing DiamondPHP is a very quick and simple procedure. Most people will be up and running in 5 minutes or less!
+        No need for complex setup and endless configuration. Most people will be up and running in 5 minutes or less!
     </p>
-    <strong>1. Create an empty database</strong>
+    <strong>1. Download the framework</strong>
     <p>
-        Using a database tool of your choice, create a new database. Once the database is created, import the <code>diamondphp.sql</code> file located in the <var>/var/install directory</var>.<br><br>
-        The <code>diamondphp.sql</code> file comes with Geolocation data and is approximately 12.2 MB in size as a result; you may need to increase your POST and Max File Upload settings in your PHP configuration if it is still set to the default 2 MB settings.<br><br>
-        <em>If you need to adjust your POST and Max File Upload settings, and are unsure how to do so, contact your web host for information. Some web hosts will provide a control panel or GUI to change PHP settings; others require you to add a php.ini file to your web directory.</em>
-    </p>
-
-    <strong>2. Download an unpack the framework</strong>
-    <p>
-        After downloading the framework, copy the package to the location you wish to install the framework (typically, the root directory of your web server). Unzip the package.
+        Download DiamondPHP framework from one of our repositories:<br>
+        <ul>
+            <li><a href="https://bitbucket.org/arout77/diamondphp/src/master/">Bitbucket repo for DiamondPHP</a></li>
+            <li><a href="https://github.com/arout77/diamondphp">GitHub repo for DiamondPHP</a></li>
+        </ul>
+        Once the download is complete, copy the package to the location you wish to install the framework (typically, the root directory of your web server). Unzip the package.
     </p>
     <p>
-        Once all the files are unpacked, open a terminal (command prompt for Windows users) and change to the directory where you just unzipped the framework:<br><br><span class="console">cd /path/to/install/directory</span>
+        Once all the files are unpacked, open a terminal (command prompt for Windows users) and change to the directory where you just unzipped the framework:<br><br><span class="terminal">cd /path/to/install/directory</span>
     </p>
     <p>
         Run the following command:
     </p>
     <p>
-        <span class="console">composer update</span>
+        <span class="terminal">composer update</span>
     </p>
     <p>
-        Composer will then download and install any required files the framework requires. To view what packages Composer is installing, simply open the <code>composer.json</code> file located in the root directory.
+        Composer will then create a folder named "vendor", and download and install any files the framework requires. To view what packages Composer is installing, simply open the <code>composer.json</code> file located in the root directory.
     </p>
     <p>
         <div class="alert alert-info">
@@ -39,12 +37,12 @@
         Located in the root directory, you will find a configuration file named <code>.env.example</code>. Rename this file to <code>.env</code>, and then open it in a text editor.
     </p>
     <p>
-        You will find that most of the settings are blank, and a few are already filled out. For more information regarding these settings, view the <a href="{$smarty.const.SITE_URL}documentation/introduction/configuration" target="_blank">configuration documentation</a>. Some of the settings are optional, but it is recommended to ensure all are completed.
+        You will find that most of the settings are blank, and a few are already filled out. For more information regarding these settings, view the <a href="{$smarty.const.SITE_URL}documentation/introduction/configuration" target="_blank">configuration documentation</a>. Some of the settings are optional.
     </p>
     <p>
         <div class="alert alert-warning">
             There are some settings that are mandatory:<br>
-            Database settings, site URL, site name, site email address, time zone and all of the settings that already contain a default value (you may change these if you wish). This information is <strong>not</strong> collected in any way by us, but is necessary for the proper operation of various framework features.
+            Database settings, site URL, time zone and all of the settings that already contain a default value (you may change these if you wish). This information is <strong>not</strong> collected in any way by us, but is necessary for the proper operation of various framework features.
         </div>
     </p>
 

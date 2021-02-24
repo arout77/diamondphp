@@ -3252,16 +3252,16 @@ ul.pagination li > a:focus {
 	z-index: 3;
 }
 .alert.alert-success:after {
-	content: "\f00c";
+	/*content: "\f00c";*/
 }
 .alert.alert-info:after {
-	content: "\f05a";
+	/*content: "\f05a";*/
 }
 .alert.alert-warning:after {
-	content: "\f071";
+	/*content: "\f071";*/
 }
 .alert.alert-danger:after {
-	content: "\f00d";
+	/*content: "\f00d";*/
 }
 .close {
 	font-size: 28px;
