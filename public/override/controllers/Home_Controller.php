@@ -22,6 +22,7 @@ class Home_Controller extends Home {
 	}
 
 	public function index() {
+<<<<<<< HEAD
 
 		// $headers = [
 		// 	'Transfer-Encoding: chunked',
@@ -31,6 +32,8 @@ class Home_Controller extends Home {
 		// 	'Content-Disposition: attachment; filename=".env"',
 		// ];
 		// $this->set_headers($headers);
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		$mysql     = $this->db_info;
 		$mysql_ver = $mysql[2];
 
@@ -48,6 +51,7 @@ class Home_Controller extends Home {
 		$this->template->display('template/body.tpl');
 		$this->template->display('home/index.tpl');
 		$this->template->display('template/footer.tpl');
+<<<<<<< HEAD
 /*
 $to = 'andrew_rout@yahoo.com';
 $to_name = 'Andrew Rout';
@@ -91,6 +95,8 @@ $this->template->assign('mailstatus', 'There was a problem sending the email');
 		$this->template->display('template/body.tpl');
 		$this->template->display('home/checkout.tpl');
 		$this->template->display('template/footer.tpl');
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 	}
 
 	public function userData() {

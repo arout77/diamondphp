@@ -136,7 +136,11 @@ class Config {
 		$this->setting['var_path'] = $env->get_global_configuration('var_path');
 		
 		# Vendor folder
+<<<<<<< HEAD:app/code/core/system/Config.php
 		$this->setting['vendor_folder'] = BASE_PATH . self::DS . 'vendor' . self::DS;
+=======
+		$this->setting['vendor_folder'] = $env->get_global_configuration('vendor_folder');
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024:app/code/core/config/Config.php
 
 		# Location of template directory
 		$this->setting['template_folder'] = $this->setting['app_path'] . 'design/frontend/' . $this->setting['template_name'] . '/';
@@ -149,6 +153,15 @@ class Config {
 
 		# Admin Template URL for fetching CSS / JS / IMG files
 		$this->setting['admin_template_url'] = $this->setting['site_url'] . 'app/design/admin/' . $this->setting['admin_template_name'] . '/';
+<<<<<<< HEAD:app/code/core/system/Config.php
+=======
+
+		# Convert image file size setting to kb
+		$this->setting['img_size'] = $this->setting['img_file_size'] * 1024;
+		$size = $this->setting['img_size'];
+		$unit = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
+		$this->setting['notify_img_size'] = number_format(round($size / pow(1024, ($i = floor(log($size, 1024)))), 2)) . ' ' . $unit[$i];
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024:app/code/core/config/Config.php
 
 		# Enable / disable Memcached helper
 		if (extension_loaded('memcached')) {

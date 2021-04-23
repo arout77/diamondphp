@@ -73,6 +73,7 @@ class Base_Controller {
 	/**
 	 * @var mixed
 	 */
+<<<<<<< HEAD
 	public $plugin;
 	/**
 	 * @var mixed
@@ -81,6 +82,8 @@ class Base_Controller {
 	/**
 	 * @var mixed
 	 */
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 	protected $route;
 	/**
 	 * @var mixed
@@ -93,6 +96,13 @@ class Base_Controller {
 	/**
 	 * @var mixed
 	 */
+<<<<<<< HEAD
+=======
+	public $plugin;
+	/**
+	 * @var mixed
+	 */
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 	public $view;
 
 	/**
@@ -109,6 +119,7 @@ class Base_Controller {
 		$this->load     = $app['load'];
 		$this->log      = $app['log'];
 		$this->model    = $app['system_model'];
+<<<<<<< HEAD
 		$this->profiler = $app['profiler'];
 		$this->route    = $app['router'];
 		$this->session  = $app['session'];
@@ -131,12 +142,25 @@ class Base_Controller {
 	}
 
 	/**
+=======
+		$this->route    = $app['router'];
+		$this->session  = $app['session'];
+		$this->template = $app['template'];
+		$this->plugin  = $app['toolbox'];
+	}
+
+	/**
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 	 * @param $_web_class
 	 * @param $_override_class
 	 * @return mixed
 	 */
 	public function initOverrideController($_web_class, $_override_class) {
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		# Define child controller extending this class
 		$this->controller = $this->route->controller;
 		# The class name contained inside child controller
@@ -204,7 +228,11 @@ class Base_Controller {
 		$action       = trim(strtolower($this->route->action));
 		# URL parameters
 		$this->param = $this->route->param;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		if (class_exists($_web_class)) {
 			# File was found and has proper file permissions
 			require_once $this->config->setting('controllers_path') . $this->controller_filename;
@@ -271,7 +299,11 @@ class Base_Controller {
 		$_admin_class    = $this->controller_class;
 		$_web_class      = "\Web\Controller\\" . $this->controller_class;
 		$_override_class = "\App\ControllerOverride\\" . $this->controller_class;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		# First search for requested controller file in override directory
 		if (is_readable(PUBLIC_OVERRIDE_PATH . 'controllers/' . $this->controller_filename)) {
 			return self::initOverrideController($_web_class, $_override_class);
@@ -279,6 +311,7 @@ class Base_Controller {
 
 		if (is_readable($this->config->setting('controllers_path') . $this->controller_filename)) {
 			return self::initPublicController($_web_class, $_override_class);
+<<<<<<< HEAD
 		}
 
 		# Controller file does not exist, or
@@ -289,6 +322,18 @@ class Base_Controller {
 			$this->template->display('error/controller.tpl');
 		}
 
+=======
+		}
+
+		# Controller file does not exist, or
+		# does not have read permissions
+		if ($this->config->setting('debug_mode') === 'OFF') {
+			$this->redirect('error/_404');
+		} else {
+			$this->template->display('error/controller.tpl');
+		}
+
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		# Check if the admin controller is being requested
 		// if ($this->controller == $this->config->setting('admin_controller') && is_readable(CORE_PATH . 'controllers/' . $this->controller_filename) && $this->controller_filename)
 		// {
@@ -335,6 +380,10 @@ class Base_Controller {
 	public function redirect($url) {
 		if ($url === 'http_referer') {
 			return header('Location: ' . $_SERVER['HTTP_REFERER']);
+<<<<<<< HEAD
+=======
+			exit;
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		}
 		return header('Location: ' . SITE_URL . $url);
 	}

@@ -7,6 +7,7 @@
 			DiamondPHP implements the <a href="http://smarty.net">Smarty 3 template engine</a> to generate templates and view files. If you are familiar with MVC frameworks, or have already read through the <a href="{$smarty.const.SITE_URL}documentation/mvc/controllers">Controllers</a> and <a href="{$smarty.const.SITE_URL}documentation/mvc/models">Models</a> portion of the documentation, you'll already know that controllers and models do not present data, they only manage it. Views are what is responsible for outputting HTML and content to the browser.
 		</p>
 
+<<<<<<< HEAD
 		<legend>File location</legend>
 		<p>
 			View files are stored inside the following location:<br>
@@ -18,6 +19,41 @@
 			<code>/app/design/frontend/template_name/views/member</code><br><br>
 			Organizing your views in such a manner will make it simple to find a specific file, and will help avoid name collisions.
 		</p>
+=======
+	<!-- blogpost start -->
+	<article class="clearfix blogpost" data-animation-effect="fadeInUpSmall" data-effect-delay="200">
+		<div class="overlay-container">
+			<h3 class="text-center">Use it: <code>$this->template->assign('content', 'example.tpl');</code></h3>
+		</div>
+		<div class="blogpost-body">
+			<div class="post-info">
+				<span class="day">04</span>
+				<span class="month">Dec 2016</span>
+			</div>
+			<div class="blogpost-content">
+				<header>
+					<h2 class="title"><a href="#">Working with view files</a></h2>
+					<div class="submitted"><i class="fa fa-user pr-5"></i> by <a href="#">Andrew Rout</a></div>
+				</header>
+
+				<legend>Introduction</legend>
+
+				<p>
+					DiamondPHP implements the <a href="http://smarty.net">Smarty 3 template engine</a> to generate templates and view files. If you are familiar with MVC frameworks, or have already read through the <a href="{$smarty.const.SITE_URL}documentation/mvc/controllers">Controllers</a> and <a href="{$smarty.const.SITE_URL}documentation/mvc/models">Models</a> portion of the documentation, you'll already know that controllers and models do not present data, they only manage it. Views are what is responsible for outputting HTML and content to the browser.
+				</p>
+
+				<legend>File location</legend>
+				<p>
+					View files are stored inside the following location:<br>
+					<code>/app/design/frontend/template_name/views/</code><br><br>
+					Change "template_name" to the name of your template, as set in the <a href="{$smarty.const.SITE_URL}documentation/introduction/configuration">Configuration file</a>.
+				</p>
+				<p>
+					It is highly recommended to create separate folders for your view files for each corresponding controller. For example, store view files for the Member controller in the following directory:<br>
+					<code>/app/design/frontend/template_name/views/member</code><br><br>
+					Organizing your views in such a manner will make it simple to find a specific file, and will help avoid name collisions.
+				</p>
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 
 		<legend>Layout</legend>
 		<p>

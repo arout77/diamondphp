@@ -1,11 +1,14 @@
 <?php
 
+<<<<<<< HEAD
 if ($app['config']->setting('debug_mode') == 'ON' || $app['config']->setting('debug_mode') == 'on') {
 	// Start the timer for script exec time profiler
 	$profiler = new App\System\Profiler($app['config'], $app['database'], $app['plugin_core'], $app['load']);
 	$profiler->start_timer();
 }
 
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 # Core Smarty settings
 $app['template']->setTemplateDir(VIEWS_PATH);
 $app['template']->setCompileDir($app['config']->setting('var_path') . 'templates_c');
@@ -16,8 +19,11 @@ $app['template']->setCacheDir($app['config']->setting('var_path') . 'cache' . DS
 $app['template']->setConfigDir(SMARTY_PATH . 'configs');
 
 # Assign some site settings used globally
+<<<<<<< HEAD
 $app['template']->assign('site_url', $app['config']->setting('site_url'));
 $app['template']->assign('site_name', $app['config']->setting('site_name'));
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 $app['template']->assign('slogan', $app['config']->setting('site_slogan'));
 
 $route = $app['router'];
@@ -30,6 +36,7 @@ if ($app['config']->setting('maintenance_mode') === "TRUE") {
 		$app['router']->controller_class !== 'Contact_Controller') {
 		header('Location: ' . $app['config']->setting('site_url') . 'maintenance');
 	}
+<<<<<<< HEAD
 }
 
 if ($app['config']->setting('system_startup_check') === "TRUE") {
@@ -60,4 +67,11 @@ if ($app['config']->setting('debug_mode') == 'ON' || $app['config']->setting('de
 	$app['template']->assign('ram_usage', $ram_usage);
 	$app['template']->assign('ram_peak_usage', $ram_peak_usage);
 	$app['template']->display('template/debug_toolbar.tpl');
+=======
+}
+
+if ($app['config']->setting('system_startup_check') === "TRUE") {
+	require_once 'system_startup_check.php';
+	exit;
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 }

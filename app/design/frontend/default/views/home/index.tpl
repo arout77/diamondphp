@@ -26,7 +26,11 @@
 	<hr>
 
 	<div>
+<<<<<<< HEAD
 		<table class="table" style="width: 400px;">
+=======
+		<table class="table" style="width: 370px;">
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
 		<caption>Some information about your current environment:</caption>
 			<tr>
 				<td><strong>DiamondPHP Version</strong>:</td><td>{$data.software_ver}</td>

@@ -65,7 +65,10 @@ legend {
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/events">Event Listeners</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/logger">Error Logging</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/loader">File Loading</a></li>
+<<<<<<< HEAD
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/headers">HTTP Headers</a></li>
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/router">Router</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/core/sessions">Sessions</a></li>
                     </ul>
@@ -84,7 +87,10 @@ legend {
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/ckeditor">CKEditor</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/formatter">Data Formatter</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/sanitize">Data Sanitization</a></li>
+<<<<<<< HEAD
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/email">Email Helper</a></li>
+=======
+>>>>>>> ec5adaa9c1057104c796a0bef4746beb58a29024
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/validation">Form Validation</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/friends">Friends</a></li>
                         <li><a href="{$smarty.const.SITE_URL}documentation/modules/geoip">GeoIP</a></li>
