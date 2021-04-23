@@ -20,10 +20,11 @@
 			<p>
 				<legend>To install Diamond PHP, the following is <code>mandatory</code></legend>
 			<ul class="list-icon check">
-				<li>PHP version 5.5 or above</li>
+				<li>PHP version 8.0 or above</li>
 				<li>PDO compatible database (if using a database)</li>
-				<li>Apache Server (2.2 or above)</li>
+				<li>Apache Server (2.4 or above)</li>
 				<li>Apache extension mod_rewrite enabled</li>
+				<li>PHP extension mbstring enabled</li>
 			</ul>
 			<legend>For optimal performance, the following is <span class="pass">optional</span>, but highly recommended</legend>
 			<ul class="list-icon star">

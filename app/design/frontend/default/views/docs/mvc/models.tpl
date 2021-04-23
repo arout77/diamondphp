@@ -8,7 +8,7 @@
 		When creating models, they will always extend the base class <samp>System_Model</samp>:
 	</p>
 <pre class="prettyprint">
-class WelcomeModel extends Hal\Model\System_Model {
+class WelcomeModel extends App\Model\System_Model {
 	// Do something
 }
 </pre>

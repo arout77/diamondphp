@@ -14,11 +14,11 @@
 		</div>
 		<div class="blogpost-body">
 			<div class="post-info">
-				<span class="day">28</span>
-				<span class="month">Jun 2017</span>
+				<span class="day">6</span>
+				<span class="month">Feb 2021</span>
 			</div>
 			<div class="blogpost-content">
 				<header>
 					<h2 class="title"><a href="#">{$subtitle}</a></h2>
-					<div class="submitted"><i class="fa fa-user pr-5"></i> by <a href="https://github.com/arout/diamondphp" target="_blank">Andrew Rout</a></div>
+					<div class="submitted"><i class="fa fa-user pr-5"></i> by <a href="https://github.com/arout77/diamondphp" target="_blank">Andrew Rout</a></div>
 				</header>

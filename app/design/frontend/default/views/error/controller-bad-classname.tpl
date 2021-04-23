@@ -24,7 +24,7 @@
 >  To correct this error, open the controller file listed above, 
 >  and edit class definition as follows:
 >
->  <strong>&lt?php class {$controller}_Controller extends Hal\Controller\Base_Controller ?></strong>
+>  <strong>&lt?php class {$controller}_Controller extends App\Controller\Base_Controller ?></strong>
 >
 >  View <a href="{$smarty.const.SITE_URL}documentation/mvc/controllers">the Controllers documentation</a> for more information.
 </pre>

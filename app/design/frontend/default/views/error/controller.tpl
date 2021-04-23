@@ -5,6 +5,7 @@
 		color: lime;
 		font-size: 16px;
 		font-family: "Lucida Console", Monaco, monospace;
+		padding: 10px;
 	}
 	h3 { color: #242424; background-color: lime; width: 25%; text-align: center; margin-left: auto; margin-right: auto; }
 </style>
@@ -24,7 +25,7 @@
 >
    <strong><span style="color: #ff6666">&lt?php 
        namespace Web\Controller;
-       use Hal\Controller\Base_Controller;
+       use App\Controller\Base_Controller;
  
        class {$controller}_Controller extends Base_Controller{}</span></strong>
 >

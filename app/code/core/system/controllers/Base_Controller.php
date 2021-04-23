@@ -73,6 +73,14 @@ class Base_Controller {
 	/**
 	 * @var mixed
 	 */
+	public $plugin;
+	/**
+	 * @var mixed
+	 */
+	public $profiler;
+	/**
+	 * @var mixed
+	 */
 	protected $route;
 	/**
 	 * @var mixed
@@ -82,10 +90,6 @@ class Base_Controller {
 	 * @var mixed
 	 */
 	public $template;
-	/**
-	 * @var mixed
-	 */
-	public $plugin;
 	/**
 	 * @var mixed
 	 */
@@ -105,10 +109,25 @@ class Base_Controller {
 		$this->load     = $app['load'];
 		$this->log      = $app['log'];
 		$this->model    = $app['system_model'];
+		$this->profiler = $app['profiler'];
 		$this->route    = $app['router'];
 		$this->session  = $app['session'];
 		$this->template = $app['template'];
-		$this->plugin  = $app['toolbox'];
+		$this->plugin   = $app['toolbox'];
+	}
+
+	/**
+	 * @param $headers
+	 */
+	public function set_headers($headers) {
+
+		if(!is_array($headers)) {
+			return header("$headers");
+		}
+
+		foreach($headers as $header) {
+			header("$header");
+		}
 	}
 
 	/**
@@ -117,7 +136,7 @@ class Base_Controller {
 	 * @return mixed
 	 */
 	public function initOverrideController($_web_class, $_override_class) {
-		
+
 		# Define child controller extending this class
 		$this->controller = $this->route->controller;
 		# The class name contained inside child controller
@@ -185,7 +204,7 @@ class Base_Controller {
 		$action       = trim(strtolower($this->route->action));
 		# URL parameters
 		$this->param = $this->route->param;
-		
+
 		if (class_exists($_web_class)) {
 			# File was found and has proper file permissions
 			require_once $this->config->setting('controllers_path') . $this->controller_filename;
@@ -252,7 +271,7 @@ class Base_Controller {
 		$_admin_class    = $this->controller_class;
 		$_web_class      = "\Web\Controller\\" . $this->controller_class;
 		$_override_class = "\App\ControllerOverride\\" . $this->controller_class;
-		
+
 		# First search for requested controller file in override directory
 		if (is_readable(PUBLIC_OVERRIDE_PATH . 'controllers/' . $this->controller_filename)) {
 			return self::initOverrideController($_web_class, $_override_class);
@@ -316,7 +335,6 @@ class Base_Controller {
 	public function redirect($url) {
 		if ($url === 'http_referer') {
 			return header('Location: ' . $_SERVER['HTTP_REFERER']);
-			exit;
 		}
 		return header('Location: ' . SITE_URL . $url);
 	}

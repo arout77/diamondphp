@@ -2,7 +2,7 @@
 <html lang="zxx">
 	<head>
 		<meta charset="utf-8">
-		<title>{if $title} {$title} {else} DiamondPHP Frameowrk {/if}</title>
+		<title>{if isset($title)} {$title} {else} DiamondPHP MVC Framework for PHP 8 {/if}</title>
 		<meta name="author" content="author">
 
 		<!-- Mobile Meta -->
@@ -29,6 +29,7 @@
 		<link href="{$smarty.const.SITE_URL}media/default/plugins/owl-carousel/assets/owl.carousel.css" rel="stylesheet">
 		<link href="{$smarty.const.SITE_URL}media/default/plugins/owl-carousel/assets/owl.theme.default.min.css" rel="stylesheet">
 
+		<script src="https://kit.fontawesome.com/e3c82f8328.js" crossorigin="anonymous"></script>
 		<link href="{$smarty.const.SITE_URL}media/default/css/style.css" rel="stylesheet">
 		<link href="{$smarty.const.SITE_URL}media/default/css/custom.css" rel="stylesheet">
 		<script type = "text/javascript" src = "{$smarty.const.SITE_URL}media/default/js/vue.js"></script>

@@ -76,8 +76,16 @@ $app['toolbox'] = function ($app) {
 	return $app;
 };
 
+$app['profiler'] = function ($c) {
+	return new \App\System\Profiler($c['config'], $c['database'], $c['plugin_core'], $c['load']);
+};
+
 $app['plugin_core'] = function ($c) {
 	return new \App\System\Plugins($c['config'], $c['database'], $c['toolbox'], $c['load']);
+};
+
+$app['email'] = function ($c) {
+	return new \App\Plugin\Email;
 };
 
 $app['formatter'] = function ($c) {
@@ -100,6 +108,10 @@ $app['login'] = function ($c) {
 
 $app['pagination'] = function ($c) {
 	return new \App\Plugin\Pagination($c);
+};
+
+$app['paypal'] = function ($c) {
+	return new \App\Plugin\Paypal($c);
 };
 
 $app['sanitize'] = function ($c) {
@@ -186,10 +198,6 @@ return $bc;
 
 $app['cookie'] = function ($c) {
 return new \App\System\Cookie;
-};
-
-$app['email'] = function ($c) {
-return new \App\Plugin\Email($c);
 };
 
 $app['friends'] = function ($c) {

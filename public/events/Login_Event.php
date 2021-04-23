@@ -1,6 +1,6 @@
 <?php
 namespace Web\Event;
-use Hal\Core\Event;
+use App\Core\Event;
 use Web\Controller\Login_Controller;
 
 class Login_Event extends Event
